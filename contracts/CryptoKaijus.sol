@@ -13,26 +13,42 @@ contract CryptoKaijus is ERC721Token, Whitelist {
 
   string public tokenBaseURI = "https://ipfs.infura.io/ipfs/";
 
-  constructor () public payable ERC721Token("CryptoKaijus", "KAIJUS") {
-  }
-
   // The NFC tag ID
   mapping(bytes32 => uint256) internal nfcIdToTokenId;
+  mapping(uint256 => bytes32) internal tokenIdToNfcId;
 
   // Block when the Kaijus was born - will help with ordering by birth date which could differ from token ID
-  mapping(uint256 => uint256) internal tokenIdToBlockNumber;
+  mapping(uint256 => uint256) internal tokenIdToBirthDate;
 
-  function mint(address to, uint256 tokenId, bytes32 nfcId, string tokenURI)
+  constructor () public ERC721Token("CryptoKaijus", "KAIJUS") {
+    addAddressToWhitelist(msg.sender);
+  }
+
+  function mint(uint256 tokenId, bytes32 nfcId, string tokenURI, uint256 birthDate)
   public
-  onlyIfWhitelisted
+  onlyIfWhitelisted(msg.sender)
   returns (bool) {
+    _mint(msg.sender, tokenId, nfcId, tokenURI, birthDate);
+    return true;
+  }
+
+  function mintTo(address to, uint256 tokenId, bytes32 nfcId, string tokenURI, uint256 birthDate)
+  public
+  onlyIfWhitelisted(msg.sender)
+  returns (bool) {
+    _mint(to, tokenId, nfcId, tokenURI, birthDate);
+    return true;
+  }
+
+  function _mint(address to, uint256 tokenId, bytes32 nfcId, string tokenURI, uint256 birthDate) internal {
     require(nfcIdToTokenId[nfcId] == 0, "Unable to mint Kaijus with duplicate NFC ID");
 
-    tokenIdToBlockNumber[tokenId] = block.number;
+    tokenIdToBirthDate[tokenId] = birthDate;
+    tokenIdToNfcId[tokenId] = nfcId;
+    nfcIdToTokenId[nfcId] = tokenId;
 
     _mint(to, tokenId);
     _setTokenURI(tokenId, tokenURI);
-    return true;
   }
 
   function burn(uint256 tokenId)
