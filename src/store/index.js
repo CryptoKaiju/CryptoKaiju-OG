@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import Web3 from 'web3'
 import * as actions from './actions'
 import * as mutations from './mutation-types'
 import createLogger from 'vuex/dist/logger'
@@ -24,7 +25,9 @@ const store = new Vuex.Store({
     currentNetwork: null,
     currentUsdPrice: null,
     etherscanBase: null,
-    uploadedKaijusHashs: null
+    totalSupply: null,
+    uploadedKaijusHashs: null,
+    searchResult: null
   },
   getters: {},
   mutations: {
@@ -47,6 +50,12 @@ const store = new Vuex.Store({
     },
     [mutations.SET_KAIJUS_UPLOAD_HASH](state, hash) {
       state.uploadedKaijusHashs = hash;
+    },
+    [mutations.SET_KAIJUS_TOTAL_SUPPLY](state, totalSupply) {
+      state.totalSupply = totalSupply;
+    },
+    [mutations.SET_KAIJUS_SEARCH](state, searchResult) {
+      state.searchResult = searchResult;
     },
   },
   actions: {
@@ -91,6 +100,11 @@ const store = new Vuex.Store({
 
       const refreshHandler = async () => {
         let updatedAccounts = await web3.eth.getAccounts();
+        let contract = await CryptoKaijus.deployed();
+
+        let totalSupply = (await contract.totalSupply()).toString("10");
+        commit(mutations.SET_KAIJUS_TOTAL_SUPPLY, totalSupply);
+
         if (updatedAccounts[0] !== account) {
           account = updatedAccounts[0];
           commit(mutations.SET_ACCOUNT, account);
@@ -120,8 +134,38 @@ const store = new Vuex.Store({
       console.log(tx);
 
       commit(mutations.SET_KAIJUS_UPLOAD_HASH, tx);
+    },
+    [actions.FIND_KAIJUS_BY_NFC_ID]: async function ({commit, dispatch, state}, nfcId) {
+      commit(mutations.SET_KAIJUS_SEARCH, null);
+      const contract = await state.contract.deployed();
+
+      let results = await contract.nfcDetails(nfcId);
+
+      let tokenDetails = mapTokenDetails(results);
+      console.log(tokenDetails);
+      commit(mutations.SET_KAIJUS_SEARCH, tokenDetails);
+    },
+    [actions.FIND_KAIJUS_BY_TOKEN_ID]: async function ({commit, dispatch, state}, tokenId) {
+      commit(mutations.SET_KAIJUS_SEARCH, null);
+      const contract = await state.contract.deployed();
+
+      console.log("tokenId", tokenId);
+
+      let results = await contract.tokenDetails(_.toString(tokenId));
+      let tokenDetails = mapTokenDetails(results);
+      console.log(tokenDetails);
+      commit(mutations.SET_KAIJUS_SEARCH, tokenDetails);
     }
   }
 });
+
+function mapTokenDetails(results) {
+  return {
+    tokenId: results[0].toString("10"),
+    nfcId: Web3.utils.toAscii(results[1]).replace(/\0/g, ''),
+    tokenUri: results[2],
+    dob: results[3].toString("10"),
+  }
+}
 
 export default store

@@ -4,6 +4,7 @@ import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 import "openzeppelin-solidity/contracts/access/Whitelist.sol";
 import "openzeppelin-solidity/contracts/token/ERC721/ERC721Token.sol";
 
+import "./Strings.sol";
 
 /**
 * @title CryptoKaijus
@@ -61,6 +62,7 @@ contract CryptoKaijus is ERC721Token, Whitelist {
   function burn(uint256 tokenId)
   public {
     require(isApprovedForAll(ownerOf(tokenId), msg.sender));
+    // TODO handle burn of custom fields
     _burn(ownerOf(tokenId), tokenId);
   }
 
@@ -75,6 +77,46 @@ contract CryptoKaijus is ERC721Token, Whitelist {
   onlyIfWhitelisted(msg.sender) {
     require(bytes(_newBaseURI).length != 0, "Base URI invalid");
     tokenBaseURI = _newBaseURI;
+  }
+
+  function tokenURI(uint256 _tokenId) public view returns (string) {
+    return Strings.strConcat(tokenBaseURI, tokenURIs[_tokenId]);
+  }
+
+  function birthDateOfToken(uint256 _tokenId) public view returns (uint256) {
+    return tokenIdToBirthDate[_tokenId];
+  }
+
+  function tokenOfNfcId(bytes32 _nfcId) public view returns (uint256) {
+    return nfcIdToTokenId[_nfcId];
+  }
+
+  function nfcIdTokenId(uint256 _tokenId) public view returns (bytes32) {
+    return tokenIdToNfcId[_tokenId];
+  }
+
+  function nfcDetails(bytes32 _nfcId) public view returns (
+    uint256 tokenId,
+    bytes32 nfcId,
+    string tokenUri,
+    uint256 dob
+  ) {
+    uint256 _tokenId = nfcIdToTokenId[_nfcId];
+    return tokenDetails(_tokenId);
+  }
+
+  function tokenDetails(uint256 _tokenId) public view returns (
+    uint256 tokenId,
+    bytes32 nfcId,
+    string tokenUri,
+    uint256 dob
+  ) {
+    return (
+    _tokenId,
+    tokenIdToNfcId[_tokenId],
+    tokenURI(_tokenId),
+    tokenIdToBirthDate[_tokenId]
+    );
   }
 
 }

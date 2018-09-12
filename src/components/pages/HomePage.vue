@@ -5,6 +5,14 @@
 
     <div class="row">
       <div class="col-sm-12">
+          Total Supply : {{totalSupply}}
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="row">
+      <div class="col-sm-12">
         <form>
           <div class="form-group row">
             <label for="tokenId"
@@ -43,15 +51,15 @@
 
     <hr/>
 
-    <div class="row">
+    <div class="row" v-if="searchResult">
       <div class="col-sm-12">
         <h5>Results</h5>
       </div>
     </div>
 
-    <div class="row">
+    <div class="row" v-if="searchResult">
       <div class="col-sm-12">
-
+        {{searchResult}}
       </div>
     </div>
 
@@ -72,18 +80,25 @@
     components: {},
     data() {
       return {
-        searchData: {}
+        searchData: {
+          tokenId: null,
+          nfcId: null
+        }
       }
     },
     computed: {
-      ...mapState(['currentUsdPrice']),
+      ...mapState(['currentUsdPrice', 'totalSupply', 'searchResult']),
     },
     methods: {
       searchByTokenId: function () {
-        // TODO
+        if (this.searchData.tokenId) {
+          this.$store.dispatch(actions.FIND_KAIJUS_BY_TOKEN_ID, this.searchData.tokenId);
+        }
       },
       searchByNfcID: function () {
-        // TODO
+        if (this.searchData.nfcId) {
+          this.$store.dispatch(actions.FIND_KAIJUS_BY_NFC_ID, this.searchData.nfcId);
+        }
       }
     },
   }
