@@ -22,6 +22,7 @@ const store = new Vuex.Store({
     contract: null,
     contractAddress: null,
     account: null,
+    accountKaijus: [],
     currentNetwork: null,
     currentUsdPrice: null,
     etherscanBase: null,
@@ -56,6 +57,9 @@ const store = new Vuex.Store({
     },
     [mutations.SET_KAIJUS_SEARCH](state, searchResult) {
       state.searchResult = searchResult;
+    },
+    [mutations.SET_ACCOUNT_KAIJUS](state, accountKaijus) {
+      state.accountKaijus = accountKaijus;
     },
   },
   actions: {
@@ -152,12 +156,23 @@ const store = new Vuex.Store({
 
       console.log("tokenId", tokenId);
 
-      let results = await contract.tokenDetails(_.toString(tokenId));
+      let results = await contract.tokenDetails(tokenId);
 
       let tokenDetails = await mapTokenDetails(results);
       console.log(tokenDetails);
       commit(mutations.SET_KAIJUS_SEARCH, tokenDetails);
-    }
+    },
+    [actions.LOAD_ACCOUNT_KAIJUS]: async function ({commit, dispatch, state}, {account}) {
+
+      const contract = await state.contract.deployed();
+      let tokenIds = await contract.tokensOf(account);
+
+      let accountKaijus = await _.map(tokenIds, async (tokenId) => {
+        let results = await contract.tokenDetails(tokenId);
+        return await mapTokenDetails(results);
+      });
+      commit(mutations.SET_ACCOUNT_KAIJUS, accountKaijus);
+    },
   }
 });
 

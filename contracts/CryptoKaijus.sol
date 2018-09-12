@@ -95,6 +95,10 @@ contract CryptoKaijus is ERC721Token, Whitelist {
     return tokenIdToNfcId[_tokenId];
   }
 
+  function tokensOf(address _owner) public view returns (uint256[] _tokenIds) {
+    return ownedTokens[_owner];
+  }
+
   function nfcDetails(bytes32 _nfcId) public view returns (
     uint256 tokenId,
     bytes32 nfcId,

@@ -15,8 +15,10 @@
           <li class="nav-item d-none d-md-block">
             <router-link :to="{ name: 'create' }" class="nav-link">Create Kajius</router-link>
           </li>
+        </ul>
+        <ul class="navbar-nav">
           <li class="nav-item nav-link">
-            Account (TODO)
+            <router-link :to="{ name: 'account' }" class="nav-link">Account</router-link>
           </li>
         </ul>
       </nav>
