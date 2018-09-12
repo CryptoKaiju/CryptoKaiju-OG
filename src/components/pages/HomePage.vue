@@ -5,11 +5,11 @@
 
     <div class="row">
       <div class="col-sm-12">
-          Total Supply : {{totalSupply}}
+        Total Supply : {{totalSupply}}
       </div>
     </div>
 
-    <hr />
+    <hr/>
 
     <div class="row">
       <div class="col-sm-12">
@@ -54,12 +54,44 @@
     <div class="row" v-if="searchResult">
       <div class="col-sm-12">
         <h5>Results</h5>
-      </div>
-    </div>
 
-    <div class="row" v-if="searchResult">
-      <div class="col-sm-12">
-        {{searchResult}}
+        <div class="row">
+          <div class="col-sm-4">
+            Token ID: {{searchResult.tokenId}}
+          </div>
+          <div class="col-sm-4">
+            NFC ID: {{searchResult.nfcId}}
+          </div>
+          <div class="col-sm-4">
+            DOB: {{searchResult.dob}}
+          </div>
+        </div>
+        <div class="row" v-if="searchResult.ipfsData">
+          <div class="col-sm-4">
+            Name: {{searchResult.ipfsData.name}}
+          </div>
+          <div class="col-sm-4">
+            Description: {{searchResult.ipfsData.description}}
+          </div>
+          <div class="col-sm-4">
+            Attributes: {{searchResult.ipfsData.attributes}}
+          </div>
+        </div>
+        <div class="row" v-if="searchResult.ipfsData">
+          <div class="col-sm-!2">
+            <img :src="searchResult.ipfsData.image"
+                 class="img-thumbnail"
+                 style="max-height: 200px"/>
+          </div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+          <div class="col-sm-12">
+            Raw data: <pre>{{searchResult}}</pre>
+          </div>
+        </div>
       </div>
     </div>
 

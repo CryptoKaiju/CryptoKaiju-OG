@@ -141,7 +141,8 @@ const store = new Vuex.Store({
 
       let results = await contract.nfcDetails(nfcId);
 
-      let tokenDetails = mapTokenDetails(results);
+
+      let tokenDetails = await mapTokenDetails(results);
       console.log(tokenDetails);
       commit(mutations.SET_KAIJUS_SEARCH, tokenDetails);
     },
@@ -152,20 +153,24 @@ const store = new Vuex.Store({
       console.log("tokenId", tokenId);
 
       let results = await contract.tokenDetails(_.toString(tokenId));
-      let tokenDetails = mapTokenDetails(results);
+
+      let tokenDetails = await mapTokenDetails(results);
       console.log(tokenDetails);
       commit(mutations.SET_KAIJUS_SEARCH, tokenDetails);
     }
   }
 });
 
-function mapTokenDetails(results) {
-  return {
+async function mapTokenDetails(results) {
+  let data = {
     tokenId: results[0].toString("10"),
     nfcId: Web3.utils.toAscii(results[1]).replace(/\0/g, ''),
     tokenUri: results[2],
     dob: results[3].toString("10"),
-  }
+  };
+
+  data.ipfsData = (await axios.get(data.tokenUri)).data;
+  return data;
 }
 
 export default store
