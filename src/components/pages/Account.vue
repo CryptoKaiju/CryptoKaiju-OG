@@ -5,16 +5,49 @@
 
     <div class="row">
       <div class="col-lg-12">
-        <h3>Your Kaijus <clickable-address :eth-address="account"></clickable-address></h3>
+        <h3>Your Kaijus
+          <clickable-address :eth-address="account"></clickable-address>
+        </h3>
       </div>
     </div>
 
     <hr/>
 
-    <div class="row">
-      <div class="col-lg-12">
-        {{accountKaijus}}
+    <div class="row" v-for="account in accountKaijus">
+      <div class="col-sm-12">
+        <h5>Results</h5>
+
+        <div class="row">
+          <div class="col-sm-4">
+            Token ID: {{account.tokenId}}
+          </div>
+          <div class="col-sm-4">
+            NFC ID: {{account.nfcId}}
+          </div>
+          <div class="col-sm-4">
+            DOB: {{account.dob}}
+          </div>
+        </div>
+        <div class="row" v-if="account.ipfsData">
+          <div class="col-sm-4">
+            Name: {{account.ipfsData.name}}
+          </div>
+          <div class="col-sm-4">
+            Description: {{account.ipfsData.description}}
+          </div>
+          <div class="col-sm-4">
+            Attributes: {{account.ipfsData.attributes}}
+          </div>
+        </div>
+        <div class="row" v-if="account.ipfsData">
+          <div class="col-sm-!2">
+            <img :src="account.ipfsData.image"
+                 class="img-thumbnail"
+                 style="max-height: 200px"/>
+          </div>
+        </div>
       </div>
+
     </div>
   </div>
 </template>
@@ -38,9 +71,8 @@
     mounted() {
 
     },
-    methods: {
-    },
-    created () {
+    methods: {},
+    created() {
 
       const loadData = function () {
         this.$store.dispatch(actions.LOAD_ACCOUNT_KAIJUS, {account: this.account})

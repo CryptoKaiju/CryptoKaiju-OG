@@ -167,11 +167,12 @@ const store = new Vuex.Store({
       const contract = await state.contract.deployed();
       let tokenIds = await contract.tokensOf(account);
 
-      let accountKaijus = await _.map(tokenIds, async (tokenId) => {
+      let accountKaijus = _.map(tokenIds, async (tokenId) => {
         let results = await contract.tokenDetails(tokenId);
+        console.log(results);
         return await mapTokenDetails(results);
       });
-      commit(mutations.SET_ACCOUNT_KAIJUS, accountKaijus);
+      commit(mutations.SET_ACCOUNT_KAIJUS, await Promise.all(accountKaijus));
     },
   }
 });

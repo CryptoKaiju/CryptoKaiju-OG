@@ -18,7 +18,7 @@
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item nav-link">
-            <router-link :to="{ name: 'account' }" class="nav-link">Account</router-link>
+            <router-link :to="{ name: 'account' }" class="nav-link">Account ({{accountKaijus.length}})</router-link>
           </li>
         </ul>
       </nav>
@@ -62,7 +62,7 @@
     name: 'app',
     components: {ClickableAddress, CurrentNetwork},
     computed: {
-      ...mapState(['contractAddress']),
+      ...mapState(['contractAddress', 'accountKaijus']),
     },
     mounted() {
 
