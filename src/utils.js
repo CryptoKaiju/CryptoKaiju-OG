@@ -32,7 +32,7 @@ const getEtherscanAddress = () => {
         case 42:
           return 'http://kovan.etherscan.io';
         default:
-          throw new Error(`Unknown network ID ${id}`);
+          return 'http://localhost';
       }
     })
     .then((etherScanAddress) => {

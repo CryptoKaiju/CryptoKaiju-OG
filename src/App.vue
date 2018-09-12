@@ -16,7 +16,7 @@
             <router-link :to="{ name: 'create' }" class="nav-link">Create Kajius</router-link>
           </li>
           <li class="nav-item nav-link">
-              Account (TODO)
+            Account (TODO)
           </li>
         </ul>
       </nav>
@@ -32,8 +32,12 @@
           <div class="col-sm text-center">
             <small>
               <router-link :to="{ name: 'home' }">Home</router-link> &bull;
-              <router-link :to="{ name: 'create' }">Create Kajius</router-link> &bull;
+              <router-link :to="{ name: 'create' }">Create Kajius</router-link>
             </small>
+            <strong>
+              <current-network></current-network>
+            </strong>
+            <clickable-address :eth-address="contractAddress"></clickable-address>
           </div>
         </div>
       </div>
@@ -50,12 +54,13 @@
   import * as actions from './store/actions'
   import * as mutations from './store/mutation-types'
   import CurrentNetwork from './components/widgets/CurrentNetwork'
+  import ClickableAddress from "./components/widgets/ClickableAddress";
 
   export default {
     name: 'app',
-    components: {CurrentNetwork},
+    components: {ClickableAddress, CurrentNetwork},
     computed: {
-      ...mapGetters([]),
+      ...mapState(['contractAddress']),
     },
     mounted() {
 
@@ -86,4 +91,6 @@
     padding-top: 50px;
     padding-bottom: 20px;
   }
+
+
 </style>

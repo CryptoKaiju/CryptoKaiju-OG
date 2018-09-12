@@ -20,28 +20,33 @@ contract CryptoKaijus is ERC721Token, Whitelist {
   // Block when the Kaijus was born - will help with ordering by birth date which could differ from token ID
   mapping(uint256 => uint256) internal tokenIdToBirthDate;
 
+  // A pointer to the next token to be minted, zero indexed
+  uint256 public tokenIdPointer = 1;
+
   constructor () public ERC721Token("CryptoKaijus", "KAIJUS") {
     addAddressToWhitelist(msg.sender);
   }
 
-  function mint(uint256 tokenId, bytes32 nfcId, string tokenURI, uint256 birthDate)
+  function mint(bytes32 nfcId, string tokenURI, uint256 birthDate)
   public
   onlyIfWhitelisted(msg.sender)
   returns (bool) {
-    _mint(msg.sender, tokenId, nfcId, tokenURI, birthDate);
+    _mint(msg.sender, nfcId, tokenURI, birthDate);
     return true;
   }
 
-  function mintTo(address to, uint256 tokenId, bytes32 nfcId, string tokenURI, uint256 birthDate)
+  function mintTo(address to, bytes32 nfcId, string tokenURI, uint256 birthDate)
   public
   onlyIfWhitelisted(msg.sender)
   returns (bool) {
-    _mint(to, tokenId, nfcId, tokenURI, birthDate);
+    _mint(to, nfcId, tokenURI, birthDate);
     return true;
   }
 
-  function _mint(address to, uint256 tokenId, bytes32 nfcId, string tokenURI, uint256 birthDate) internal {
+  function _mint(address to, bytes32 nfcId, string tokenURI, uint256 birthDate) internal {
     require(nfcIdToTokenId[nfcId] == 0, "Unable to mint Kaijus with duplicate NFC ID");
+
+    uint256 tokenId = tokenIdPointer;
 
     tokenIdToBirthDate[tokenId] = birthDate;
     tokenIdToNfcId[tokenId] = nfcId;
@@ -49,6 +54,8 @@ contract CryptoKaijus is ERC721Token, Whitelist {
 
     _mint(to, tokenId);
     _setTokenURI(tokenId, tokenURI);
+
+    tokenIdPointer = tokenIdPointer.add(1);
   }
 
   function burn(uint256 tokenId)
