@@ -7,40 +7,26 @@
     </p>
 
     <div class="row" v-for="account in accountKaijus">
-      <div class="col">
-        <h5>Results</h5>
+      <div class="card-deck">
+        <div class="card" style="width: 20rem">
+          <img :src="account.ipfsData.image" class="card-img-top"/>
 
-        <div class="row">
-          <div class="col-sm-4">
-            Token ID: {{account.tokenId}}
+          <div class="card-body">
+            <h5 class="card-title">{{account.ipfsData.name}}</h5>
+            <p class="card-text">{{account.ipfsData.description}}</p>
           </div>
-          <div class="col-sm-4">
-            NFC ID: {{account.nfcId}}
-          </div>
-          <div class="col-sm-4">
-            DOB: {{account.dob}}
-          </div>
-        </div>
-        <div class="row" v-if="account.ipfsData">
-          <div class="col-sm-4">
-            Name: {{account.ipfsData.name}}
-          </div>
-          <div class="col-sm-4">
-            Description: {{account.ipfsData.description}}
-          </div>
-          <div class="col-sm-4">
-            Attributes: {{account.ipfsData.attributes}}
-          </div>
-        </div>
-        <div class="row" v-if="account.ipfsData">
-          <div class="col">
-            <img :src="account.ipfsData.image"
-                 class="img-thumbnail"
-                 style="max-height: 200px"/>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Token ID: {{account.tokenId}}</li>
+            <li class="list-group-item"> NFC ID: {{account.nfcId}}</li>
+            <li class="list-group-item">DOB: {{account.dob}}</li>
+          </ul>
+          <div class="card-body">
+            <pre>
+              {{account.ipfsData.attributes}}
+            </pre>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </template>

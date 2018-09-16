@@ -23,7 +23,7 @@
           <form class="form-inline">
             <div class="form-group mx-sm-3 ">
               <label for="tokenId" class="sr-only">NFC ID</label>
-              <input type="number"
+              <input type="text"
                      class="form-control"
                      id="nfcId"
                      v-model="searchData.nfcId"
@@ -35,49 +35,31 @@
           </form>
         </div>
         <div class="col">
-          Total Supply: {{totalSupply}}
+          <h2>Supply <span class="badge badge-primary">{{totalSupply}}</span></h2>
         </div>
-        <!--<div class="col" v-if="searchResult">-->
-        <!--<h5>Results</h5>-->
+      </div>
+      <div class="row">
+        <div class="col mt-5" v-if="searchResult">
+          <div class="card" style="width: 20rem">
+            <img :src="searchResult.ipfsData.image" class="card-img-top"/>
 
-        <!--<div class="row">-->
-        <!--<div class="col-sm-4">-->
-        <!--Token ID: {{searchResult.tokenId}}-->
-        <!--</div>-->
-        <!--<div class="col-sm-4">-->
-        <!--NFC ID: {{searchResult.nfcId}}-->
-        <!--</div>-->
-        <!--<div class="col-sm-4">-->
-        <!--DOB: {{searchResult.dob}}-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="row" v-if="searchResult.ipfsData">-->
-        <!--<div class="col-sm-4">-->
-        <!--Name: {{searchResult.ipfsData.name}}-->
-        <!--</div>-->
-        <!--<div class="col-sm-4">-->
-        <!--Description: {{searchResult.ipfsData.description}}-->
-        <!--</div>-->
-        <!--<div class="col-sm-4">-->
-        <!--Attributes: {{searchResult.ipfsData.attributes}}-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="row" v-if="searchResult.ipfsData">-->
-        <!--<div class="col-sm-!2">-->
-        <!--<img :src="searchResult.ipfsData.image"-->
-        <!--class="img-thumbnail"-->
-        <!--style="max-height: 200px"/>-->
-        <!--</div>-->
-        <!--</div>-->
-
-        <!--<hr />-->
-
-        <!--<div class="row">-->
-        <!--<div class="col-sm-12">-->
-        <!--Raw data: <pre>{{searchResult}}</pre>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
+            <div class="card-body">
+              <h5 class="card-title">{{searchResult.ipfsData.name}}</h5>
+              <p class="card-text">{{searchResult.ipfsData.description}}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Token ID: {{searchResult.tokenId}}</li>
+              <li class="list-group-item"> NFC ID: {{searchResult.nfcId}}</li>
+              <li class="list-group-item">DOB: {{searchResult.dob}}</li>
+            </ul>
+            <div class="card-body">
+              <small>
+                {{searchResult}}
+              </small>
+            </div>
+          </div>
+          <!--<pre class="small">{{searchResult}}</pre>-->
+        </div>
       </div>
     </div>
   </div>
@@ -85,22 +67,21 @@
 
 <script>
 
-  import {mapGetters, mapState} from 'vuex'
-  import * as actions from '../../store/actions'
-  import * as _ from 'lodash'
-  import Web3 from 'web3'
-
+  import { mapGetters, mapState } from 'vuex';
+  import * as actions from '../../store/actions';
+  import * as _ from 'lodash';
+  import Web3 from 'web3';
 
   export default {
     name: 'home',
     components: {},
-    data() {
+    data () {
       return {
         searchData: {
           tokenId: null,
           nfcId: null
         }
-      }
+      };
     },
     computed: {
       ...mapState(['currentUsdPrice', 'totalSupply', 'searchResult']),
@@ -117,7 +98,7 @@
         }
       }
     },
-  }
+  };
 </script>
 
 <style lang="scss" scoped>
