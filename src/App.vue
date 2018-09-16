@@ -17,7 +17,7 @@
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item nav-link">
-            <router-link :to="{ name: 'account' }" class="nav-link">Account ({{accountKaijus.length}})</router-link>
+            <router-link :to="{ name: 'account' }" class="nav-link">My Kaijus ({{accountKaijus.length}})</router-link>
           </li>
         </ul>
       </nav>

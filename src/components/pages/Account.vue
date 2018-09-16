@@ -1,30 +1,27 @@
 <template>
   <div class="container">
 
-    <h2>My Kaijus</h2>
+    <h2>My Kaijus ({{accountKaijus.length}})</h2>
     <p>
       <clickable-address :eth-address="account"></clickable-address>
     </p>
 
-    <div class="row" v-for="account in accountKaijus">
-      <div class="card-deck">
-        <div class="card" style="width: 20rem">
-          <img :src="account.ipfsData.image" class="card-img-top"/>
-
-          <div class="card-body">
-            <h5 class="card-title">{{account.ipfsData.name}}</h5>
-            <p class="card-text">{{account.ipfsData.description}}</p>
-          </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">Token ID: {{account.tokenId}}</li>
-            <li class="list-group-item"> NFC ID: {{account.nfcId}}</li>
-            <li class="list-group-item">DOB: {{account.dob}}</li>
-          </ul>
-          <div class="card-body">
-            <small>
-              {{account}}
-            </small>
-          </div>
+    <div class="card-group">
+      <div class="card m-4" v-for="account in accountKaijus">
+        <div class="card-body">
+          <img :src="account.ipfsData.image" class="float-right" style="max-width: 100px"/>
+          <h5 class="card-title">{{account.ipfsData.name}}</h5>
+          <p class="card-text">{{account.ipfsData.description}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Token ID: {{account.tokenId}}</li>
+          <li class="list-group-item"> NFC ID: {{account.nfcId}}</li>
+          <li class="list-group-item">DOB: {{account.dob}}</li>
+        </ul>
+        <div class="card-footer">
+          <small>
+            {{account}}
+          </small>
         </div>
       </div>
     </div>

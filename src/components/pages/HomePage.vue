@@ -1,7 +1,7 @@
 <template>
   <div class="container">
 
-    <div class="jumbotron">
+    <div class="">
       <h1 class="display-4">Welcome to Crypto-Kaijus</h1>
       <p class="lead">Linking your kaijus to provenance on the Blockchain</p>
       <div class="row">
@@ -40,25 +40,28 @@
       </div>
       <div class="row">
         <div class="col mt-5" v-if="searchResult">
-          <div class="card" style="width: 20rem">
-            <img :src="searchResult.ipfsData.image" class="card-img-top"/>
 
-            <div class="card-body">
-              <h5 class="card-title">{{searchResult.ipfsData.name}}</h5>
-              <p class="card-text">{{searchResult.ipfsData.description}}</p>
+          <div class="card">
+            <div class="row no-gutters">
+              <div class="col-auto pr-5">
+                <img :src="searchResult.ipfsData.image" class="img-fluid" style="max-width: 200px"/>
+              </div>
+              <div class="col">
+                <div class="card-block px-2 pt-2">
+                  <h2 class="card-title">{{searchResult.ipfsData.name}}</h2>
+                  <p class="card-text">{{searchResult.ipfsData.description}}</p>
+                  <ul class="list-group mt-4">
+                    <li class="list-group-item"><span class="small">Token ID:</span> {{searchResult.tokenId}}</li>
+                    <li class="list-group-item"><span class="small">NFC ID:</span> {{searchResult.nfcId}}</li>
+                    <li class="list-group-item"><span class="small">DOB:</span> {{searchResult.dob}}</li>
+                  </ul>
+                </div>
+              </div>
             </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">Token ID: {{searchResult.tokenId}}</li>
-              <li class="list-group-item"> NFC ID: {{searchResult.nfcId}}</li>
-              <li class="list-group-item">DOB: {{searchResult.dob}}</li>
-            </ul>
-            <div class="card-body">
-              <small>
-                {{searchResult}}
-              </small>
+            <div class="card-footer w-100 text-muted small">
+              {{searchResult}}
             </div>
           </div>
-          <!--<pre class="small">{{searchResult}}</pre>-->
         </div>
       </div>
     </div>
@@ -106,9 +109,5 @@
   body > .container {
     padding: 60px 60px 0;
   }
-
-  .jumbotron {
-    background-color: #E8F6F3;
-  }
-
+  
 </style>
