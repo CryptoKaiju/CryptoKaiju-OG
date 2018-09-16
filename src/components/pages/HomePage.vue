@@ -3,7 +3,8 @@
 
     <div class="">
       <h1 class="display-4">Welcome to Crypto-Kaijus</h1>
-      <p class="lead">Linking your kaijus to provenance on the Blockchain</p>
+      <h2></h2>
+      <p class="lead">Linking your kaijus to provenance on the Blockchain. Total Kaijus (so far): <span class="badge badge-primary">{{totalSupply}}</span></p>
       <div class="row">
         <div class="col">
           <form class="form-inline mb-4">
@@ -35,7 +36,7 @@
           </form>
         </div>
         <div class="col">
-          <h2>Supply <span class="badge badge-primary">{{totalSupply}}</span></h2>
+
         </div>
       </div>
       <div class="row">
@@ -109,5 +110,5 @@
   body > .container {
     padding: 60px 60px 0;
   }
-  
+
 </style>
