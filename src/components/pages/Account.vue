@@ -21,9 +21,9 @@
             <li class="list-group-item">DOB: {{account.dob}}</li>
           </ul>
           <div class="card-body">
-            <pre>
-              {{account.ipfsData.attributes}}
-            </pre>
+            <small>
+              {{account}}
+            </small>
           </div>
         </div>
       </div>
