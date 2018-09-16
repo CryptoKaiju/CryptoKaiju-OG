@@ -18,7 +18,7 @@ require('chai')
   .use(require('chai-bignumber')(BigNumber))
   .should();
 
-contract('CryptoKaijus ERC721 Common', function (accounts) {
+contract.only('CryptoKaijus ERC721 Common', function (accounts) {
   const owner = accounts[0];
   const account1 = accounts[1];
   const account2 = accounts[2];
@@ -60,8 +60,8 @@ contract('CryptoKaijus ERC721 Common', function (accounts) {
 
   describe('like an ERC721', function () {
     beforeEach(async function () {
-      await this.token.mintTo(account1, firstTokenId, genNfcId(), TOKEN_URI, genBirthDate(), {from: owner});
-      await this.token.mintTo(account1, secondTokenId, genNfcId(), TOKEN_URI, genBirthDate(), {from: owner});
+      await this.token.mintTo(account1, genNfcId(), TOKEN_URI, genBirthDate(), {from: owner});
+      await this.token.mintTo(account1, genNfcId(), TOKEN_URI, genBirthDate(), {from: owner});
     });
 
     describe('balanceOf', function () {

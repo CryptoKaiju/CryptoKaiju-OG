@@ -1,20 +1,13 @@
 <template>
   <div class="container">
 
-    <hr/>
-
-    <div class="row">
-      <div class="col-lg-12">
-        <h3>Your Kaijus
-          <clickable-address :eth-address="account"></clickable-address>
-        </h3>
-      </div>
-    </div>
-
-    <hr/>
+    <h2>My Kaijus</h2>
+    <p>
+      <clickable-address :eth-address="account"></clickable-address>
+    </p>
 
     <div class="row" v-for="account in accountKaijus">
-      <div class="col-sm-12">
+      <div class="col">
         <h5>Results</h5>
 
         <div class="row">
@@ -40,7 +33,7 @@
           </div>
         </div>
         <div class="row" v-if="account.ipfsData">
-          <div class="col-sm-!2">
+          <div class="col">
             <img :src="account.ipfsData.image"
                  class="img-thumbnail"
                  style="max-height: 200px"/>
@@ -54,13 +47,12 @@
 
 <script>
 
-  import {mapGetters, mapState} from 'vuex'
-  import * as _ from 'lodash'
-  import * as moment from 'moment'
-  import Web3 from 'web3'
-  import * as actions from '../../store/actions'
-  import ClickableAddress from "../widgets/ClickableAddress";
-
+  import { mapGetters, mapState } from 'vuex';
+  import * as _ from 'lodash';
+  import * as moment from 'moment';
+  import Web3 from 'web3';
+  import * as actions from '../../store/actions';
+  import ClickableAddress from '../widgets/ClickableAddress';
 
   export default {
     name: 'account',
@@ -68,14 +60,14 @@
     computed: {
       ...mapState(['account', 'accountKaijus'])
     },
-    mounted() {
+    mounted () {
 
     },
     methods: {},
-    created() {
+    created () {
 
       const loadData = function () {
-        this.$store.dispatch(actions.LOAD_ACCOUNT_KAIJUS, {account: this.account})
+        this.$store.dispatch(actions.LOAD_ACCOUNT_KAIJUS, {account: this.account});
       }.bind(this);
 
       this.$store.watch(
@@ -87,7 +79,7 @@
         loadData();
       }
     },
-  }
+  };
 </script>
 
 <style lang="scss" scoped>

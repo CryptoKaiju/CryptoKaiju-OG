@@ -1,18 +1,9 @@
 <template>
   <div class="container">
-
-    <hr/>
-
-    <div class="row">
-      <div class="col-lg-12">
-        <h3>Giving birth to a Kaijus</h3>
-      </div>
-    </div>
-
-    <hr/>
+    <h2>Kaiju Foundry</h2>
 
     <div class="row">
-      <div class="col-lg-12">
+      <div class="col">
         <form>
 
           <div class="form-group row" v-if="formData.errors.length">
@@ -27,13 +18,14 @@
           <div class="form-group row">
             <label for="recipient"
                    class="col-sm-2 col-form-label">
-              Recipient (ETH Address)
+              Recipient
             </label>
             <div class="col-sm-10">
               <input type="text"
                      class="form-control"
                      id="recipient"
-                     v-model="formData.recipient"/>
+                     v-model="formData.recipient"
+                    placeholder="0x0abc"/>
             </div>
           </div>
 
@@ -109,17 +101,12 @@
                    class="col-sm-2 col-form-label">
               Colour
             </label>
-            <div class="col-sm-7">
+            <div class="col-sm-10">
               <select class="form-control"
                       id="colour"
                       v-model="formData.colour">
                 <option v-for="colour in formLookupData.colour" :value="colour">{{colour.name}}</option>
               </select>
-            </div>
-            <div class="col-sm-3">
-              <img v-if="formData.colour" :src="'https://ipfs.infura.io/ipfs/' + formData.colour.hash"
-                   class="img-thumbnail"
-                   style="max-height: 200px"/>
             </div>
           </div>
 
@@ -148,30 +135,28 @@
             </div>
           </div>
 
-          <button type="button" class="btn btn-primary mb-2"
-                  v-on:click="giveBirth">Birth me a Kaijus
-          </button>
+          <button type="button" class="btn btn-primary" v-on:click="giveBirth">Kaiju Birth</button>
 
-          <div class="form-group">
-            <div class="row col-sm-12" v-if="response.ipfsHash">
-              <h6>IPFS Metadata:</h6>
-              <a target="_blank" :href="'https://ipfs.infura.io/ipfs/' + response.ipfsHash">{{response.ipfsHash}}</a>
+          <div class="row">
+            <div class="col mt-5" v-if="response.ipfsHash">
+              IPFS Metadata: <a target="_blank" :href="'https://ipfs.infura.io/ipfs/' + response.ipfsHash">{{response.ipfsHash}}</a>
             </div>
-            <div class="row col-sm-12" v-if="uploadedKaijusHashs">
+            <div class="col mt-5" v-if="uploadedKaijusHashs">
               <clickable-transaction :transaction="uploadedKaijusHashs"></clickable-transaction>
             </div>
           </div>
-
-          <hr/>
-
-          <div class="form-group row">
-            <div class="col-sm-4">
-              <pre>{{generateIpfsData()}}</pre>
-            </div>
-          </div>
-
         </form>
 
+        <div class="row mt-5">
+          <div class="col-sm-10">
+            <pre>{{generateIpfsData()}}</pre>
+          </div>
+          <div class="col-sm-2">
+            <img v-if="formData.colour" :src="'https://ipfs.infura.io/ipfs/' + formData.colour.hash"
+                 class=""
+                 style="max-height: 150px"/>
+          </div>
+        </div>
 
       </div>
     </div>
