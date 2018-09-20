@@ -37,8 +37,8 @@ function shouldBehaveLikeERC721(
 
   describe('like an ERC721', function () {
     beforeEach(async function () {
-      await this.token.mintTo(owner, firstTokenId, genNfcId(), TOKEN_URI, genBirthDate(), {from: minter});
-      await this.token.mintTo(owner, secondTokenId, genNfcId(), TOKEN_URI, genBirthDate(), {from: minter});
+      await this.token.mintTo(owner, genNfcId(), TOKEN_URI, genBirthDate(), {from: minter});
+      await this.token.mintTo(owner, genNfcId(), TOKEN_URI, genBirthDate(), {from: minter});
       this.toWhom = anyone; // default to anyone for toWhom in context-dependent tests
     });
 
