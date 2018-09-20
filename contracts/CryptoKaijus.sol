@@ -62,6 +62,7 @@ contract CryptoKaijus is ERC721Token, Whitelist {
   function burn(uint256 tokenId)
   public {
     require(isApprovedForAll(ownerOf(tokenId), msg.sender));
+
     // TODO handle burn of custom fields
     _burn(ownerOf(tokenId), tokenId);
   }
@@ -83,15 +84,15 @@ contract CryptoKaijus is ERC721Token, Whitelist {
     return Strings.strConcat(tokenBaseURI, tokenURIs[_tokenId]);
   }
 
-  function birthDateOfToken(uint256 _tokenId) public view returns (uint256) {
+  function birthDateOf(uint256 _tokenId) public view returns (uint256) {
     return tokenIdToBirthDate[_tokenId];
   }
 
-  function tokenOfNfcId(bytes32 _nfcId) public view returns (uint256) {
+  function tokenOf(bytes32 _nfcId) public view returns (uint256) {
     return nfcIdToTokenId[_nfcId];
   }
 
-  function nfcIdTokenId(uint256 _tokenId) public view returns (bytes32) {
+  function nfcIdOf(uint256 _tokenId) public view returns (bytes32) {
     return tokenIdToNfcId[_tokenId];
   }
 
