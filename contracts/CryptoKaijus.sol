@@ -9,7 +9,7 @@ import "./Strings.sol";
 /**
 * @title CryptoKaijus
 */
-contract CryptoKaijus is ERC721Token, Whitelist {
+contract CryptoKaiju is ERC721Token, Whitelist {
   using SafeMath for uint256;
 
   string public tokenBaseURI = "https://ipfs.infura.io/ipfs/";
@@ -24,7 +24,7 @@ contract CryptoKaijus is ERC721Token, Whitelist {
   // A pointer to the next token to be minted, zero indexed
   uint256 public tokenIdPointer = 1;
 
-  constructor () public ERC721Token("CryptoKaijus", "KAIJUS") {
+  constructor () public ERC721Token("CryptoKaiju", "KAIJU") {
     addAddressToWhitelist(msg.sender);
   }
 
@@ -59,6 +59,7 @@ contract CryptoKaijus is ERC721Token, Whitelist {
     tokenIdPointer = tokenIdPointer.add(1);
   }
 
+  // TODO hide behind whitelist
   function burn(uint256 tokenId)
   public {
     require(isApprovedForAll(ownerOf(tokenId), msg.sender));

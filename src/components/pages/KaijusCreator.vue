@@ -96,6 +96,8 @@
             </div>
           </div>
 
+          TODO - Batch e.g. Genesis
+
           <div class="form-group row">
             <label for="colour"
                    class="col-sm-2 col-form-label">
