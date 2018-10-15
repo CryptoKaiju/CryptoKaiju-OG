@@ -1,7 +1,7 @@
 {
   "name": "crypto-kaijus",
   "version": "1.0.0",
-  "description": "",
+  "description": "Blockchain & Toy Explorer for the up and coming http://cryptokaiju.io",
   "author": "james@blockrocket.tech",
   "license": "MIT",
   "repository": {
@@ -84,7 +84,6 @@
     "opn": "^5.1.0",
     "optimize-css-assets-webpack-plugin": "^2.0.0",
     "ora": "^1.2.0",
-    "phantomjs-prebuilt": "^2.1.14",
     "rimraf": "^2.6.0",
     "sass-loader": "^6.0.6",
     "semver": "^5.3.0",
@@ -92,7 +91,8 @@
     "sinon": "^2.1.0",
     "sinon-chai": "^2.8.0",
     "truffle": "^4.1.14",
-    "truffle-hdwallet-provider": "0.0.6",
+    "truffle-flattener": "^1.2.9",
+    "truffle-hdwallet-provider": "^1.0.0-web3one.0",
     "url-loader": "^0.5.8",
     "vue-loader": "^13.3.0",
     "vue-style-loader": "^3.0.1",

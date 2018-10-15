@@ -9,9 +9,9 @@ import moment from 'moment'
 import {getEtherscanAddress, getNetIdString} from '../utils';
 
 import truffleContract from 'truffle-contract';
-import CryptoKaijusABI from '../../build/contracts/CryptoKaijus.json';
+import CryptoKaijuABI from '../../build/contracts/CryptoKaiju.json';
 
-const CryptoKaijus = truffleContract(CryptoKaijusABI);
+const CryptoKaiju = truffleContract(CryptoKaijuABI);
 
 Vue.use(Vuex);
 
@@ -47,7 +47,7 @@ const store = new Vuex.Store({
     [mutations.SET_WEB3]: async function (state, {web3, contract}) {
       state.web3 = web3;
       state.contract = contract;
-      state.contractAddress = (await CryptoKaijus.deployed()).address;
+      state.contractAddress = (await CryptoKaiju.deployed()).address;
     },
     [mutations.SET_KAIJUS_UPLOAD_HASH](state, hash) {
       state.uploadedKaijusHashs = hash;
@@ -84,19 +84,19 @@ const store = new Vuex.Store({
     },
     [actions.INIT_APP]: async function ({commit, dispatch, state}, web3) {
 
-      CryptoKaijus.setProvider(web3.currentProvider);
+      CryptoKaiju.setProvider(web3.currentProvider);
 
       //dirty hack for web3@1.0.0 support for localhost testrpc, see https://github.com/trufflesuite/truffle-contract/issues/56#issuecomment-331084530
-      if (typeof CryptoKaijus.currentProvider.sendAsync !== "function") {
-        CryptoKaijus.currentProvider.sendAsync = function () {
-          return CryptoKaijus.currentProvider.send.apply(
-            CryptoKaijus.currentProvider, arguments
+      if (typeof CryptoKaiju.currentProvider.sendAsync !== "function") {
+        CryptoKaiju.currentProvider.sendAsync = function () {
+          return CryptoKaiju.currentProvider.send.apply(
+            CryptoKaiju.currentProvider, arguments
           );
         };
       }
 
       // Set the web3 instance
-      commit(mutations.SET_WEB3, {web3, contract: CryptoKaijus});
+      commit(mutations.SET_WEB3, {web3, contract: CryptoKaiju});
 
       let accounts = await web3.eth.getAccounts();
 
@@ -104,7 +104,7 @@ const store = new Vuex.Store({
 
       const refreshHandler = async () => {
         let updatedAccounts = await web3.eth.getAccounts();
-        let contract = await CryptoKaijus.deployed();
+        let contract = await CryptoKaiju.deployed();
 
         let totalSupply = (await contract.totalSupply()).toString("10");
         commit(mutations.SET_KAIJUS_TOTAL_SUPPLY, totalSupply);
