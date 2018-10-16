@@ -21,7 +21,7 @@
   </div>
   <div class="row mt-5" v-if="notFound">
     <div class="col d-flex justify-content-center text-warning" >
-      Token ID {{ this.id }} not found!
+      {{ notFound }}
     </div>
   </div>
   <div class="row mt-5" v-if="searchResult && ipfsResult">
@@ -86,7 +86,7 @@
             if (details.nfcId === '0x0000000000000000000000000000000000000000000000000000000000000000') {
               throw new Error('not found!');
             }
-            that.notFound = false;
+            that.notFound = null;
             return axios.get(that.searchResult[2]);
           })
           .then(function (ipfs) {
@@ -95,7 +95,7 @@
           .catch(function (error) {
             that.ipfsResult = null;
             that.searchResult = null;
-            that.notFound = true;
+            that.notFound = "Not found: " + that.id;
           });
 
       }
