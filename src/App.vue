@@ -2,7 +2,7 @@
   <div id="app">
 
     <header>
-      <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top floating-nav">
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top floating-nav">
         <router-link :to="{ name: 'home' }" class="navbar-brand">
           <img src="../static/logo.png" alt="Crypto-Kaijus" class="logo"/>
         </router-link>
