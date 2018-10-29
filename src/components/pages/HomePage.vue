@@ -19,12 +19,12 @@
                    v-model="searchData.kId"
                    placeholder="Token ID or NFC ID"/>
           </div>
-          <button type="button" class="btn btn-primary btn-lg" v-on:click="searchByTokenId">
-            Search by ID
+          <button type="button" class="btn btn-primary btn-lg" v-on:click="searchByKId">
+            Search
           </button>
-          <button type="button" class="btn btn-primary btn-lg" v-on:click="searchByNfcID">
-            Search by Tag
-          </button>
+          <!--<button type="button" class="btn btn-primary btn-lg" v-on:click="searchByNfcID">-->
+            <!--Search by Tag-->
+          <!--</button>-->
         </form>
       </div>
     </div>
@@ -114,10 +114,17 @@
         }
       },
       searchByKId: function () {
-        if (this.searchData.kId && Number.isInteger(this.searchData.kId)) {
-          this.searchByTokenId();
+        function isInt(value) {
+          let x = parseFloat(value);
+          return !isNaN(value) && (x | 0) === x;
+        }
+
+        if (this.searchData.kId && isInt(this.searchData.kId)) {
+          console.log(`TOK ${this.searchData.kId}`);
+          this.$store.dispatch(actions.FIND_KAIJUS_BY_TOKEN_ID, this.searchData.kId);
         } else {
-          this.searchByNfcID();
+          console.log(`TAG ${this.searchData.kId}`);
+          this.$store.dispatch(actions.FIND_KAIJUS_BY_NFC_ID, this.searchData.kId);
         }
       }
     },
