@@ -300,6 +300,7 @@
           image: _.get(this.formData, 'colour.uri'),
           attributes: {
             dob: _.get(this.formData, 'dob'),
+            nfc: _.get(this.formData, 'nfcId'),
             colour: _.lowerCase(_.get(this.formData, 'colour.name')),
             gender: _.lowerCase(_.get(this.formData, 'gender.name')),
             batch: _.lowerCase(_.get(this.formData, 'batch')),
