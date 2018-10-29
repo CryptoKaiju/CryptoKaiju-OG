@@ -19,8 +19,11 @@
                    v-model="searchData.kId"
                    placeholder="Token ID or NFC ID"/>
           </div>
-          <button type="button" class="btn btn-primary btn-lg" v-on:click="searchByKId">
-            Search
+          <button type="button" class="btn btn-primary btn-lg" v-on:click="searchByTokenId">
+            Search by ID
+          </button>
+          <button type="button" class="btn btn-primary btn-lg" v-on:click="searchByNfcID">
+            Search by Tag
           </button>
         </form>
       </div>
@@ -71,6 +74,9 @@
         </div>
 
       </div>
+      <div class="col mt-5 text-center" v-if="!searchResult && searchData.kId">
+        <code>Searching...</code>
+      </div>
     </div>
   </div>
 
@@ -108,7 +114,7 @@
         }
       },
       searchByKId: function () {
-        if (Number.isInteger(this.searchData.kId)) {
+        if (this.searchData.kId && Number.isInteger(this.searchData.kId)) {
           this.searchByTokenId();
         } else {
           this.searchByNfcID();

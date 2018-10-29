@@ -64,9 +64,7 @@
     computed: {
       ...mapState(['account', 'accountKaijus'])
     },
-    mounted () {
-
-    },
+    mounted () {},
     methods: {},
     created () {
 

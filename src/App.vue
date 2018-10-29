@@ -31,11 +31,9 @@
         <div class="row">
           <div class="col-sm text-center">
             <small>
-              <router-link :to="{ name: 'home' }">Home</router-link>
-              |
-              <router-link :to="{ name: 'create' }">Create</router-link> |
+              <router-link :to="{ name: 'home' }">Home</router-link> <span class="text-primary">&bull;</span>
+              <router-link :to="{ name: 'create' }">Create</router-link> <span class="text-primary">&bull;</span>
               <router-link :to="{ name: 'account' }">My Kajuis</router-link>
-
               <br/>
               <current-network></current-network>
               <br/>
@@ -104,6 +102,7 @@
   }
 
   footer {
+    margin-top: 50px;
     color: $body-color;
   }
 
