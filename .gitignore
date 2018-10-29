@@ -63,3 +63,4 @@ typings/
 .idea/
 crypto-kaijus.iml
 /dist/
+/coverageEnv/

@@ -1,15 +1,15 @@
 {
-  "name": "crypto-kaijus",
+  "name": "crypto-kaiju",
   "version": "1.0.0",
-  "description": "Blockchain & Toy Explorer for the up and coming http://cryptokaiju.io",
+  "description": "NFT & Token Explorer for the up and coming http://cryptokaiju.io",
   "author": "james@blockrocket.tech",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/blockrockettech/crypto-kaijus.git"
+    "url": "git+https://github.com/blockrockettech/crypto-kaiju.git"
   },
   "bugs": {
-    "url": "https://github.com/blockrockettech/crypto-kaijus/issues"
+    "url": "https://github.com/blockrockettech/crypto-kaiju/issues"
   },
   "scripts": {
     "dev": "node scripts/dev-server.js",
@@ -21,7 +21,7 @@
     "test/contracts": "test/test_truffle.sh",
     "test": "npm run test/contracts"
   },
-  "homepage": "https://github.com/blockrockettech/crypto-kaijus#readme",
+  "homepage": "https://github.com/blockrockettech/crypto-kaiju#readme",
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap-vue": "^2.0.0-rc.11",
@@ -85,6 +85,7 @@
     "optimize-css-assets-webpack-plugin": "^2.0.0",
     "ora": "^1.2.0",
     "rimraf": "^2.6.0",
+    "solidity-coverage": "^0.5.5",
     "sass-loader": "^6.0.6",
     "semver": "^5.3.0",
     "shelljs": "^0.7.6",

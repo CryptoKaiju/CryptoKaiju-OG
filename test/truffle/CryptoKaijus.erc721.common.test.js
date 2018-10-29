@@ -5,12 +5,13 @@ const {shouldSupportInterfaces} = require('./SupportsInterface.behavior');
 
 const advanceBlock = require('../helpers/advanceToBlock');
 
-const { shouldBehaveLikeERC721 } = require('./ERC721.behavior');
+const {shouldBehaveLikeERC721} = require('./ERC721.behavior');
+const {shouldBehaveLikeMintAndBurnERC721} = require('./ERC721MintBurn.behavior');
 
 const _ = require('lodash');
 
 const BigNumber = web3.BigNumber;
-const CryptoKaijus = artifacts.require('CryptoKaijus');
+const CryptoKaiju = artifacts.require('CryptoKaiju');
 const ERC721Receiver = artifacts.require('ERC721ReceiverMock.sol');
 
 require('chai')
@@ -18,7 +19,7 @@ require('chai')
   .use(require('chai-bignumber')(BigNumber))
   .should();
 
-contract('CryptoKaijus ERC721 Common', function (accounts) {
+contract('CryptoKaiju ERC721 Common', function (accounts) {
   const owner = accounts[0];
   const account1 = accounts[1];
   const account2 = accounts[2];
@@ -32,7 +33,7 @@ contract('CryptoKaijus ERC721 Common', function (accounts) {
   const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
   const RECEIVER_MAGIC_VALUE = '0x150b7a02';
 
-  const name = 'CryptoKaijus';
+  const name = 'CryptoKaiju';
   const symbol = 'KAIJUS';
 
   const TOKEN_URI = "123abcHash";
@@ -43,7 +44,7 @@ contract('CryptoKaijus ERC721 Common', function (accounts) {
   });
 
   beforeEach(async function () {
-    this.token = await CryptoKaijus.new({from: owner});
+    this.token = await CryptoKaiju.new({from: owner});
   });
 
   let currentNfcId = 1;
@@ -633,6 +634,8 @@ contract('CryptoKaijus ERC721 Common', function (accounts) {
   });
 
   shouldBehaveLikeERC721(account1, owner, accounts);
+
+  shouldBehaveLikeMintAndBurnERC721(owner, [account1, account2, account3, account4]);
 
   shouldSupportInterfaces([
     'ERC165',
