@@ -5,6 +5,7 @@
       <nav class="navbar navbar-expand-md navbar-dark fixed-top floating-nav">
         <router-link :to="{ name: 'home' }" class="navbar-brand">
           <img src="../static/logo.png" alt="Crypto-Kaijus" class="logo"/>
+          <code class="small ml-2 text-secondary">Alpha</code>
         </router-link>
 
         <ul class="navbar-nav mr-auto">
