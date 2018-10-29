@@ -1,28 +1,49 @@
 <template>
   <div class="container">
 
-    <h2>My Kaijus ({{accountKaijus.length}})</h2>
+    <h2>My Kaijus <span class="badge badge-primary">{{accountKaijus.length}}</span></h2>
     <p>
       <clickable-address :eth-address="account"></clickable-address>
     </p>
 
-    <div class="card-group">
-      <div class="card m-4" v-for="account in accountKaijus">
+    <div class="card-columns">
+      <div class="card shadow-sm" v-for="searchResult in accountKaijus">
+        <img :src="searchResult.ipfsData.image" class="card-img-top"/>
         <div class="card-body">
-          <img :src="account.ipfsData.image" class="float-right" style="max-width: 100px"/>
-          <h5 class="card-title">{{account.ipfsData.name}}</h5>
-          <p class="card-text">{{account.ipfsData.description}}</p>
+          <h2 class="card-title p-2">
+            <span class="badge badge-secondary">#{{searchResult.tokenId}}</span>
+            {{searchResult.ipfsData.name}}
+          </h2>
+          <p class="card-text p-2">{{searchResult.ipfsData.description}}</p>
+          <div class="row">
+            <div class="col">
+              <span class="small">Tag</span><br/><code>{{searchResult.nfcId}}</code>
+            </div>
+            <div class="col">
+              <span class="small">Birth date</span><br/><code>{{searchResult.dob}}</code>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <span class="small">Gender</span><br/><code>{{searchResult.ipfsData.attributes.gender|capitalize}}</code>
+            </div>
+            <div class="col">
+              <span class="small">Colour</span><br/><code>{{searchResult.ipfsData.attributes.colour|capitalize}}</code>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <span class="small">Nature</span><br/><code>{{searchResult.ipfsData.attributes.nature|capitalize}}</code>
+            </div>
+            <div class="col">
+              <span class="small">Skill</span><br/><code>{{searchResult.ipfsData.attributes.skill|capitalize}}</code>
+            </div>
+          </div>
         </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">Token ID: {{account.tokenId}}</li>
-          <li class="list-group-item"> NFC ID: {{account.nfcId}}</li>
-          <li class="list-group-item">DOB: {{account.dob}}</li>
-        </ul>
-        <div class="card-footer">
-          <small>
-            {{account}}
-          </small>
-        </div>
+
+        <!--<div class="card-footer w-100 text-muted small">-->
+        <!--{{searchResult}}-->
+        <!--</div>-->
       </div>
     </div>
   </div>
@@ -43,9 +64,7 @@
     computed: {
       ...mapState(['account', 'accountKaijus'])
     },
-    mounted () {
-
-    },
+    mounted () {},
     methods: {},
     created () {
 
@@ -66,6 +85,8 @@
 </script>
 
 <style lang="scss" scoped>
-
+  .card-body {
+    padding-top: 0 !important;
+  }
 
 </style>

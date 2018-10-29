@@ -10,13 +10,13 @@
         <ul class="navbar-nav mr-auto">
         </ul>
         <!--<ul class="navbar-nav">-->
-          <!--<li class="nav-item d-none d-md-block">-->
-            <!--<router-link :to="{ name: 'create' }" class="nav-link">Create Kajiu</router-link>-->
-          <!--</li>-->
+        <!--<li class="nav-item d-none d-md-block">-->
+        <!--<router-link :to="{ name: 'create' }" class="nav-link">Create Kajiu</router-link>-->
+        <!--</li>-->
         <!--</ul>-->
         <ul class="navbar-nav">
           <li class="nav-item nav-link">
-            <router-link :to="{ name: 'account' }" class="nav-link">My Kaijus ({{accountKaijus.length}})</router-link>
+            <router-link :to="{ name: 'account' }" class="nav-link">My Kaijus <span class="badge badge-primary">{{accountKaijus.length}}</span></router-link>
           </li>
         </ul>
       </nav>
@@ -26,19 +26,19 @@
       <router-view></router-view>
     </main>
 
-    <footer class="footer">
+    <footer class="footer mt-5">
       <div class="container">
         <div class="row">
           <div class="col-sm text-center">
             <small>
-              <router-link :to="{ name: 'home' }">Home</router-link> |
-              <router-link :to="{ name: 'create' }">Create Kajius</router-link> |
+              <router-link :to="{ name: 'home' }">Home</router-link> <span class="text-primary">&bull;</span>
+              <router-link :to="{ name: 'create' }">Create</router-link> <span class="text-primary">&bull;</span>
               <router-link :to="{ name: 'account' }">My Kajuis</router-link>
-            </small>
-            <strong>
+              <br/>
               <current-network></current-network>
-            </strong>
-            <clickable-address :eth-address="contractAddress"></clickable-address>
+              <br/>
+              Contract: <clickable-address :eth-address="contractAddress"></clickable-address>
+            </small>
           </div>
         </div>
       </div>
@@ -50,12 +50,12 @@
 <script>
   /* global web3:true */
 
-  import Web3 from 'web3'
-  import {mapGetters, mapState} from 'vuex'
-  import * as actions from './store/actions'
-  import * as mutations from './store/mutation-types'
-  import CurrentNetwork from './components/widgets/CurrentNetwork'
-  import ClickableAddress from "./components/widgets/ClickableAddress";
+  import Web3 from 'web3';
+  import { mapGetters, mapState } from 'vuex';
+  import * as actions from './store/actions';
+  import * as mutations from './store/mutation-types';
+  import CurrentNetwork from './components/widgets/CurrentNetwork';
+  import ClickableAddress from './components/widgets/ClickableAddress';
 
   export default {
     name: 'app',
@@ -63,7 +63,7 @@
     computed: {
       ...mapState(['contractAddress', 'accountKaijus']),
     },
-    mounted() {
+    mounted () {
 
       let bootStrappedWeb3;
 
@@ -82,7 +82,7 @@
       // Bootstrap the full app
       this.$store.dispatch(actions.INIT_APP, bootStrappedWeb3);
     },
-  }
+  };
 </script>
 
 <style lang="scss">
@@ -101,6 +101,11 @@
     padding-bottom: 20px;
   }
 
+  footer {
+    margin-top: 50px;
+    color: $body-color;
+  }
+
   .navbar-dark {
     background-color: $body-bg;
   }
@@ -111,6 +116,16 @@
 
   main {
     min-height: 400px;
+  }
+
+  .card {
+    color: #383838;
+    background-color: #F5F5F5;
+  }
+
+  .list-group-item {
+    color: #383838;
+    background-color: #F5F5F5;
   }
 
 </style>

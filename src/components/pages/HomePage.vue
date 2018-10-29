@@ -3,66 +3,79 @@
 
 
     <div class="row">
-      <div class="col">
+      <div class="col-sm-5">
         <h1 class="display-4 text-left">CryptoKaiju</h1>
         <h2>Collectible Vinyl Toys</h2>
         <p>Powered by the Ethereum Blockchain</p>
-        <img src="../../../static/RoughCutout-500x670.png" class="" style="max-height: 200px"/>
+        <!--<img src="../../../static/RoughCutout-500x670.png" class="ml-5" style="max-height: 200px"/>-->
       </div>
-      <div class="col mt-5">
-        <form class="form-inline mb-4">
-          <div class="form-group mx-sm-3">
-            <label for="tokenId" class="sr-only">Token ID</label>
-            <input type="number"
-                   class="form-control"
-                   id="tokenId"
-                   v-model="searchData.tokenId"
-                   placeholder="Token ID"/>
-          </div>
-          <button type="button" class="btn btn-primary" v-on:click="searchByTokenId">
-            Search
-          </button>
-        </form>
+      <div class="col-sm-7 mt-5">
+        <form class="form">
 
-        <form class="form-inline">
-          <div class="form-group mx-sm-3 ">
-            <label for="tokenId" class="sr-only">NFC ID</label>
+          <div class="form-group">
             <input type="text"
-                   class="form-control"
-                   id="nfcId"
-                   v-model="searchData.nfcId"
-                   placeholder="NFC ID"/>
+                   class="form-control form-control-lg w-75"
+                   id="kId"
+                   v-model="searchData.kId"
+                   placeholder="Token ID or NFC ID"/>
           </div>
-          <button type="button" class="btn btn-primary" v-on:click="searchByNfcID">
-            Search
+          <button type="button" class="btn btn-primary btn-lg" v-on:click="searchByTokenId">
+            Search by ID
+          </button>
+          <button type="button" class="btn btn-primary btn-lg" v-on:click="searchByNfcID">
+            Search by Tag
           </button>
         </form>
       </div>
     </div>
     <div class="row">
       <div class="col mt-5" v-if="searchResult">
-
-        <div class="card">
-          <div class="row no-gutters">
-            <div class="col-auto pr-5">
-              <img :src="searchResult.ipfsData.image" class="img-fluid" style="max-width: 200px"/>
-            </div>
-            <div class="col">
-              <div class="card-block px-2 pt-2">
-                <h2 class="card-title">{{searchResult.ipfsData.name}}</h2>
-                <p class="card-text">{{searchResult.ipfsData.description}}</p>
-                <ul class="list-group mt-4">
-                  <li class="list-group-item"><span class="small">Token ID:</span> {{searchResult.tokenId}}</li>
-                  <li class="list-group-item"><span class="small">NFC ID:</span> {{searchResult.nfcId}}</li>
-                  <li class="list-group-item"><span class="small">DOB:</span> {{searchResult.dob}}</li>
-                </ul>
+        <div class="d-flex justify-content-center">
+          <div class="card shadow-sm">
+            <div class="row no-gutters">
+              <div class="col-auto pr-5">
+                <img :src="searchResult.ipfsData.image" class="img-fluid" style="max-width: 200px"/>
+              </div>
+              <div class="col mb-4">
+                <div class="card-block px-2 pt-2">
+                  <h2 class="card-title p-2">{{searchResult.ipfsData.name}}</h2>
+                  <p class="card-text p-2">{{searchResult.ipfsData.description}}</p>
+                  <div class="row">
+                    <div class="col">
+                      <span class="small">Tag</span><br/><code>{{searchResult.nfcId}}</code>
+                    </div>
+                    <div class="col">
+                      <span class="small">Birth date</span><br/><code>{{searchResult.dob}}</code>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <span class="small">Gender</span><br/><code>{{searchResult.ipfsData.attributes.gender|capitalize}}</code>
+                    </div>
+                    <div class="col">
+                      <span class="small">Colour</span><br/><code>{{searchResult.ipfsData.attributes.colour|capitalize}}</code>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <span class="small">Nature</span><br/><code>{{searchResult.ipfsData.attributes.nature|capitalize}}</code>
+                    </div>
+                    <div class="col">
+                      <span class="small">Skill</span><br/><code>{{searchResult.ipfsData.attributes.skill|capitalize}}</code>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="card-footer w-100 text-muted small">
-            {{searchResult}}
+            <!--<div class="card-footer w-100 text-muted small">-->
+            <!--{{searchResult}}-->
+            <!--</div>-->
           </div>
         </div>
+
+      </div>
+      <div class="col mt-5 text-center" v-if="!searchResult && searchData.kId">
+        <code>Searching...</code>
       </div>
     </div>
   </div>
@@ -82,8 +95,7 @@
     data () {
       return {
         searchData: {
-          tokenId: null,
-          nfcId: null
+          kId: null
         }
       };
     },
@@ -92,13 +104,20 @@
     },
     methods: {
       searchByTokenId: function () {
-        if (this.searchData.tokenId) {
-          this.$store.dispatch(actions.FIND_KAIJUS_BY_TOKEN_ID, this.searchData.tokenId);
+        if (this.searchData.kId) {
+          this.$store.dispatch(actions.FIND_KAIJUS_BY_TOKEN_ID, this.searchData.kId);
         }
       },
       searchByNfcID: function () {
-        if (this.searchData.nfcId) {
-          this.$store.dispatch(actions.FIND_KAIJUS_BY_NFC_ID, this.searchData.nfcId);
+        if (this.searchData.kId) {
+          this.$store.dispatch(actions.FIND_KAIJUS_BY_NFC_ID, this.searchData.kId);
+        }
+      },
+      searchByKId: function () {
+        if (this.searchData.kId && Number.isInteger(this.searchData.kId)) {
+          this.searchByTokenId();
+        } else {
+          this.searchByNfcID();
         }
       }
     },
@@ -118,4 +137,6 @@
     font-weight: 700;
     font-style: normal;
   }
+
+
 </style>
