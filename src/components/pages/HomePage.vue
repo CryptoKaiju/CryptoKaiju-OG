@@ -37,11 +37,30 @@
                 <div class="card-block px-2 pt-2">
                   <h2 class="card-title p-2">{{searchResult.ipfsData.name}}</h2>
                   <p class="card-text p-2">{{searchResult.ipfsData.description}}</p>
-                  <ul class="list-group list-group-flush mt-4">
-                    <li class="list-group-item"><span class="small">Token:</span> {{searchResult.tokenId}}</li>
-                    <li class="list-group-item"><span class="small">NFC:</span> {{searchResult.nfcId}}</li>
-                    <li class="list-group-item"><span class="small">DOB:</span> {{searchResult.dob}}</li>
-                  </ul>
+                  <div class="row">
+                    <div class="col">
+                      <span class="small">Tag</span><br/><code>{{searchResult.nfcId}}</code>
+                    </div>
+                    <div class="col">
+                      <span class="small">Birth date</span><br/><code>{{searchResult.dob}}</code>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <span class="small">Gender</span><br/><code>{{searchResult.ipfsData.attributes.gender|capitalize}}</code>
+                    </div>
+                    <div class="col">
+                      <span class="small">Colour</span><br/><code>{{searchResult.ipfsData.attributes.colour|capitalize}}</code>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <span class="small">Nature</span><br/><code>{{searchResult.ipfsData.attributes.nature|capitalize}}</code>
+                    </div>
+                    <div class="col">
+                      <span class="small">Skill</span><br/><code>{{searchResult.ipfsData.attributes.skill|capitalize}}</code>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -90,9 +109,9 @@
       },
       searchByKId: function () {
         if (Number.isInteger(this.searchData.kId)) {
-          this.searchByNfcID();
-        } else {
           this.searchByTokenId();
+        } else {
+          this.searchByNfcID();
         }
       }
     },
@@ -113,13 +132,5 @@
     font-style: normal;
   }
 
-  .card {
-    color: #383838;
-    background-color: #F5F5F5;
-  }
 
-  .list-group-item {
-    color: #383838;
-    background-color: #F5F5F5;
-  }
 </style>

@@ -144,8 +144,7 @@ const store = new Vuex.Store({
       const contract = await state.contract.deployed();
 
       let results = await contract.nfcDetails(nfcId);
-
-
+      console.log(results);
       let tokenDetails = await mapTokenDetails(results);
       console.log(tokenDetails);
       commit(mutations.SET_KAIJUS_SEARCH, tokenDetails);
@@ -153,8 +152,6 @@ const store = new Vuex.Store({
     [actions.FIND_KAIJUS_BY_TOKEN_ID]: async function ({commit, dispatch, state}, tokenId) {
       commit(mutations.SET_KAIJUS_SEARCH, null);
       const contract = await state.contract.deployed();
-
-      console.log("tokenId", tokenId);
 
       let results = await contract.tokenDetails(tokenId);
 

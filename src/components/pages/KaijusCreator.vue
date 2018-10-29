@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-    <h2>Kaiju Foundry</h2>
+    <h1>Kaiju Foundry</h1>
 
-    <div class="row">
-      <div class="col">
+    <div class="row mt-5">
+      <div class="col ml-3 mr-3">
         <form>
 
           <div class="form-group row" v-if="formData.errors.length">
@@ -25,7 +25,7 @@
                      class="form-control"
                      id="recipient"
                      v-model="formData.recipient"
-                    placeholder="0x0abc"/>
+                     placeholder="0x0abc"/>
             </div>
           </div>
 
@@ -96,8 +96,6 @@
             </div>
           </div>
 
-          TODO - Batch e.g. Genesis
-
           <div class="form-group row">
             <label for="colour"
                    class="col-sm-2 col-form-label">
@@ -115,24 +113,41 @@
           <div class="form-group row">
             <label for="gender"
                    class="col-sm-2 col-form-label">
-              Trait 1
+              Batch
             </label>
-            <div class="col-sm-2">
+            <div class="col-sm-10">
               <select class="form-control"
-                      id="trait1"
-                      v-model="formData.trait1">
-                <option v-for="trait in formLookupData.traits" :value="trait">{{trait}}</option>
+                      id="batch"
+                      v-model="formData.batch">
+                <option v-for="batch in formLookupData.batch" :value="batch">{{batch}}</option>
               </select>
             </div>
+          </div>
+
+          <div class="form-group row">
             <label for="gender"
                    class="col-sm-2 col-form-label">
-              Trait 2
+              Nature
             </label>
-            <div class="col-sm-2">
+            <div class="col-sm-10">
               <select class="form-control"
-                      id="trait2"
-                      v-model="formData.trait2">
-                <option v-for="trait in formLookupData.traits" :value="trait">{{trait}}</option>
+                      id="nature"
+                      v-model="formData.nature">
+                <option v-for="nature in formLookupData.natures" :value="nature">{{nature}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="gender"
+                   class="col-sm-2 col-form-label">
+              Skill
+            </label>
+            <div class="col-sm-10">
+              <select class="form-control"
+                      id="skill"
+                      v-model="formData.skill">
+                <option v-for="skill in formLookupData.skills" :value="skill">{{skill}}</option>
               </select>
             </div>
           </div>
@@ -141,7 +156,7 @@
 
           <div class="row">
             <div class="col mt-5" v-if="response.ipfsHash">
-              IPFS Metadata: <a target="_blank" :href="'https://ipfs.infura.io/ipfs/' + response.ipfsHash">{{response.ipfsHash}}</a>
+              <code>IPFS Metadata: <a target="_blank" :href="'https://ipfs.infura.io/ipfs/' + response.ipfsHash">{{response.ipfsHash}}</a></code>
             </div>
             <div class="col mt-5" v-if="uploadedKaijusHashs">
               <clickable-transaction :transaction="uploadedKaijusHashs"></clickable-transaction>
@@ -151,7 +166,7 @@
 
         <div class="row mt-5">
           <div class="col-sm-10">
-            <pre>{{generateIpfsData()}}</pre>
+            <code>{{generateIpfsData()}}</code>
           </div>
           <div class="col-sm-2">
             <img v-if="formData.colour" :src="'https://ipfs.infura.io/ipfs/' + formData.colour.hash"
@@ -167,20 +182,20 @@
 
 <script>
 
-  import {mapGetters, mapState} from 'vuex'
-  import * as _ from 'lodash'
-  import * as moment from 'moment'
-  import IPFS from 'ipfs-api'
-  import Web3 from 'web3'
-  import * as actions from '../../store/actions'
-  import ClickableTransaction from "../widgets/ClickableTransaction";
+  import { mapGetters, mapState } from 'vuex';
+  import * as _ from 'lodash';
+  import * as moment from 'moment';
+  import IPFS from 'ipfs-api';
+  import Web3 from 'web3';
+  import * as actions from '../../store/actions';
+  import ClickableTransaction from '../widgets/ClickableTransaction';
 
   const ipfs = IPFS('ipfs.infura.io', '5001', {protocol: 'https'});
 
   export default {
     name: 'creator',
     components: {ClickableTransaction},
-    data() {
+    data () {
       return {
         formLookupData: {
           gender: [
@@ -190,35 +205,33 @@
           ],
           colour: [
             {
-              name: 'purple',
+              name: 'Purple',
               hash: 'QmeogxKnb65KB8ydhUJuWrrUG8rpaUZkG2KdTv2eMxXD8U',
               uri: 'https://ipfs.infura.io/ipfs/QmeogxKnb65KB8ydhUJuWrrUG8rpaUZkG2KdTv2eMxXD8U'
             },
             {
-              name: 'green',
+              name: 'Green',
               hash: 'Qma9fCYT85s8Y7Pmhj3XifauiKCVwTytw4XTLabBuXNfSN',
               uri: 'https://ipfs.infura.io/ipfs/Qma9fCYT85s8Y7Pmhj3XifauiKCVwTytw4XTLabBuXNfSN'
             },
           ],
-          traits: ["Genesis", "Intelligent", "Fire breathing", "Flying", "Cuddly"]
+          natures: ['Intelligent', 'Determined', 'Mutant', 'Cute', 'Explorer', 'Creative', 'Sporty', 'Arrogant', 'Flatulent', 'Kind', 'Sneaky'],
+          skills: ['Leader', 'Cryptography', 'Hungry', 'Lover', 'Dancer', 'Fluffy', 'Writer', 'Musician', 'Analytical', 'Creative', 'Liar', 'Gross', 'Retired', 'Technical', 'Designer', 'Fighter', 'Influential', 'Fashionable', 'Chubby'],
+          batch: ['Genesis']
         },
         formData: {
           errors: [],
-          recipient: null,
-          name: null,
-          description: null,
-          nfcId: null,
           dob: moment().format('YYYY-MM-DD'),
         },
         response: {
           ipfsHash: null
         }
-      }
+      };
     },
     computed: {
       ...mapState(['account', 'uploadedKaijusHashs'])
     },
-    mounted() {
+    mounted () {
       this.$nextTick(function () {
         this.formData.recipient = this.account;
       });
@@ -270,11 +283,14 @@
         if (!this.formData.gender) {
           this.formData.errors.push('Gender is required.');
         }
-        if (!this.formData.trait1) {
-          this.formData.errors.push('Trait1 is required.');
+        if (!this.formData.batch) {
+          this.formData.errors.push('Batch is required.');
         }
-        if (!this.formData.trait2) {
-          this.formData.errors.push('Trait2 is required.');
+        if (!this.formData.nature) {
+          this.formData.errors.push('Nature is required.');
+        }
+        if (!this.formData.skill) {
+          this.formData.errors.push('Skill is required.');
         }
       },
       generateIpfsData: function () {
@@ -286,14 +302,15 @@
             dob: _.get(this.formData, 'dob'),
             colour: _.lowerCase(_.get(this.formData, 'colour.name')),
             gender: _.lowerCase(_.get(this.formData, 'gender.name')),
-            trait1: _.lowerCase(_.get(this.formData, 'trait1')),
-            trait2: _.lowerCase(_.get(this.formData, 'trait2'))
+            batch: _.lowerCase(_.get(this.formData, 'batch')),
+            nature: _.lowerCase(_.get(this.formData, 'nature')),
+            skill: _.lowerCase(_.get(this.formData, 'skill'))
           },
-          external_uri: "https://cryptokaiju.io",
+          external_uri: 'https://cryptokaiju.io',
         };
       }
     },
-  }
+  };
 </script>
 
 <style lang="scss" scoped>

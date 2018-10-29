@@ -16,7 +16,7 @@
         <!--</ul>-->
         <ul class="navbar-nav">
           <li class="nav-item nav-link">
-            <router-link :to="{ name: 'account' }" class="nav-link">My Kaijus ({{accountKaijus.length}})</router-link>
+            <router-link :to="{ name: 'account' }" class="nav-link">My Kaijus <span class="badge badge-primary">{{accountKaijus.length}}</span></router-link>
           </li>
         </ul>
       </nav>
@@ -31,12 +31,14 @@
         <div class="row">
           <div class="col-sm text-center">
             <small>
-              <!--<router-link :to="{ name: 'home' }">Home</router-link>-->
-              <!--|-->
-              <!--&lt;!&ndash;<router-link :to="{ name: 'create' }">Create Kajius</router-link> |&ndash;&gt;-->
-              <!--<router-link :to="{ name: 'account' }">My Kajuis</router-link>-->
+              <router-link :to="{ name: 'home' }">Home</router-link>
+              |
+              <router-link :to="{ name: 'create' }">Create</router-link> |
+              <router-link :to="{ name: 'account' }">My Kajuis</router-link>
 
-              <current-network></current-network><br/>
+              <br/>
+              <current-network></current-network>
+              <br/>
               Contract: <clickable-address :eth-address="contractAddress"></clickable-address>
             </small>
           </div>
@@ -115,6 +117,16 @@
 
   main {
     min-height: 400px;
+  }
+
+  .card {
+    color: #383838;
+    background-color: #F5F5F5;
+  }
+
+  .list-group-item {
+    color: #383838;
+    background-color: #F5F5F5;
   }
 
 </style>
