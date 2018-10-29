@@ -102,7 +102,6 @@
   }
 
   footer {
-    margin-top: 50px;
     color: $body-color;
   }
 
