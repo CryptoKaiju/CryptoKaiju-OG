@@ -94,6 +94,7 @@ contract CryptoKaiju is ERC721Token, Whitelist {
   }
 
   function tokenURI(uint256 _tokenId) public view returns (string) {
+    require(exists(_tokenId));
     return Strings.strConcat(tokenBaseURI, tokenURIs[_tokenId]);
   }
 
