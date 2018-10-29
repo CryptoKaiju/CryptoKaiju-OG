@@ -27,28 +27,30 @@
     </div>
     <div class="row">
       <div class="col mt-5" v-if="searchResult">
-
-        <div class="card">
-          <div class="row no-gutters">
-            <div class="col-auto pr-5">
-              <img :src="searchResult.ipfsData.image" class="img-fluid" style="max-width: 200px"/>
-            </div>
-            <div class="col">
-              <div class="card-block px-2 pt-2">
-                <h2 class="card-title">{{searchResult.ipfsData.name}}</h2>
-                <p class="card-text">{{searchResult.ipfsData.description}}</p>
-                <ul class="list-group mt-4">
-                  <li class="list-group-item"><span class="small">Token ID:</span> {{searchResult.tokenId}}</li>
-                  <li class="list-group-item"><span class="small">NFC ID:</span> {{searchResult.nfcId}}</li>
-                  <li class="list-group-item"><span class="small">DOB:</span> {{searchResult.dob}}</li>
-                </ul>
+        <div class="d-flex justify-content-center">
+          <div class="card shadow-sm">
+            <div class="row no-gutters">
+              <div class="col-auto pr-5">
+                <img :src="searchResult.ipfsData.image" class="img-fluid" style="max-width: 200px"/>
+              </div>
+              <div class="col mb-4">
+                <div class="card-block px-2 pt-2">
+                  <h2 class="card-title p-2">{{searchResult.ipfsData.name}}</h2>
+                  <p class="card-text p-2">{{searchResult.ipfsData.description}}</p>
+                  <ul class="list-group list-group-flush mt-4">
+                    <li class="list-group-item"><span class="small">Token:</span> {{searchResult.tokenId}}</li>
+                    <li class="list-group-item"><span class="small">NFC:</span> {{searchResult.nfcId}}</li>
+                    <li class="list-group-item"><span class="small">DOB:</span> {{searchResult.dob}}</li>
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="card-footer w-100 text-muted small">
-            {{searchResult}}
+            <!--<div class="card-footer w-100 text-muted small">-->
+            <!--{{searchResult}}-->
+            <!--</div>-->
           </div>
         </div>
+
       </div>
     </div>
   </div>
@@ -109,5 +111,15 @@
     text-align: center;
     font-weight: 700;
     font-style: normal;
+  }
+
+  .card {
+    color: #383838;
+    background-color: #F5F5F5;
+  }
+
+  .list-group-item {
+    color: #383838;
+    background-color: #F5F5F5;
   }
 </style>
