@@ -10,9 +10,9 @@
         <ul class="navbar-nav mr-auto">
         </ul>
         <!--<ul class="navbar-nav">-->
-          <!--<li class="nav-item d-none d-md-block">-->
-            <!--<router-link :to="{ name: 'create' }" class="nav-link">Create Kajiu</router-link>-->
-          <!--</li>-->
+        <!--<li class="nav-item d-none d-md-block">-->
+        <!--<router-link :to="{ name: 'create' }" class="nav-link">Create Kajiu</router-link>-->
+        <!--</li>-->
         <!--</ul>-->
         <ul class="navbar-nav">
           <li class="nav-item nav-link">
@@ -31,14 +31,14 @@
         <div class="row">
           <div class="col-sm text-center">
             <small>
-              <router-link :to="{ name: 'home' }">Home</router-link> |
-              <!--<router-link :to="{ name: 'create' }">Create Kajius</router-link> |-->
-              <router-link :to="{ name: 'account' }">My Kajuis</router-link>
+              <!--<router-link :to="{ name: 'home' }">Home</router-link>-->
+              <!--|-->
+              <!--&lt;!&ndash;<router-link :to="{ name: 'create' }">Create Kajius</router-link> |&ndash;&gt;-->
+              <!--<router-link :to="{ name: 'account' }">My Kajuis</router-link>-->
+
+              <current-network></current-network><br/>
+              Contract: <clickable-address :eth-address="contractAddress"></clickable-address>
             </small>
-            <strong>
-              <current-network></current-network>
-            </strong>
-            <clickable-address :eth-address="contractAddress"></clickable-address>
           </div>
         </div>
       </div>
@@ -50,12 +50,12 @@
 <script>
   /* global web3:true */
 
-  import Web3 from 'web3'
-  import {mapGetters, mapState} from 'vuex'
-  import * as actions from './store/actions'
-  import * as mutations from './store/mutation-types'
-  import CurrentNetwork from './components/widgets/CurrentNetwork'
-  import ClickableAddress from "./components/widgets/ClickableAddress";
+  import Web3 from 'web3';
+  import { mapGetters, mapState } from 'vuex';
+  import * as actions from './store/actions';
+  import * as mutations from './store/mutation-types';
+  import CurrentNetwork from './components/widgets/CurrentNetwork';
+  import ClickableAddress from './components/widgets/ClickableAddress';
 
   export default {
     name: 'app',
@@ -63,7 +63,7 @@
     computed: {
       ...mapState(['contractAddress', 'accountKaijus']),
     },
-    mounted() {
+    mounted () {
 
       let bootStrappedWeb3;
 
@@ -82,13 +82,13 @@
       // Bootstrap the full app
       this.$store.dispatch(actions.INIT_APP, bootStrappedWeb3);
     },
-  }
+  };
 </script>
 
 <style lang="scss">
 
   $body-bg: #21285b;
-  $body-color: #000;
+  $body-color: #FFF;
   $primary: #bd1722;
 
   $font-family-base: 'Montserrat', Helvetica, Arial, sans-serif;

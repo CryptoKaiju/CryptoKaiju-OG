@@ -1,7 +1,7 @@
 <template>
-  <div class="current-network">
+  <span class="current-network">
     {{ currentNetwork }}
-  </div>
+  </span>
 </template>
 
 <script>
