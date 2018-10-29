@@ -26,13 +26,13 @@
       <router-view></router-view>
     </main>
 
-    <footer class="footer">
+    <footer class="footer mt-5">
       <div class="container">
         <div class="row">
           <div class="col-sm text-center">
             <small>
               <router-link :to="{ name: 'home' }">Home</router-link> |
-              <router-link :to="{ name: 'create' }">Create Kajius</router-link> |
+              <!--<router-link :to="{ name: 'create' }">Create Kajius</router-link> |-->
               <router-link :to="{ name: 'account' }">My Kajuis</router-link>
             </small>
             <strong>
@@ -88,7 +88,7 @@
 <style lang="scss">
 
   $body-bg: #21285b;
-  $body-color: #FFF;
+  $body-color: #000;
   $primary: #bd1722;
 
   $font-family-base: 'Montserrat', Helvetica, Arial, sans-serif;
@@ -99,6 +99,10 @@
     margin-bottom: 60px;
     padding-top: 50px;
     padding-bottom: 20px;
+  }
+
+  footer {
+    color: $body-color;
   }
 
   .navbar-dark {

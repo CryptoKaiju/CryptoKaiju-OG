@@ -3,37 +3,23 @@
 
 
     <div class="row">
-      <div class="col">
+      <div class="col-sm-5">
         <h1 class="display-4 text-left">CryptoKaiju</h1>
         <h2>Collectible Vinyl Toys</h2>
         <p>Powered by the Ethereum Blockchain</p>
-        <img src="../../../static/RoughCutout-500x670.png" class="" style="max-height: 200px"/>
+        <img src="../../../static/RoughCutout-500x670.png" class="ml-5" style="max-height: 200px"/>
       </div>
-      <div class="col mt-5">
-        <form class="form-inline mb-4">
-          <div class="form-group mx-sm-3">
-            <label for="tokenId" class="sr-only">Token ID</label>
-            <input type="number"
-                   class="form-control"
-                   id="tokenId"
-                   v-model="searchData.tokenId"
-                   placeholder="Token ID"/>
-          </div>
-          <button type="button" class="btn btn-primary" v-on:click="searchByTokenId">
-            Search
-          </button>
-        </form>
-
-        <form class="form-inline">
-          <div class="form-group mx-sm-3 ">
-            <label for="tokenId" class="sr-only">NFC ID</label>
+      <div class="col-sm-7 mt-5">
+        <form class="form text-right">
+          <div class="form-group">
+            <label for="kId" class="sr-only">ID</label>
             <input type="text"
-                   class="form-control"
-                   id="nfcId"
-                   v-model="searchData.nfcId"
-                   placeholder="NFC ID"/>
+                   class="form-control form-control-lg"
+                   id="kId"
+                   v-model="searchData.kId"
+                   placeholder="Token ID or NFC ID"/>
           </div>
-          <button type="button" class="btn btn-primary" v-on:click="searchByNfcID">
+          <button type="button" class="btn btn-primary btn-lg" v-on:click="searchByKId">
             Search
           </button>
         </form>
@@ -82,8 +68,7 @@
     data () {
       return {
         searchData: {
-          tokenId: null,
-          nfcId: null
+          kId: null
         }
       };
     },
@@ -92,13 +77,20 @@
     },
     methods: {
       searchByTokenId: function () {
-        if (this.searchData.tokenId) {
-          this.$store.dispatch(actions.FIND_KAIJUS_BY_TOKEN_ID, this.searchData.tokenId);
+        if (this.searchData.kId) {
+          this.$store.dispatch(actions.FIND_KAIJUS_BY_TOKEN_ID, this.searchData.kId);
         }
       },
       searchByNfcID: function () {
-        if (this.searchData.nfcId) {
-          this.$store.dispatch(actions.FIND_KAIJUS_BY_NFC_ID, this.searchData.nfcId);
+        if (this.searchData.kId) {
+          this.$store.dispatch(actions.FIND_KAIJUS_BY_NFC_ID, this.searchData.kId);
+        }
+      },
+      searchByKId: function () {
+        if (Number.isInteger(this.searchData.kId)) {
+          this.searchByNfcID();
+        } else {
+          this.searchByTokenId();
         }
       }
     },
