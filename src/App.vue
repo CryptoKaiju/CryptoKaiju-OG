@@ -2,19 +2,18 @@
   <div id="app">
 
     <header>
-      <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top floating-nav">
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top floating-nav">
         <router-link :to="{ name: 'home' }" class="navbar-brand">
           <img src="../static/logo.png" alt="Crypto-Kaijus" class="logo"/>
         </router-link>
-        <span class="text-white">Eating the world one kaiju at at time</span>
 
         <ul class="navbar-nav mr-auto">
         </ul>
-        <ul class="navbar-nav">
-          <li class="nav-item d-none d-md-block">
-            <router-link :to="{ name: 'create' }" class="nav-link">Create Kajiu</router-link>
-          </li>
-        </ul>
+        <!--<ul class="navbar-nav">-->
+          <!--<li class="nav-item d-none d-md-block">-->
+            <!--<router-link :to="{ name: 'create' }" class="nav-link">Create Kajiu</router-link>-->
+          <!--</li>-->
+        <!--</ul>-->
         <ul class="navbar-nav">
           <li class="nav-item nav-link">
             <router-link :to="{ name: 'account' }" class="nav-link">My Kaijus ({{accountKaijus.length}})</router-link>
@@ -88,11 +87,11 @@
 
 <style lang="scss">
 
-  $body-bg: #F5EEF8;
-  $body-color: #6C3483;
-  $primary: #1E8449;
+  $body-bg: #21285b;
+  $body-color: #FFF;
+  $primary: #bd1722;
 
-  $font-family-base: 'Avenir', Helvetica, Arial, sans-serif;
+  $font-family-base: 'Montserrat', Helvetica, Arial, sans-serif;
 
   @import '../node_modules/bootstrap/scss/bootstrap.scss';
 
@@ -100,6 +99,10 @@
     margin-bottom: 60px;
     padding-top: 50px;
     padding-bottom: 20px;
+  }
+
+  .navbar-dark {
+    background-color: $body-bg;
   }
 
   .logo {

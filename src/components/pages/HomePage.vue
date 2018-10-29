@@ -2,9 +2,11 @@
   <div class="container">
 
     <div class="">
-      <h1 class="display-4">Welcome to Crypto-Kaijus</h1>
-      <h2></h2>
-      <p class="lead">Linking your kaijus to provenance on the Blockchain. Total Kaijus (so far): <span class="badge badge-primary">{{totalSupply}}</span></p>
+      <!--<img src="../../../static/RoughCutout-500x670.png" class="float-right" style="max-height: 200px"/>-->
+      <h1 class="display-4 text-left">CryptoKaiju</h1>
+      <h2>Collectible Vinyl Toys</h2>
+      <p>Powered by the Ethereum Blockchain</p>
+
       <div class="row">
         <div class="col">
           <form class="form-inline mb-4">
@@ -111,4 +113,11 @@
     padding: 60px 60px 0;
   }
 
+  h1 {
+    font-size: 50px;
+    color: #ffffff;
+    text-align: center;
+    font-weight: 700;
+    font-style: normal;
+  }
 </style>
