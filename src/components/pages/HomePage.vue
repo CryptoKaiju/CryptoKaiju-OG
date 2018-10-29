@@ -4,9 +4,9 @@
 
     <div class="row">
       <div class="col-sm-5">
-        <h1 class="display-4 text-left">CryptoKaiju</h1>
+        <h1 class="display-4 text-left mb-4">CryptoKaiju</h1>
         <h2>Collectible Vinyl Toys</h2>
-        <p>Powered by the Ethereum Blockchain</p>
+        <p><em>Powered by the Ethereum Blockchain</em></p>
         <!--<img src="../../../static/RoughCutout-500x670.png" class="ml-5" style="max-height: 200px"/>-->
       </div>
       <div class="col-sm-7 mt-5">
