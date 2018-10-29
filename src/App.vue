@@ -113,6 +113,8 @@
   $body-color: #FFF;
   $primary: #bd1722;
 
+  @import url('https://fonts.googleapis.com/css?family=Montserrat');
+  
   $font-family-base: 'Montserrat', Helvetica, Arial, sans-serif;
 
   @import '../node_modules/bootstrap/scss/bootstrap.scss';
