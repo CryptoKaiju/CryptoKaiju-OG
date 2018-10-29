@@ -1,7 +1,7 @@
 const CryptoKaiju = artifacts.require("./CryptoKaiju.sol");
 
 const HDWalletProvider = require('truffle-hdwallet-provider');
-const infuraApikey = 'nbCbdzC6IG9CF6hmvAVQ';
+const infuraApikey = '4396873c00c84479991e58a34a54ebd9';
 
 module.exports = async (deployer, network, accounts) => {
 
@@ -9,15 +9,15 @@ module.exports = async (deployer, network, accounts) => {
 
   // Load in other accounts for different networks
   if (network === 'ropsten' || network === 'ropsten-fork' || network === 'rinkeby' || network === 'rinkeby-fork') {
-    account = new HDWalletProvider(require('../mnemonic'), `https://${network}.infura.io/${infuraApikey}`, 0).getAddress();
+    account = new HDWalletProvider(require('../mnemonic'), `https://${network}.infura.io/v3/${infuraApikey}`, 0).getAddress();
   }
 
   if (network === 'live') {
-    account = new HDWalletProvider(require('../mnemonic_live'), `https://mainnet.infura.io/${infuraApikey}`, 0).getAddress();
+    account = new HDWalletProvider(require('../mnemonic_live'), `https://mainnet.infura.io/v3/${infuraApikey}`, 0).getAddress();
   }
 
   console.log(`Running within network = ${network}`);
   console.log(`Account = ${account}`);
 
-  await deployer.deploy(CryptoKaiju);
+  return deployer.deploy(CryptoKaiju, {from: account});
 };
