@@ -16,7 +16,10 @@
         <!--</ul>-->
         <ul class="navbar-nav">
           <li class="nav-item nav-link">
-            <router-link :to="{ name: 'account' }" class="nav-link">My Kaijus <span class="badge badge-primary">{{accountKaijus.length}}</span></router-link>
+            <router-link :to="{ name: 'account' }" class="nav-link">
+              My Kaijus
+              <span class="badge badge-primary">{{accountKaijus.length}}</span>
+            </router-link>
           </li>
         </ul>
       </nav>
@@ -61,7 +64,7 @@
     name: 'app',
     components: {ClickableAddress, CurrentNetwork},
     computed: {
-      ...mapState(['contractAddress', 'accountKaijus']),
+      ...mapState(['contractAddress', 'accountKaijus', 'account']),
     },
     mounted () {
 
@@ -82,6 +85,20 @@
       // Bootstrap the full app
       this.$store.dispatch(actions.INIT_APP, bootStrappedWeb3);
     },
+    created () {
+      const loadData = function () {
+        this.$store.dispatch(actions.LOAD_ACCOUNT_KAIJUS, {account: this.account});
+      }.bind(this);
+
+      this.$store.watch(
+        () => this.$store.state.account,
+        () => loadData()
+      );
+
+      if (this.$store.state.account) {
+        loadData();
+      }
+    }
   };
 </script>
 

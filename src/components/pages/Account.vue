@@ -20,7 +20,7 @@
               <span class="small">Tag</span><br/><code>{{searchResult.nfcId}}</code>
             </div>
             <div class="col">
-              <span class="small">Birth date</span><br/><code>{{searchResult.dob}}</code>
+              <span class="small">Birth date</span><br/><code>{{new Date(searchResult.dob * 1000).toDateString()}}</code>
             </div>
           </div>
           <div class="row">
@@ -67,7 +67,6 @@
     mounted () {},
     methods: {},
     created () {
-
       const loadData = function () {
         this.$store.dispatch(actions.LOAD_ACCOUNT_KAIJUS, {account: this.account});
       }.bind(this);
@@ -80,7 +79,7 @@
       if (this.$store.state.account) {
         loadData();
       }
-    },
+    }
   };
 </script>
 
