@@ -29,20 +29,24 @@
       <router-view></router-view>
     </main>
 
-    <footer class="footer mt-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm text-center">
-            <small>
-              <router-link :to="{ name: 'home' }">Home</router-link> <span class="text-primary">&bull;</span>
-              <router-link :to="{ name: 'create' }">Create</router-link> <span class="text-primary">&bull;</span>
-              <router-link :to="{ name: 'account' }">My Kajuis</router-link>
-              <br/>
-              <current-network></current-network>
-              <br/>
-              Contract: <clickable-address :eth-address="contractAddress"></clickable-address>
-            </small>
-          </div>
+    <footer class="footer container-fluid mt-5">
+      <div class="row">
+        <div class="col text-left">
+          <small>
+            <img src="../static/KO.png" style="max-height: 75px" title="Powered by KnownOrigin.io"/>
+          </small>
+        </div>
+        <div class="col text-center small">
+          <router-link :to="{ name: 'home' }">Home</router-link>
+          <span class="text-primary">&bull;</span>
+          <router-link :to="{ name: 'create' }">Create</router-link>
+          <span class="text-primary">&bull;</span>
+          <router-link :to="{ name: 'account' }">My Kajuis</router-link>
+        </div>
+        <div class="col text-right small text-muted">
+          <current-network></current-network>
+          <br/>
+          <clickable-address :eth-address="contractAddress"></clickable-address>
         </div>
       </div>
     </footer>
@@ -113,7 +117,6 @@
   @import '../node_modules/bootstrap/scss/bootstrap.scss';
 
   body {
-    margin-bottom: 60px;
     padding-top: 50px;
     padding-bottom: 20px;
   }
@@ -132,6 +135,7 @@
 
   main {
     min-height: 400px;
+    margin-bottom: 100px;
   }
 
   .card {
