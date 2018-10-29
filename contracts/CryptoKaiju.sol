@@ -7,7 +7,15 @@ import "openzeppelin-solidity/contracts/token/ERC721/ERC721Token.sol";
 import "./Strings.sol";
 
 /**
-* @title CryptoKaijus
+* @title CryptoKaiju - http://cryptokaiju.io
+*
+* Collectable Vinyl Toys Powered By The Ethereum Blockchain.
+*
+* The contract below represents the base contract for issuing CryptoKaiju NFT tokens.
+*
+* Taking over the world one collectable Kaiju at a time.
+*
+* Dreamt up by https://coinjournal.net in partnership between http://knownorigin.io & http://blockrocket.tech
 */
 contract CryptoKaiju is ERC721Token, Whitelist {
   using SafeMath for uint256;
@@ -18,7 +26,7 @@ contract CryptoKaiju is ERC721Token, Whitelist {
   mapping(bytes32 => uint256) internal nfcIdToTokenId;
   mapping(uint256 => bytes32) internal tokenIdToNfcId;
 
-  // Block when the Kaijus was born - will help with ordering by birth date which could differ from token ID
+  // Block when the Kaiju was born - will help with ordering by birth date which could differ from token ID
   mapping(uint256 => uint256) internal tokenIdToBirthDate;
 
   // A pointer to the next token to be minted, zero indexed
@@ -45,7 +53,7 @@ contract CryptoKaiju is ERC721Token, Whitelist {
   }
 
   function _mint(address to, bytes32 nfcId, string tokenURI, uint256 birthDate) internal {
-    require(nfcIdToTokenId[nfcId] == 0, "Unable to mint Kaijus with duplicate NFC ID");
+    require(nfcIdToTokenId[nfcId] == 0, "Unable to mint Kaiju with duplicate NFC ID");
 
     uint256 tokenId = tokenIdPointer;
 
@@ -59,12 +67,16 @@ contract CryptoKaiju is ERC721Token, Whitelist {
     tokenIdPointer = tokenIdPointer.add(1);
   }
 
-  // TODO hide behind whitelist
   function burn(uint256 tokenId)
-  public {
-    require(isApprovedForAll(ownerOf(tokenId), msg.sender));
+  public
+  onlyIfWhitelisted(msg.sender) {
+    // Cleanup custom data
+    bytes32 nfcId = tokenIdToNfcId[tokenId];
+    delete nfcIdToTokenId[nfcId];
+    delete tokenIdToNfcId[tokenId];
+    delete tokenIdToBirthDate[tokenId];
 
-    // TODO handle burn of custom fields
+    // Super burn
     _burn(ownerOf(tokenId), tokenId);
   }
 

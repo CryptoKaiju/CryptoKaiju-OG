@@ -1,24 +1,20 @@
 const {assertRevert} = require('../helpers/assertRevert');
 const {sendTransaction} = require('../helpers/sendTransaction');
 const etherToWei = require('../helpers/etherToWei');
-const {shouldSupportInterfaces} = require('./SupportsInterface.behavior');
 
 const advanceBlock = require('../helpers/advanceToBlock');
-
-const {shouldBehaveLikeERC721} = require('./ERC721.behavior');
 
 const _ = require('lodash');
 
 const BigNumber = web3.BigNumber;
-const CryptoKaijus = artifacts.require('CryptoKaijus');
-const ERC721Receiver = artifacts.require('ERC721ReceiverMock.sol');
+const CryptoKaiju = artifacts.require('CryptoKaiju');
 
 require('chai')
   .use(require('chai-as-promised'))
   .use(require('chai-bignumber')(BigNumber))
   .should();
 
-contract('CryptoKaijus ERC721 Custom', function (accounts) {
+contract('CryptoKaiju ERC721 Custom', function (accounts) {
   const owner = accounts[0];
   const account1 = accounts[1];
   const account2 = accounts[2];
@@ -32,7 +28,7 @@ contract('CryptoKaijus ERC721 Custom', function (accounts) {
   const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
   const RECEIVER_MAGIC_VALUE = '0x150b7a02';
 
-  const name = 'CryptoKaijus';
+  const name = 'CryptoKaiju';
   const symbol = 'KAIJUS';
 
   const TOKEN_URI = "123abcHash";
@@ -43,7 +39,7 @@ contract('CryptoKaijus ERC721 Custom', function (accounts) {
   });
 
   beforeEach(async function () {
-    this.token = await CryptoKaijus.new({from: owner});
+    this.token = await CryptoKaiju.new({from: owner});
   });
 
   let currentNfcId = 1;
