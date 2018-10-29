@@ -10,11 +10,6 @@
 
         <ul class="navbar-nav mr-auto">
         </ul>
-        <!--<ul class="navbar-nav">-->
-        <!--<li class="nav-item d-none d-md-block">-->
-        <!--<router-link :to="{ name: 'create' }" class="nav-link">Create Kajiu</router-link>-->
-        <!--</li>-->
-        <!--</ul>-->
         <ul class="navbar-nav">
           <li class="nav-item nav-link">
             <router-link :to="{ name: 'account' }" class="nav-link">
@@ -114,7 +109,7 @@
   $primary: #bd1722;
 
   @import url('https://fonts.googleapis.com/css?family=Montserrat');
-  
+
   $font-family-base: 'Montserrat', Helvetica, Arial, sans-serif;
 
   @import '../node_modules/bootstrap/scss/bootstrap.scss';

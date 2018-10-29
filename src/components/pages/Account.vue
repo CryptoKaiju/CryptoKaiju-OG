@@ -15,7 +15,7 @@
             {{searchResult.ipfsData.name}}
           </h2>
           <p class="card-text p-2">{{searchResult.ipfsData.description}}</p>
-          <div class="row">
+          <div class="row mb-2">
             <div class="col">
               <span class="small">Tag</span><br/><code>{{searchResult.nfcId}}</code>
             </div>
@@ -23,7 +23,7 @@
               <span class="small">Birth date</span><br/><code>{{new Date(searchResult.dob * 1000).toDateString()}}</code>
             </div>
           </div>
-          <div class="row">
+          <div class="row mb-2">
             <div class="col">
               <span class="small">Gender</span><br/><code>{{searchResult.ipfsData.attributes.gender|capitalize}}</code>
             </div>
@@ -31,7 +31,7 @@
               <span class="small">Colour</span><br/><code>{{searchResult.ipfsData.attributes.colour|capitalize}}</code>
             </div>
           </div>
-          <div class="row">
+          <div class="row mb-2">
             <div class="col">
               <span class="small">Nature</span><br/><code>{{searchResult.ipfsData.attributes.nature|capitalize}}</code>
             </div>
