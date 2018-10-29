@@ -64,3 +64,5 @@ typings/
 crypto-kaijus.iml
 /dist/
 /coverageEnv/
+
+.firebase
