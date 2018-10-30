@@ -5,7 +5,7 @@
       <nav class="navbar navbar-expand-md navbar-dark fixed-top floating-nav">
         <router-link :to="{ name: 'home' }" class="navbar-brand">
           <img src="../static/logo.png" alt="Crypto-Kaijus" class="logo"/>
-          <code class="small ml-2 text-secondary">Alpha</code>
+          <code class="small ml-2 text-secondary d-none d-md-inline-block">Alpha</code>
         </router-link>
 
         <ul class="navbar-nav mr-auto">
@@ -27,9 +27,9 @@
 
     <footer class="footer container-fluid mt-5">
       <div class="row">
-        <div class="col text-left">
+        <div class="col text-left d-none d-md-inline-block">
           <small>
-            <img src="../static/KO.png" style="max-height: 75px" title="Powered by KnownOrigin.io"/>
+            <img src="../static/KO.png" style="max-height: 50px" title="Powered by KnownOrigin.io"/>
           </small>
         </div>
         <div class="col text-center small">
@@ -137,7 +137,7 @@
   }
 
   .card {
-    color: #383838;
+    color: #040505;
     background-color: #F5F5F5;
   }
 

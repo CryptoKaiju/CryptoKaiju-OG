@@ -7,7 +7,6 @@
         <h1 class="display-4 text-left mb-4">CryptoKaiju</h1>
         <h2>Collectible Vinyl Toys</h2>
         <p><em>Powered by the Ethereum Blockchain</em></p>
-        <!--<img src="../../../static/RoughCutout-500x670.png" class="ml-5" style="max-height: 200px"/>-->
       </div>
       <div class="col-sm-7 mt-5">
         <form class="form">
@@ -22,9 +21,6 @@
           <button type="button" class="btn btn-primary btn-lg" v-on:click="searchByKId">
             Search
           </button>
-          <!--<button type="button" class="btn btn-primary btn-lg" v-on:click="searchByNfcID">-->
-            <!--Search by Tag-->
-          <!--</button>-->
         </form>
       </div>
     </div>
@@ -38,8 +34,8 @@
               </div>
               <div class="col mb-4">
                 <div class="card-block px-2 pt-2">
-                  <h2 class="card-title p-2">{{searchResult.ipfsData.name}}</h2>
-                  <p class="card-text p-2">{{searchResult.ipfsData.description}}</p>
+                  <h2 class="card-title">{{searchResult.ipfsData.name}}</h2>
+                  <p class="card-text">{{searchResult.ipfsData.description}}</p>
                   <div class="row mb-2">
                     <div class="col">
                       <span class="small">Tag</span><br/><code>{{searchResult.nfcId}}</code>

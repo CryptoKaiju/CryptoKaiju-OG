@@ -10,11 +10,11 @@
       <div class="card shadow-sm" v-for="searchResult in accountKaijus">
         <img :src="searchResult.ipfsData.image" class="card-img-top"/>
         <div class="card-body">
-          <h2 class="card-title p-2">
+          <h2 class="card-title">
             <span class="badge badge-secondary">#{{searchResult.tokenId}}</span>
             {{searchResult.ipfsData.name}}
           </h2>
-          <p class="card-text p-2">{{searchResult.ipfsData.description}}</p>
+          <p class="card-text">{{searchResult.ipfsData.description}}</p>
           <div class="row mb-2">
             <div class="col">
               <span class="small">Tag</span><br/><code>{{searchResult.nfcId}}</code>
