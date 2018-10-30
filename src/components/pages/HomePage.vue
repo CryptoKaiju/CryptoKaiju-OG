@@ -34,7 +34,7 @@
               </div>
               <div class="col mb-4">
                 <div class="card-block px-2 pt-2">
-                  <h2 class="card-title">{{searchResult.ipfsData.name}}</h2>
+                  <h2 class="card-title"><strong>{{searchResult.ipfsData.name}}</strong></h2>
                   <p class="card-text">{{searchResult.ipfsData.description}}</p>
                   <div class="row mb-2">
                     <div class="col">

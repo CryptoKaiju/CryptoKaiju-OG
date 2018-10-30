@@ -12,7 +12,7 @@
         <div class="card-body">
           <h2 class="card-title">
             <span class="badge badge-secondary">#{{searchResult.tokenId}}</span>
-            {{searchResult.ipfsData.name}}
+            <strong>{{searchResult.ipfsData.name}}</strong>
           </h2>
           <p class="card-text">{{searchResult.ipfsData.description}}</p>
           <div class="row mb-2">
