@@ -7,10 +7,10 @@
         <h1 class="display-4 text-left mb-4">CryptoKaiju</h1>
         <h2>Collectible Vinyl Toys</h2>
         <p><em>Powered by the Ethereum Blockchain</em></p>
+        <p class="mt-5" v-if="totalSupply">There are currently <span class="badge badge-primary">{{ totalSupply }}</span> kaijus in existence</p>
       </div>
       <div class="col-sm-7 mt-5">
-        <form class="form">
-
+        <b-form @submit="searchByKId" novalidate class="">
           <div class="form-group">
             <input type="text"
                    class="form-control form-control-lg w-75"
@@ -18,10 +18,10 @@
                    v-model="searchData.kId"
                    placeholder="Token ID or NFC ID"/>
           </div>
-          <button type="button" class="btn btn-primary btn-lg" v-on:click="searchByKId">
+          <b-button type="submit" variant="primary" class="btn-lg">
             Search
-          </button>
-        </form>
+          </b-button>
+        </b-form>
       </div>
     </div>
     <div class="row">
@@ -34,7 +34,10 @@
               </div>
               <div class="col mb-4">
                 <div class="card-block px-2 pt-2">
-                  <h2 class="card-title"><strong>{{searchResult.ipfsData.name}}</strong></h2>
+                  <h2 class="card-title">
+                    <strong>{{searchResult.ipfsData.name}}</strong>
+                    <span class="badge badge-secondary float-right ml-5">#{{searchResult.tokenId}}</span>
+                  </h2>
                   <p class="card-text">{{searchResult.ipfsData.description}}</p>
                   <div class="row mb-2">
                     <div class="col">
@@ -109,7 +112,9 @@
           this.$store.dispatch(actions.FIND_KAIJUS_BY_NFC_ID, this.searchData.kId);
         }
       },
-      searchByKId: function () {
+      searchByKId: function (evt) {
+        evt.preventDefault();
+
         function isInt(value) {
           let x = parseFloat(value);
           return !isNaN(value) && (x | 0) === x;

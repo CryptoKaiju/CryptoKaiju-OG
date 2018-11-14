@@ -14,12 +14,20 @@
           <li class="nav-item nav-link">
             <router-link :to="{ name: 'account' }" class="nav-link">
               My Kaijus
-              <span class="badge badge-primary">{{accountKaijus.length}}</span>
+              <span class="ml-2 badge badge-primary">{{accountKaijus.length}}</span>
             </router-link>
           </li>
         </ul>
       </nav>
     </header>
+
+    <div class="container-fluid mt-5" v-if="!web3Detected">
+      <div class="row no-metamask text-center">
+        <div class="col mt-2 mb-2">
+          <img src="../static/metamask.png" style="max-height: 35px" class="mr-3"/> Please install the <code><a href="https://metamask.io/" target="_blank">METAMASK</a></code> extension to interact with the Ethereum blockchain
+        </div>
+      </div>
+    </div>
 
     <main role="main" class="container-fluid mt-5">
       <router-view></router-view>
@@ -34,8 +42,6 @@
         </div>
         <div class="col text-center small">
           <router-link :to="{ name: 'home' }">Home</router-link>
-          <span class="text-primary">&bull;</span>
-          <router-link :to="{ name: 'create' }">Create</router-link>
           <span class="text-primary">&bull;</span>
           <router-link :to="{ name: 'account' }">My Kajuis</router-link>
         </div>
@@ -63,6 +69,11 @@
   export default {
     name: 'app',
     components: {ClickableAddress, CurrentNetwork},
+    data () {
+      return {
+        web3Detected: true
+      };
+    },
     computed: {
       ...mapState(['contractAddress', 'accountKaijus', 'account']),
     },
@@ -73,9 +84,13 @@
       // Checking if Web3 has been injected by the browser (Mist/MetaMask)
       if (typeof web3 !== 'undefined') {
         bootStrappedWeb3 = new Web3(web3.currentProvider);
+
+        this.web3Detected = true;
       } else {
         console.log('No web3! You should consider trying MetaMask or an Ethereum browser');
         console.log('Falling back to using HTTP Provider');
+
+        this.web3Detected = false;
 
         bootStrappedWeb3 = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/nbCbdzC6IG9CF6hmvAVQ'));
       }
@@ -144,6 +159,14 @@
   .list-group-item {
     color: #383838;
     background-color: #F5F5F5;
+  }
+
+  .no-metamask {
+    background-color: #e83e8c;
+
+    a {
+      color: white;
+    }
   }
 
 </style>

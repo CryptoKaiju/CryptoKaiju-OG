@@ -6,6 +6,14 @@
       <clickable-address :eth-address="account"></clickable-address>
     </p>
 
+    <div class="row mt-5">
+      <div class="col text-center">
+        <code>You don't own any kaijus yet...</code>
+        <br/>
+        <a href="https://cryptokaiju.io/store/" target="_blank" class="btn btn-primary btn-lg mt-5">Buy now</a>
+      </div>
+    </div>
+
     <div class="card-columns">
       <div class="card shadow-sm" v-for="searchResult in accountKaijus">
         <img :src="searchResult.ipfsData.image" class="card-img-top"/>
@@ -64,8 +72,6 @@
     computed: {
       ...mapState(['account', 'accountKaijus'])
     },
-    mounted () {},
-    methods: {},
     created () {
       const loadData = function () {
         this.$store.dispatch(actions.LOAD_ACCOUNT_KAIJUS, {account: this.account});
