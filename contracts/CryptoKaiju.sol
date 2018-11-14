@@ -130,6 +130,8 @@ contract CryptoKaiju is ERC721Token, Whitelist {
     string tokenUri,
     uint256 dob
   ) {
+    require(exists(_tokenId));
+
     return (
     _tokenId,
     tokenIdToNfcId[_tokenId],

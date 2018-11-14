@@ -73,8 +73,8 @@
         </div>
 
       </div>
-      <div class="col mt-5 text-center" v-if="!searchResult && searchData.kId">
-        <code>Searching...</code>
+      <div class="col mt-5 text-center" v-if="!searchResult && notFound">
+        <code>Not found!</code>
       </div>
     </div>
   </div>
@@ -99,7 +99,7 @@
       };
     },
     computed: {
-      ...mapState(['currentUsdPrice', 'totalSupply', 'searchResult']),
+      ...mapState(['notFound', 'totalSupply', 'searchResult']),
     },
     methods: {
       searchByTokenId: function () {
