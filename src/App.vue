@@ -42,13 +42,13 @@
         </div>
         <div class="col text-center small">
           <router-link :to="{ name: 'home' }">Home</router-link>
-          <span class="text-primary">&bull;</span>
+          &bull;
           <router-link :to="{ name: 'account' }">My Kajuis</router-link>
         </div>
-        <div class="col text-right small text-muted">
+        <div class="col text-right small">
           <current-network></current-network>
           <br/>
-          <clickable-address :eth-address="contractAddress"></clickable-address>
+          Contract: <clickable-address :eth-address="contractAddress"></clickable-address>
         </div>
       </div>
     </footer>
@@ -148,7 +148,19 @@
   }
 
   footer {
-    color: $body-color;
+    color: rgba(255, 255, 255, 0.5);
+
+    a {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    a:visited {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    a:hover {
+      color: rgba(255, 255, 255, 0.5);
+    }
   }
 
   .navbar-dark {
