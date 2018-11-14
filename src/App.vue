@@ -77,22 +77,35 @@
     computed: {
       ...mapState(['contractAddress', 'accountKaijus', 'account']),
     },
-    mounted () {
+    async mounted () {
 
       let bootStrappedWeb3;
 
-      // Checking if Web3 has been injected by the browser (Mist/MetaMask)
-      if (typeof web3 !== 'undefined') {
+      // Modern dapp browsers...
+      if (window.ethereum) {
+        console.log(`Using post-Nov 2nd (approval) MetaMask`);
+        bootStrappedWeb3 = new Web3(ethereum);
+        try {
+          // Request account access if needed
+          await window.ethereum.enable();
+          console.log(`Enabled`);
+
+          this.web3Detected = true;
+        } catch (error) {
+          // User denied account access...
+          console.log(error);
+
+          this.web3Detected = false;
+        }
+      } else if (window.web3) {
+        console.log(`Using pre-Nov 2nd MetaMask`);
         bootStrappedWeb3 = new Web3(web3.currentProvider);
 
         this.web3Detected = true;
       } else {
-        console.log('No web3! You should consider trying MetaMask or an Ethereum browser');
-        console.log('Falling back to using HTTP Provider');
+        console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
 
         this.web3Detected = false;
-
-        bootStrappedWeb3 = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/nbCbdzC6IG9CF6hmvAVQ'));
       }
 
       window.web3 = bootStrappedWeb3;
