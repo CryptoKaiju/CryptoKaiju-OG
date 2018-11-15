@@ -127,13 +127,13 @@
           <div class="form-group row">
             <label for="gender"
                    class="col-sm-2 col-form-label">
-              Nature
+              Class
             </label>
             <div class="col-sm-10">
               <select class="form-control"
                       id="nature"
-                      v-model="formData.nature">
-                <option v-for="nature in formLookupData.natures" :value="nature">{{nature}}</option>
+                      v-model="formData.kclass">
+                <option v-for="kclass in formLookupData.kclass" :value="kclass">{{kclass}}</option>
               </select>
             </div>
           </div>
@@ -215,7 +215,7 @@
               uri: 'https://ipfs.infura.io/ipfs/Qma9fCYT85s8Y7Pmhj3XifauiKCVwTytw4XTLabBuXNfSN'
             },
           ],
-          natures: [
+          kclass: [
             'Leader',
             'Determined',
             'Mutant',
@@ -345,8 +345,8 @@
         if (!this.formData.batch) {
           this.formData.errors.push('Batch is required.');
         }
-        if (!this.formData.nature) {
-          this.formData.errors.push('Nature is required.');
+        if (!this.formData.kclass) {
+          this.formData.errors.push('Class is required.');
         }
         if (!this.formData.skill) {
           this.formData.errors.push('Skill is required.');
@@ -363,7 +363,7 @@
             colour: _.lowerCase(_.get(this.formData, 'colour.name')),
             gender: _.lowerCase(_.get(this.formData, 'gender.name')),
             batch: _.lowerCase(_.get(this.formData, 'batch')),
-            nature: _.lowerCase(_.get(this.formData, 'nature')),
+            class: _.lowerCase(_.get(this.formData, 'kclass')),
             skill: _.lowerCase(_.get(this.formData, 'skill'))
           },
           external_uri: 'https://cryptokaiju.io',

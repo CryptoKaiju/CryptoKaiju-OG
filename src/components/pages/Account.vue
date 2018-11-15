@@ -6,7 +6,7 @@
       <clickable-address :eth-address="account"></clickable-address>
     </p>
 
-    <div class="row mt-5">
+    <div class="row mt-5" v-if="!accountKaijus || accountKaijus.length === 0">
       <div class="col text-center">
         <code>You don't own any kaijus yet...</code>
         <br/>
@@ -14,44 +14,48 @@
       </div>
     </div>
 
-    <div class="card-columns">
-      <div class="card shadow-sm" v-for="searchResult in accountKaijus">
-        <img :src="searchResult.ipfsData.image" class="card-img-top"/>
-        <div class="card-body">
-          <h2 class="card-title">
-            <span class="badge badge-secondary">#{{searchResult.tokenId}}</span>
-            <strong>{{searchResult.ipfsData.name}}</strong>
-          </h2>
-          <p class="card-text">{{searchResult.ipfsData.description}}</p>
-          <div class="row mb-2">
-            <div class="col">
-              <span class="small">Tag</span><br/><code>{{searchResult.nfcId}}</code>
+    <div class="row mt-5" v-else>
+      <div class="col">
+        <div class="card-columns">
+          <div class="card shadow-sm" v-for="searchResult in accountKaijus">
+            <img :src="searchResult.ipfsData.image" class="card-img-top img-fluid"/>
+            <div class="card-body">
+              <h2 class="card-title">
+                <span class="badge badge-secondary">#{{searchResult.tokenId}}</span>
+                <strong>{{searchResult.ipfsData.name}}</strong>
+              </h2>
+              <p class="card-text">{{searchResult.ipfsData.description}}</p>
+              <div class="row mb-2">
+                <div class="col">
+                  <span class="small">Tag</span><br/><code>{{searchResult.nfcId}}</code>
+                </div>
+                <div class="col">
+                  <span class="small">Birth date</span><br/><code>{{new Date(searchResult.dob * 1000).toDateString()}}</code>
+                </div>
+              </div>
+              <div class="row mb-2">
+                <div class="col">
+                  <span class="small">Gender</span><br/><code>{{searchResult.ipfsData.attributes.gender|capitalize}}</code>
+                </div>
+                <div class="col">
+                  <span class="small">Colour</span><br/><code>{{searchResult.ipfsData.attributes.colour|capitalize}}</code>
+                </div>
+              </div>
+              <div class="row mb-2">
+                <div class="col">
+                  <span class="small">Class</span><br/><code>{{searchResult.ipfsData.attributes.nature|capitalize}}</code>
+                </div>
+                <div class="col">
+                  <span class="small">Skill</span><br/><code>{{searchResult.ipfsData.attributes.skill|capitalize}}</code>
+                </div>
+              </div>
             </div>
-            <div class="col">
-              <span class="small">Birth date</span><br/><code>{{new Date(searchResult.dob * 1000).toDateString()}}</code>
-            </div>
-          </div>
-          <div class="row mb-2">
-            <div class="col">
-              <span class="small">Gender</span><br/><code>{{searchResult.ipfsData.attributes.gender|capitalize}}</code>
-            </div>
-            <div class="col">
-              <span class="small">Colour</span><br/><code>{{searchResult.ipfsData.attributes.colour|capitalize}}</code>
-            </div>
-          </div>
-          <div class="row mb-2">
-            <div class="col">
-              <span class="small">Nature</span><br/><code>{{searchResult.ipfsData.attributes.nature|capitalize}}</code>
-            </div>
-            <div class="col">
-              <span class="small">Skill</span><br/><code>{{searchResult.ipfsData.attributes.skill|capitalize}}</code>
-            </div>
+
+            <!--<div class="card-footer w-100 text-muted small">-->
+            <!--{{searchResult}}-->
+            <!--</div>-->
           </div>
         </div>
-
-        <!--<div class="card-footer w-100 text-muted small">-->
-        <!--{{searchResult}}-->
-        <!--</div>-->
       </div>
     </div>
   </div>
@@ -94,4 +98,6 @@
     padding-top: 0 !important;
   }
 
+  .card-img-top {
+  }
 </style>

@@ -57,7 +57,7 @@
                   </div>
                   <div class="row mb-2">
                     <div class="col">
-                      <span class="small">Nature</span><br/><code>{{searchResult.ipfsData.attributes.nature|capitalize}}</code>
+                      <span class="small">Class</span><br/><code>{{searchResult.ipfsData.attributes.nature|capitalize}}</code>
                     </div>
                     <div class="col">
                       <span class="small">Skill</span><br/><code>{{searchResult.ipfsData.attributes.skill|capitalize}}</code>
