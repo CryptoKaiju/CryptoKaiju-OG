@@ -33,34 +33,45 @@
                 <img :src="searchResult.ipfsData.image" class="img-fluid" style="max-width: 200px"/>
               </div>
               <div class="col mb-4">
-                <div class="card-block px-2 pt-2">
+                <div class="card-block px-2 pt-2 text-center">
                   <h2 class="card-title">
                     <strong>{{searchResult.ipfsData.name}}</strong>
                     <span class="badge badge-secondary float-right ml-5">#{{searchResult.tokenId}}</span>
                   </h2>
                   <p class="card-text">{{searchResult.ipfsData.description}}</p>
-                  <div class="row mb-2">
-                    <div class="col">
-                      <span class="small">Tag</span><br/><code>{{searchResult.nfcId}}</code>
+                  <div class="text-left">
+                    <div class="row mb-2">
+                      <div class="col">
+                        <span class="small">Birth date</span><br/><code>{{new Date(searchResult.dob * 1000).toDateString()}}</code>
+                      </div>
                     </div>
-                    <div class="col">
-                      <span class="small">Birth date</span><br/><code>{{new Date(searchResult.dob * 1000).toDateString()}}</code>
+                    <div class="row mb-2">
+                      <div class="col">
+                        <span class="small">Gender</span><br/><code>{{searchResult.ipfsData.attributes.gender|capitalize}}</code>
+                      </div>
+                      <div class="col">
+                        <span class="small">Colour</span><br/><code>{{searchResult.ipfsData.attributes.colour|capitalize}}</code>
+                      </div>
                     </div>
-                  </div>
-                  <div class="row mb-2">
-                    <div class="col">
-                      <span class="small">Gender</span><br/><code>{{searchResult.ipfsData.attributes.gender|capitalize}}</code>
+                    <div class="row mb-2">
+                      <div class="col">
+                        <span class="small">Nature</span><br/><code>{{searchResult.ipfsData.attributes.nature|capitalize}}</code>
+                      </div>
                     </div>
-                    <div class="col">
-                      <span class="small">Colour</span><br/><code>{{searchResult.ipfsData.attributes.colour|capitalize}}</code>
+                    <div class="row mb-2">
+                      <div class="col">
+                        <span class="small">Skill</span><br/><code>{{searchResult.ipfsData.attributes.skill|capitalize}}</code>
+                      </div>
                     </div>
-                  </div>
-                  <div class="row mb-2">
-                    <div class="col">
-                      <span class="small">Class</span><br/><code>{{searchResult.ipfsData.attributes.nature|capitalize}}</code>
+                    <div class="row mb-2">
+                      <div class="col">
+                        <span class="small">Batch</span><br/><code>{{searchResult.ipfsData.attributes.batch|capitalize}}</code>
+                      </div>
                     </div>
-                    <div class="col">
-                      <span class="small">Skill</span><br/><code>{{searchResult.ipfsData.attributes.skill|capitalize}}</code>
+                    <div class="row mb-2">
+                      <div class="col">
+                        <span class="small">Tag</span><br/><code>{{searchResult.nfcId}}</code>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -115,7 +126,7 @@
       searchByKId: function (evt) {
         evt.preventDefault();
 
-        function isInt(value) {
+        function isInt (value) {
           let x = parseFloat(value);
           return !isNaN(value) && (x | 0) === x;
         }

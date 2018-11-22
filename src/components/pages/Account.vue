@@ -17,7 +17,7 @@
     <div class="row mt-5" v-else>
       <div class="col">
         <div class="card-columns">
-          <div class="card shadow-sm" v-for="searchResult in accountKaijus">
+          <div class="card shadow-sm text-center" v-for="searchResult in accountKaijus">
             <img :src="searchResult.ipfsData.image" class="card-img-top img-fluid"/>
             <div class="card-body">
               <h2 class="card-title">
@@ -25,28 +25,39 @@
                 <strong>{{searchResult.ipfsData.name}}</strong>
               </h2>
               <p class="card-text">{{searchResult.ipfsData.description}}</p>
-              <div class="row mb-2">
-                <div class="col">
-                  <span class="small">Tag</span><br/><code>{{searchResult.nfcId}}</code>
+              <div class="text-left">
+                <div class="row mb-2">
+                  <div class="col">
+                    <span class="small">Birth date</span><br/><code>{{new Date(searchResult.dob * 1000).toDateString()}}</code>
+                  </div>
                 </div>
-                <div class="col">
-                  <span class="small">Birth date</span><br/><code>{{new Date(searchResult.dob * 1000).toDateString()}}</code>
+                <div class="row mb-2">
+                  <div class="col">
+                    <span class="small">Gender</span><br/><code>{{searchResult.ipfsData.attributes.gender|capitalize}}</code>
+                  </div>
+                  <div class="col">
+                    <span class="small">Colour</span><br/><code>{{searchResult.ipfsData.attributes.colour|capitalize}}</code>
+                  </div>
                 </div>
-              </div>
-              <div class="row mb-2">
-                <div class="col">
-                  <span class="small">Gender</span><br/><code>{{searchResult.ipfsData.attributes.gender|capitalize}}</code>
+                <div class="row mb-2">
+                  <div class="col">
+                    <span class="small">Nature</span><br/><code>{{searchResult.ipfsData.attributes.nature|capitalize}}</code>
+                  </div>
                 </div>
-                <div class="col">
-                  <span class="small">Colour</span><br/><code>{{searchResult.ipfsData.attributes.colour|capitalize}}</code>
+                <div class="row mb-2">
+                  <div class="col">
+                    <span class="small">Skill</span><br/><code>{{searchResult.ipfsData.attributes.skill|capitalize}}</code>
+                  </div>
                 </div>
-              </div>
-              <div class="row mb-2">
-                <div class="col">
-                  <span class="small">Class</span><br/><code>{{searchResult.ipfsData.attributes.nature|capitalize}}</code>
+                <div class="row mb-2">
+                  <div class="col">
+                    <span class="small">Batch</span><br/><code>{{searchResult.ipfsData.attributes.batch|capitalize}}</code>
+                  </div>
                 </div>
-                <div class="col">
-                  <span class="small">Skill</span><br/><code>{{searchResult.ipfsData.attributes.skill|capitalize}}</code>
+                <div class="row mb-2">
+                  <div class="col">
+                    <span class="small">Tag</span><br/><code>{{searchResult.nfcId}}</code>
+                  </div>
                 </div>
               </div>
             </div>
@@ -99,5 +110,7 @@
   }
 
   .card-img-top {
+    width: 170px;
+    height: 250px;
   }
 </style>
