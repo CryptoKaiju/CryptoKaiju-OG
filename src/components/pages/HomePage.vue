@@ -27,10 +27,10 @@
     <div class="row">
       <div class="col mt-5" v-if="searchResult">
         <div class="d-flex justify-content-center">
-          <div class="card shadow-sm">
+          <div class="card shadow-sm p-5">
             <div class="row no-gutters">
-              <div class="col-auto pr-5">
-                <img :src="searchResult.ipfsData.image" class="img-fluid mt-5 ml-5" style="max-width: 175px"/>
+              <div class="col-auto pr-4">
+                <img :src="searchResult.ipfsData.image" class="img-fluid mt-5 ml-3" style="max-width: 175px"/>
               </div>
               <div class="col mb-4">
                 <div class="card-block px-2 pt-2 text-center">
