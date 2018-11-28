@@ -30,7 +30,7 @@ contract CryptoKaiju is ERC721Token, Whitelist {
   mapping(uint256 => uint256) internal tokenIdToBirthDate;
 
   // A pointer to the next token to be minted, zero indexed
-  uint256 public tokenIdPointer = 1;
+  uint256 public tokenIdPointer = 0;
 
   constructor () public ERC721Token("CryptoKaiju", "KAIJU") {
     addAddressToWhitelist(msg.sender);

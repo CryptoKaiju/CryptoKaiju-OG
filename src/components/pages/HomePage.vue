@@ -7,7 +7,7 @@
         <h1 class="display-4 text-left mb-4">CryptoKaiju</h1>
         <h2>Collectible Vinyl Toys</h2>
         <p><em>Powered by the Ethereum Blockchain</em></p>
-        <p class="mt-5" v-if="totalSupply">There are currently <span class="badge badge-primary pl-4 pr-4">{{ totalSupply }}</span> kaijus in existence</p>
+        <p class="mt-5" v-if="totalSupply">There are currently <span class="badge badge-primary pl-2 pr-2 ml-2 mr-2">{{ totalSupply }}</span> kaijus in existence</p>
       </div>
       <div class="col-sm-7 mt-5">
         <b-form @submit="searchByKId" novalidate class="">
@@ -55,7 +55,7 @@
                     </div>
                     <div class="row mb-2">
                       <div class="col">
-                        <span class="small">Nature</span><br/><code>{{searchResult.ipfsData.attributes.nature|capitalize}}</code>
+                        <span class="small">Class</span><br/><code>{{searchResult.ipfsData.attributes.class|capitalize}}</code>
                       </div>
                     </div>
                     <div class="row mb-2">

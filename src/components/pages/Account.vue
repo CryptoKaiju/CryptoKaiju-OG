@@ -44,7 +44,7 @@
                 </div>
                 <div class="row mb-2">
                   <div class="col">
-                    <span class="small">Nature</span><br/><code>{{searchResult.ipfsData.attributes.nature|capitalize}}</code>
+                    <span class="small">Class</span><br/><code>{{searchResult.ipfsData.attributes.class|capitalize}}</code>
                   </div>
                 </div>
                 <div class="row mb-2">
@@ -80,10 +80,11 @@
   import { mapGetters, mapState } from 'vuex';
   import * as actions from '../../store/actions';
   import ClickableTransaction from '../widgets/ClickableTransaction';
+  import ClickableAddress from '../widgets/ClickableAddress';
 
   export default {
     name: 'account',
-    components: {ClickableTransaction},
+    components: {ClickableTransaction, ClickableAddress},
     computed: {
       ...mapState(['account', 'accountKaijus', 'transfers']),
       ...mapGetters(['findTx'])
