@@ -4,7 +4,7 @@
 
     <div class="row">
       <div class="col-sm-5">
-        <h1 class="display-4 text-left mb-4">CryptoKaiju</h1>
+        <h1 class="display-4 text-left mb-4 text-primary">CryptoKaiju</h1>
         <h2>Collectible Vinyl Toys</h2>
         <p><em>Powered by the Ethereum Blockchain</em></p>
         <p class="mt-5" v-if="totalSupply">There are currently <span class="badge badge-primary pl-2 pr-2 ml-2 mr-2">{{ totalSupply }}</span> kaijus in existence</p>
@@ -30,13 +30,13 @@
           <div class="card shadow-sm">
             <div class="row no-gutters">
               <div class="col-auto pr-5">
-                <img :src="searchResult.ipfsData.image" class="img-fluid m-3" style="max-width: 175px"/>
+                <img :src="searchResult.ipfsData.image" class="img-fluid mt-5 ml-5" style="max-width: 175px"/>
               </div>
               <div class="col mb-4">
                 <div class="card-block px-2 pt-2 text-center">
                   <h2 class="card-title">
                     <strong>{{searchResult.ipfsData.name}}</strong>
-                    <span class="badge badge-secondary float-right ml-5">#{{searchResult.tokenId}}</span>
+                    <span class="badge badge-primary float-right ml-5">#{{searchResult.tokenId}}</span>
                   </h2>
                   <p class="card-text">{{searchResult.ipfsData.description}}</p>
                   <p class="card-text" v-if="transfers && findTx(searchResult.tokenId)">

@@ -2,7 +2,7 @@
   <div id="app">
 
     <header>
-      <nav class="navbar navbar-expand-md navbar-dark fixed-top floating-nav">
+      <nav class="navbar navbar-expand-md">
         <router-link :to="{ name: 'home' }" class="navbar-brand">
           <img src="../static/logo.png" alt="Crypto-Kaijus" class="logo"/>
           <code class="small ml-2 text-secondary d-none d-md-inline-block">Alpha</code>
@@ -37,7 +37,7 @@
       <div class="row">
         <div class="col text-left d-none d-md-inline-block">
           <small>
-              <img src="../static/KO.png" style="max-height: 50px" title="Powered by KnownOrigin.io"/>
+              Powered by <img src="../static/KO_icon_Round.1.svg" style="max-height: 25px" title="Powered by KnownOrigin.io" class="ml-2"/>
           </small>
         </div>
         <div class="col text-center small">
@@ -47,8 +47,7 @@
         </div>
         <div class="col text-right small">
           <current-network></current-network>
-          <br/>
-          Contract: <clickable-address :eth-address="contractAddress"></clickable-address>
+          [<clickable-address :eth-address="contractAddress"></clickable-address>]
         </div>
       </div>
     </footer>
@@ -132,9 +131,10 @@
 
 <style lang="scss">
 
-  $body-bg: #1f2760;
-  $body-color: #f5f5f5;
+  $body-bg: #f5f5f5;
+  $body-color: #1f2760;
   $primary: #ff005c;
+  $secondary: #fff0f2;
   $gray: #707070;
   $black: #040505;
   $white: #f5f5f5;
@@ -151,33 +151,37 @@
   .btn, .form-control { border-radius: 25px; }
 
   body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+      background-color: $body-bg;
+  }
+
+  #app {
+    background-image: url(../static/Header_12.png);
+    background-position: right 0px top 0px;
+    background-repeat: no-repeat;
   }
 
   footer {
-    color: rgba(255, 255, 255, 0.5);
+    color: $gray;
 
     a {
-      color: rgba(255, 255, 255, 0.5);
+      color: $gray;
     }
 
     a:visited {
-      color: rgba(255, 255, 255, 0.5);
+      color: $gray;
     }
 
     a:hover {
-      color: rgba(255, 255, 255, 0.5);
+      color: $gray;
     }
+
+    margin-bottom: 30px;
   }
 
   code {
     color: $primary;
   }
 
-  .navbar-dark {
-    background-color: $body-bg;
-  }
 
   .logo {
     width: 200px;
@@ -190,8 +194,8 @@
   }
 
   .card {
-    color: $black;
-    background-color: $body-color;
+    color: $body-color;
+    background-color: $secondary;
   }
 
   .list-group-item {
