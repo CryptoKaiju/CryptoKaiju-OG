@@ -29,7 +29,7 @@
       </div>
     </div>
 
-    <main role="main" class="container-fluid mt-5">
+    <main role="main" class="container-fluid">
       <router-view></router-view>
     </main>
 
@@ -132,15 +132,20 @@
 
 <style lang="scss">
 
-  $body-bg: #21285b;
+  $body-bg: #1f2760;
   $body-color: #FFF;
-  $primary: #bd1722;
+  $primary: #ff005c;
 
-  @import url('https://fonts.googleapis.com/css?family=Montserrat');
+  $border-radius-base: 50;
 
-  $font-family-base: 'Montserrat', Helvetica, Arial, sans-serif;
+  @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+  $font-family-base: 'Open Sans', sans-serif;
 
   @import '../node_modules/bootstrap/scss/bootstrap.scss';
+  @import '../node_modules/bootstrap-vue/dist/bootstrap-vue.css';
+
+  .btn, .form-control { border-radius: 25px; }
 
   body {
     padding-top: 50px;
@@ -174,6 +179,7 @@
   main {
     min-height: 400px;
     margin-bottom: 100px;
+    margin-top: 100px;
   }
 
   .card {
