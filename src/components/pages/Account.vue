@@ -10,7 +10,7 @@
       <div class="col text-center">
         <code>You don't own any kaijus yet...</code>
         <br/>
-        <a href="https://cryptokaiju.io/store/" target="_blank" class="btn btn-primary btn-lg mt-5">Buy now</a>
+        <a href="https://cryptokaiju.io/shop/" target="_blank" class="btn btn-primary btn-lg mt-5">Buy now</a>
       </div>
     </div>
 
