@@ -59,7 +59,7 @@
                 </div>
                 <div class="row mb-2">
                   <div class="col">
-                    <span class="small">Tag</span><br/><code>{{searchResult.nfcId}}</code>
+                    <span class="small">Tag</span><br/><code>{{searchResult.ipfsData.attributes.nfc}}</code>
                   </div>
                 </div>
               </div>

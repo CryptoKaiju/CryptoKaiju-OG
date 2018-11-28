@@ -30,7 +30,7 @@
           <div class="card shadow-sm">
             <div class="row no-gutters">
               <div class="col-auto pr-5">
-                <img :src="searchResult.ipfsData.image" class="img-fluid" style="max-width: 200px"/>
+                <img :src="searchResult.ipfsData.image" class="img-fluid m-3" style="max-width: 175px"/>
               </div>
               <div class="col mb-4">
                 <div class="card-block px-2 pt-2 text-center">
@@ -39,6 +39,9 @@
                     <span class="badge badge-secondary float-right ml-5">#{{searchResult.tokenId}}</span>
                   </h2>
                   <p class="card-text">{{searchResult.ipfsData.description}}</p>
+                  <p class="card-text" v-if="transfers && findTx(searchResult.tokenId)">
+                    <clickable-transaction :transaction="findTx(searchResult.tokenId).transactionHash"></clickable-transaction>
+                  </p>
                   <div class="text-left">
                     <div class="row mb-2">
                       <div class="col">
@@ -57,8 +60,6 @@
                       <div class="col">
                         <span class="small">Class</span><br/><code>{{searchResult.ipfsData.attributes.class|capitalize}}</code>
                       </div>
-                    </div>
-                    <div class="row mb-2">
                       <div class="col">
                         <span class="small">Skill</span><br/><code>{{searchResult.ipfsData.attributes.skill|capitalize}}</code>
                       </div>
@@ -67,10 +68,8 @@
                       <div class="col">
                         <span class="small">Batch</span><br/><code>{{searchResult.ipfsData.attributes.batch|capitalize}}</code>
                       </div>
-                    </div>
-                    <div class="row mb-2">
                       <div class="col">
-                        <span class="small">Tag</span><br/><code>{{searchResult.nfcId}}</code>
+                        <span class="small">Tag</span><br/><code>{{searchResult.ipfsData.attributes.nfc}}</code>
                       </div>
                     </div>
                   </div>
@@ -96,12 +95,11 @@
 
   import { mapGetters, mapState } from 'vuex';
   import * as actions from '../../store/actions';
-  import * as _ from 'lodash';
-  import Web3 from 'web3';
+  import ClickableTransaction from '../widgets/ClickableTransaction';
 
   export default {
     name: 'home',
-    components: {},
+    components: {ClickableTransaction},
     data () {
       return {
         searchData: {
@@ -110,7 +108,8 @@
       };
     },
     computed: {
-      ...mapState(['notFound', 'totalSupply', 'searchResult']),
+      ...mapState(['notFound', 'totalSupply', 'searchResult', 'transfers']),
+      ...mapGetters(['findTx'])
     },
     methods: {
       searchByTokenId: function () {
@@ -157,5 +156,15 @@
     font-style: normal;
   }
 
+  .card {
+    min-width: 600px;
+  }
+
+  /* mobile only */
+  @media screen and (max-width: 767px) {
+    .card {
+      min-width: 200px;
+    }
+  }
 
 </style>

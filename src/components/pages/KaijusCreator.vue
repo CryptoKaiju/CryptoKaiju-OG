@@ -206,13 +206,13 @@
           colour: [
             {
               name: 'Purple',
-              hash: 'QmeogxKnb65KB8ydhUJuWrrUG8rpaUZkG2KdTv2eMxXD8U',
-              uri: 'https://ipfs.infura.io/ipfs/QmeogxKnb65KB8ydhUJuWrrUG8rpaUZkG2KdTv2eMxXD8U'
+              hash: 'QmYSFTEeFFQ37qShWdW7S9odUmh3DaEF2SczuzG2uoGBAU ',
+              uri: 'https://ipfs.infura.io/ipfs/QmYSFTEeFFQ37qShWdW7S9odUmh3DaEF2SczuzG2uoGBAU '
             },
             {
               name: 'Green',
-              hash: 'Qma9fCYT85s8Y7Pmhj3XifauiKCVwTytw4XTLabBuXNfSN',
-              uri: 'https://ipfs.infura.io/ipfs/Qma9fCYT85s8Y7Pmhj3XifauiKCVwTytw4XTLabBuXNfSN'
+              hash: 'QmatreSMcd9GLLEX2xDpnjHDzY1EaxpSptZi2gbZzEN54a ',
+              uri: 'https://ipfs.infura.io/ipfs/QmatreSMcd9GLLEX2xDpnjHDzY1EaxpSptZi2gbZzEN54a '
             },
           ],
           kclass: [

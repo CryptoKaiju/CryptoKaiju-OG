@@ -35,7 +35,7 @@ module.exports = {
       port: 7545,
       network_id: "*",
       gas: 6721975,
-      gasPrice: 1
+      gasPrice: 0x01
     },
     testrpc: {
       host: '127.0.0.1',
