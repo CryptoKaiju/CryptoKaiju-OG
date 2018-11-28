@@ -7,6 +7,7 @@ import * as mutations from './mutation-types';
 import createLogger from 'vuex/dist/logger';
 import moment from 'moment';
 import { getEtherscanAddress, getNetIdString } from '../utils';
+import _ from 'lodash';
 
 import truffleContract from 'truffle-contract';
 import CryptoKaijuABI from '../../build/contracts/CryptoKaiju.json';
@@ -29,8 +30,13 @@ const store = new Vuex.Store({
     uploadedKaijusHashs: null,
     searchResult: null,
     notFound: null,
+    transfers: []
   },
-  getters: {},
+  getters: {
+    findTx: (state) => (tokenId) => {
+      return _.find(state.transfers, (ev) => ev.args._tokenId.toString(10) === `${tokenId}`);
+    },
+  },
   mutations: {
     [mutations.SET_ACCOUNT] (state, account) {
       state.account = account;
@@ -60,6 +66,9 @@ const store = new Vuex.Store({
     },
     [mutations.SET_ACCOUNT_KAIJUS] (state, accountKaijus) {
       state.accountKaijus = accountKaijus;
+    },
+    [mutations.SET_TRANSFER] (state, transfer) {
+      Vue.set(state, 'transfers', state.transfers.concat(transfer));
     },
   },
   actions: {
@@ -115,6 +124,8 @@ const store = new Vuex.Store({
       if (account) {
         commit(mutations.SET_ACCOUNT, account);
       }
+
+      dispatch(actions.WATCH_TRANSFERS);
     },
     [actions.BIRTH_KAIJUS]: async function ({commit, dispatch, state}, {ipfsData, tokenURI, nfcId, recipient}) {
       const contract = await state.contract.deployed();
@@ -142,10 +153,10 @@ const store = new Vuex.Store({
 
         let tokenDetails = await mapTokenDetails(results);
 
-        console.log(tokenDetails);
+        console.log(`By NFC ID ${nfcId}`, tokenDetails);
         commit(mutations.SET_KAIJUS_SEARCH, tokenDetails);
       } catch (e) {
-        console.log(`NFC ${nfcId} not found`);
+        console.log(`By NFC ID ${nfcId}: not found`);
 
         commit(mutations.SET_KAIJUS_SEARCH, null);
         commit(mutations.SET_KAIJUS_SEARCH_NOT_FOUND, true);
@@ -163,10 +174,10 @@ const store = new Vuex.Store({
 
         let tokenDetails = await mapTokenDetails(results);
 
-        console.log(tokenDetails);
+        console.log(`By Token ID ${tokenId}`, tokenDetails);
         commit(mutations.SET_KAIJUS_SEARCH, tokenDetails);
       } catch (e) {
-        console.log(`Token ${tokenId} not found`);
+        console.log(`By Token ID ${tokenId}: not found`);
 
         commit(mutations.SET_KAIJUS_SEARCH, null);
         commit(mutations.SET_KAIJUS_SEARCH_NOT_FOUND, true);
@@ -179,11 +190,30 @@ const store = new Vuex.Store({
 
       let accountKaijus = _.map(tokenIds, async (tokenId) => {
         let results = await contract.tokenDetails(tokenId);
-        console.log(results);
+        console.log(`my kaiju`, results);
         return await mapTokenDetails(results);
       });
       commit(mutations.SET_ACCOUNT_KAIJUS, await Promise.all(accountKaijus));
     },
+    [actions.WATCH_TRANSFERS]: async function ({commit, dispatch, state}) {
+
+      const contract = await state.contract.deployed();
+
+      let transferEvent = contract.Transfer({}, {
+        fromBlock: 0,
+        toBlock: 'latest' // wait until event comes through
+      });
+
+      transferEvent.watch(function (error, anEvent) {
+        if (!error) {
+          console.log(`Transfer event`, anEvent);
+          commit(mutations.SET_TRANSFER, anEvent);
+        } else {
+          console.log('Failure', error);
+          transferEvent.stopWatching();
+        }
+      });
+    }
   }
 });
 

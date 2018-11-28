@@ -1,6 +1,6 @@
 <template>
-  <span v-if="transaction">
-    View transaction: <a class="token-id" :href="buildLink" target="_blank">{{ dotDotDot }}</a>
+  <span v-if="transaction" class="small">
+     <a class="token-id" :href="buildLink" target="_blank">[view transaction]</a>
   </span>
 </template>
 
@@ -22,7 +22,7 @@
       ]),
       dotDotDot: function () {
         if (this.transaction) {
-          return this.transaction.substr(0, 12) + '...' + this.transaction.substr(this.transaction.length - 12, this.transaction.length);
+          return this.transaction.substr(0, 6) + '...' + this.transaction.substr(this.transaction.length - 6, this.transaction.length);
         }
         return '';
       },

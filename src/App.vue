@@ -37,7 +37,7 @@
       <div class="row">
         <div class="col text-left d-none d-md-inline-block">
           <small>
-            <img src="../static/KO.png" style="max-height: 50px" title="Powered by KnownOrigin.io"/>
+              <img src="../static/KO.png" style="max-height: 50px" title="Powered by KnownOrigin.io"/>
           </small>
         </div>
         <div class="col text-center small">
@@ -133,8 +133,11 @@
 <style lang="scss">
 
   $body-bg: #1f2760;
-  $body-color: #FFF;
+  $body-color: #f5f5f5;
   $primary: #ff005c;
+  $gray: #707070;
+  $black: #040505;
+  $white: #f5f5f5;
 
   $border-radius-base: 50;
 
@@ -168,6 +171,10 @@
     }
   }
 
+  code {
+    color: $primary;
+  }
+
   .navbar-dark {
     background-color: $body-bg;
   }
@@ -183,20 +190,20 @@
   }
 
   .card {
-    color: #040505;
-    background-color: #F5F5F5;
+    color: $black;
+    background-color: $body-color;
   }
 
   .list-group-item {
-    color: #383838;
-    background-color: #F5F5F5;
+    color: $gray;
+    background-color: $body-color;
   }
 
   .no-metamask {
-    background-color: #e83e8c;
+    background-color: $primary;
 
     a {
-      color: white;
+      color: $white;
     }
   }
 

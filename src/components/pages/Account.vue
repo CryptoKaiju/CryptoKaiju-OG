@@ -25,6 +25,9 @@
                 <strong>{{searchResult.ipfsData.name}}</strong>
               </h2>
               <p class="card-text">{{searchResult.ipfsData.description}}</p>
+              <p class="card-text" v-if="transfers && findTx(searchResult.tokenId)">
+                <clickable-transaction :transaction="findTx(searchResult.tokenId).transactionHash"></clickable-transaction>
+              </p>
               <div class="text-left">
                 <div class="row mb-2">
                   <div class="col">
@@ -75,17 +78,15 @@
 <script>
 
   import { mapGetters, mapState } from 'vuex';
-  import * as _ from 'lodash';
-  import * as moment from 'moment';
-  import Web3 from 'web3';
   import * as actions from '../../store/actions';
-  import ClickableAddress from '../widgets/ClickableAddress';
+  import ClickableTransaction from '../widgets/ClickableTransaction';
 
   export default {
     name: 'account',
-    components: {ClickableAddress},
+    components: {ClickableTransaction},
     computed: {
-      ...mapState(['account', 'accountKaijus'])
+      ...mapState(['account', 'accountKaijus', 'transfers']),
+      ...mapGetters(['findTx'])
     },
     created () {
       const loadData = function () {
