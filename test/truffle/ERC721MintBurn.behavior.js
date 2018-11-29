@@ -10,10 +10,10 @@ function shouldBehaveLikeMintAndBurnERC721(
   creator,
   [owner, newOwner, approved, anyone]
 ) {
-  const firstTokenId = 1;
-  const secondTokenId = 2;
-  const thirdTokenId = 3;
-  const unknownTokenId = 4;
+  const firstTokenId = 0;
+  const secondTokenId = 1;
+  const thirdTokenId = 2;
+  const unknownTokenId = 3;
   const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
   const MOCK_URI = 'https://example.com';
 

@@ -1,7 +1,5 @@
 <template>
   <div class="container">
-
-
     <div class="row">
       <div class="col-sm-5">
         <h1 class="display-4 text-left mb-4 text-primary">CryptoKaiju</h1>

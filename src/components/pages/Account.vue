@@ -18,10 +18,10 @@
       <div class="col">
         <div class="card-columns">
           <div class="card shadow-sm text-center" v-for="searchResult in accountKaijus">
-            <img :src="searchResult.ipfsData.image" class="card-img-top img-fluid"/>
+            <img :src="searchResult.ipfsData.image" class="card-img-top img-fluid m-5"/>
             <div class="card-body">
+              <span class="badge badge-primary float-right">#{{searchResult.tokenId}}</span>
               <h2 class="card-title">
-                <span class="badge badge-secondary">#{{searchResult.tokenId}}</span>
                 <strong>{{searchResult.ipfsData.name}}</strong>
               </h2>
               <p class="card-text">{{searchResult.ipfsData.description}}</p>

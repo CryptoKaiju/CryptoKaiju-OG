@@ -15,9 +15,9 @@ function shouldBehaveLikeERC721(
   minter,
   [owner, approved, anotherApproved, operator, anyone]
 ) {
-  const firstTokenId = 1;
-  const secondTokenId = 2;
-  const unknownTokenId = 3;
+  const firstTokenId = 0;
+  const secondTokenId = 1;
+  const unknownTokenId = 2;
   const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
   const RECEIVER_MAGIC_VALUE = '0x150b7a02';
 

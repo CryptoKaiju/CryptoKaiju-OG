@@ -22,17 +22,17 @@ contract('CryptoKaiju ERC721 Custom', function (accounts) {
   const account4 = accounts[5];
   const account5 = accounts[6];
 
-  const firstTokenId = 1;
-  const secondTokenId = 2;
-  const unknownTokenId = 3;
+  const firstTokenId = 0;
+  const secondTokenId = 1;
+  const unknownTokenId = 2;
   const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
   const RECEIVER_MAGIC_VALUE = '0x150b7a02';
 
   const name = 'CryptoKaiju';
   const symbol = 'KAIJUS';
 
-  const TOKEN_URI = "123abcHash";
-  const BASE_URI = "https://ipfs.infura.io/ipfs/";
+  const TOKEN_URI = '123abcHash';
+  const BASE_URI = 'https://ipfs.infura.io/ipfs/';
 
   before(async function () {
     await advanceBlock();

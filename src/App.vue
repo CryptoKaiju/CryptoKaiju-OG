@@ -5,7 +5,7 @@
       <nav class="navbar navbar-expand-md">
         <router-link :to="{ name: 'home' }" class="navbar-brand">
           <img src="../static/logo.png" alt="Crypto-Kaijus" class="logo"/>
-          <code class="small ml-2 text-secondary d-none d-md-inline-block">Alpha</code>
+          <code class="small ml-2 text-muted d-none d-md-inline-block">Alpha</code>
         </router-link>
 
         <ul class="navbar-nav mr-auto">
@@ -37,7 +37,7 @@
       <div class="row">
         <div class="col text-left d-none d-md-inline-block">
           <small>
-              Powered by <img src="../static/KO_icon_Round.1.svg" style="max-height: 25px" title="Powered by KnownOrigin.io" class="ml-2"/>
+            Powered by <a href="https://knownorigin.io/" target="_blank"><img src="../static/KO_icon_Round.1.svg" style="max-height: 25px" title="Powered by KnownOrigin.io" class="ml-2"/></a>
           </small>
         </div>
         <div class="col text-center small">
@@ -176,6 +176,18 @@
     }
 
     margin-bottom: 30px;
+  }
+
+  .nav-link {
+    color: $white;
+
+    a:visited {
+      color: $white;
+    }
+
+    a:hover {
+      color: $white;
+    }
   }
 
   code {
