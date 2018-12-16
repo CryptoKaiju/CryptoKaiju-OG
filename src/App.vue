@@ -13,7 +13,7 @@
         <ul class="navbar-nav">
           <li class="nav-item nav-link">
             <router-link :to="{ name: 'account' }" class="nav-link">
-              My Kaijus
+              My Kaiju
               <span class="ml-2 badge badge-primary">{{accountKaijus.length}}</span>
             </router-link>
           </li>
@@ -43,7 +43,7 @@
         <div class="col text-center small">
           <router-link :to="{ name: 'home' }">Home</router-link>
           &bull;
-          <router-link :to="{ name: 'account' }">My Kajuis</router-link>
+          <router-link :to="{ name: 'account' }">My Kajui</router-link>
         </div>
         <div class="col text-right small">
           <current-network></current-network>
