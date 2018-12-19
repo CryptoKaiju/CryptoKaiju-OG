@@ -88,7 +88,7 @@
 
     <div class="row text-center mt-5" v-if="kaijus && kaijus.length > 0">
       <div class="card-deck">
-        <div class="col-auto mx-auto mb-5" v-for="card in kaijus" :key="kaijus.tokenId">
+        <div class="mb-5" v-for="card in kaijus" :key="kaijus.tokenId">
           <card :cdata="card" class="m-2"></card>
         </div>
       </div>

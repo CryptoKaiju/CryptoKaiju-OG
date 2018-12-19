@@ -138,10 +138,8 @@
     display: flex;
     flex-shrink: 0;
     flex-grow: 1;
-    width: 18rem;
-    max-width: 18rem;
-    min-height: 20rem;
-    margin-right: 1rem;
+    width: 22rem;
+    height: 22rem;
     padding: $p_v $p_h;
 
     box-shadow: 0 0.25rem 1rem rgba($black, 0.1);
