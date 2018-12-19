@@ -24,6 +24,7 @@ const store = new Vuex.Store({
     contractAddress: null,
     account: null,
     accountKaijus: [],
+    kaijus: [],
     currentNetwork: null,
     etherscanBase: null,
     totalSupply: null,
@@ -66,6 +67,9 @@ const store = new Vuex.Store({
     },
     [mutations.SET_ACCOUNT_KAIJUS] (state, accountKaijus) {
       state.accountKaijus = accountKaijus;
+    },
+    [mutations.SET_ALL_KAIJUS] (state, kaijus) {
+      state.kaijus = kaijus;
     },
     [mutations.SET_TRANSFER] (state, transfer) {
       Vue.set(state, 'transfers', state.transfers.concat(transfer));
@@ -126,6 +130,7 @@ const store = new Vuex.Store({
       }
 
       dispatch(actions.WATCH_TRANSFERS);
+      dispatch(actions.LOAD_ALL_KAIJUS);
     },
     [actions.BIRTH_KAIJUS]: async function ({commit, dispatch, state}, {ipfsData, tokenURI, nfcId, recipient}) {
       const contract = await state.contract.deployed();
@@ -195,6 +200,23 @@ const store = new Vuex.Store({
       });
       commit(mutations.SET_ACCOUNT_KAIJUS, await Promise.all(accountKaijus));
     },
+    [actions.LOAD_ALL_KAIJUS]: async function ({commit, dispatch, state}) {
+
+      const contract = await state.contract.deployed();
+      let tokenPointer = await contract.tokenIdPointer();
+
+      let allKaijus = _.map(_.range(tokenPointer), async (tokenId) => {
+        // let data = await mapTokenDetails(results);
+        try {
+          let results = await contract.tokenDetails(tokenId);
+          return await mapTokenDetails(results);
+        } catch (e) {
+          return undefined;
+        }
+      });
+
+      commit(mutations.SET_ALL_KAIJUS, await Promise.all(allKaijus));
+    },
     [actions.WATCH_TRANSFERS]: async function ({commit, dispatch, state}) {
 
       const contract = await state.contract.deployed();
@@ -219,10 +241,10 @@ const store = new Vuex.Store({
 
 async function mapTokenDetails (results) {
   let data = {
-    tokenId: results[0].toString('10'),
+    tokenId: results[0],
     nfcId: Web3.utils.toAscii(results[1]).replace(/\0/g, ''),
     tokenUri: results[2],
-    dob: results[3].toString('10'),
+    dob: results[3],
   };
 
   data.ipfsData = (await axios.get(data.tokenUri)).data;

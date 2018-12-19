@@ -5,7 +5,7 @@
         <h1 class="display-4 text-left mb-4 text-primary">CryptoKaiju</h1>
         <h2>Collectible Vinyl Toys</h2>
         <p><em>Powered by the Ethereum Blockchain</em></p>
-        <p class="mt-5" v-if="totalSupply">There are currently <span class="badge badge-primary pl-2 pr-2 ml-2 mr-2">{{ totalSupply }}</span> kaijus in existence</p>
+        <p class="mt-5" v-if="totalSupply">There are currently <span class="badge badge-primary pl-2 pr-2 ml-2 mr-2">{{ totalSupply }}</span> kaiju in existence</p>
       </div>
       <div class="col-sm-7 mt-5">
         <b-form @submit="searchByKId" novalidate class="">
@@ -85,6 +85,14 @@
         <code>Not found!</code>
       </div>
     </div>
+
+    <b-row class="text-center mx-auto" v-if="kaijus && kaijus.length > 0">
+      <div v-for="card in kaijus" :key="kaijus.tokenId">
+        <b-col>
+          <card :cdata="card" class="m-2"/>
+        </b-col>
+      </div>
+    </b-row>
   </div>
 
 </template>
@@ -94,10 +102,11 @@
   import { mapGetters, mapState } from 'vuex';
   import * as actions from '../../store/actions';
   import ClickableTransaction from '../widgets/ClickableTransaction';
+  import Card from '../widgets/Card';
 
   export default {
     name: 'home',
-    components: {ClickableTransaction},
+    components: {Card, ClickableTransaction},
     data () {
       return {
         searchData: {
@@ -106,7 +115,7 @@
       };
     },
     computed: {
-      ...mapState(['notFound', 'totalSupply', 'searchResult', 'transfers']),
+      ...mapState(['notFound', 'totalSupply', 'searchResult', 'transfers', 'kaijus']),
       ...mapGetters(['findTx'])
     },
     methods: {
@@ -152,10 +161,6 @@
     text-align: center;
     font-weight: 700;
     font-style: normal;
-  }
-
-  .card {
-    min-width: 600px;
   }
 
   /* mobile only */
