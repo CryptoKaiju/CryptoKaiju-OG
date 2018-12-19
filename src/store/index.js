@@ -123,7 +123,7 @@ const store = new Vuex.Store({
       };
 
       // Every second check if the main account has changed
-      setInterval(refreshHandler, 5000);
+      // setInterval(refreshHandler, 5000);
 
       if (account) {
         commit(mutations.SET_ACCOUNT, account);
@@ -131,6 +131,8 @@ const store = new Vuex.Store({
 
       dispatch(actions.WATCH_TRANSFERS);
       dispatch(actions.LOAD_ALL_KAIJUS);
+
+      await refreshHandler();
     },
     [actions.BIRTH_KAIJUS]: async function ({commit, dispatch, state}, {ipfsData, tokenURI, nfcId, recipient}) {
       const contract = await state.contract.deployed();
