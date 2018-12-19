@@ -23,10 +23,6 @@
         <p class="descr">{{ cdata.ipfsData.description }}</p>
       </div>
 
-      <div>
-        <b-badge class="mt-2">BADGE</b-badge>
-      </div>
-
       <div class="help" v-if="isFlippable">
         <img src="/static/flip.svg" alt>Flip
       </div>
@@ -34,60 +30,82 @@
 
     <figure
       class="card__back text-center"
-      style="padding-top:50px"
       @click="flip"
     >
-      <h4></h4>
-      <hr>
-      <p class="descr">
-        Your donation goes to
-        <strong>
-          GOD
-        </strong>
-      </p>
-
-        Yellow
+      <div class="text-left">
+        <div class="row mb-2">
+          <div class="col">
+            <span class="small">Birth date</span><br/><code>{{new Date(cdata.dob * 1000).toDateString()}}</code>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col">
+            <span class="small">Tag</span><br/><code>{{cdata.ipfsData.attributes.nfc}}</code>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col">
+            <span class="small">Gender</span><br/><code>{{cdata.ipfsData.attributes.gender|capitalize}}</code>
+          </div>
+          <div class="col">
+            <span class="small">Colour</span><br/><code>{{cdata.ipfsData.attributes.colour|capitalize}}</code>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col">
+            <span class="small">Class</span><br/><code>{{cdata.ipfsData.attributes.class|capitalize}}</code>
+          </div>
+          <div class="col">
+            <span class="small">Skill</span><br/><code>{{cdata.ipfsData.attributes.skill|capitalize}}</code>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col">
+            <span class="small">Batch</span><br/><code>{{cdata.ipfsData.attributes.batch|capitalize}}</code>
+          </div>
+        </div>
+      </div>
     </figure>
   </div>
 </template>
 
 <script>
-/* global web3:true */
+  /* global web3:true */
 
-import { mapGetters, mapState } from "vuex";
-import router from "../../router";
-import * as actions from "../../store/actions";
+  import { mapGetters, mapState } from 'vuex';
+  import router from '../../router';
+  import * as actions from '../../store/actions';
 
-export default {
-  name: "card",
-  computed: {
-    isFlippable: function() {
-      return true;
+  export default {
+    name: 'card',
+    computed: {
+      isFlippable: function () {
+        return true;
+      }
+    },
+    props: {
+      cdata: {
+        type: Object
+      }
+    },
+
+    data () {
+      return {
+        transfer: false,
+        share: false,
+        transferRecipient: '',
+        isFlipped: false,
+        transfered: false,
+        transferPending: false
+      };
+    },
+
+    methods: {
+      flip: function (event) {
+        this.isFlipped = !this.isFlipped;
+      }
     }
-  },
-  props: {
-    cdata: {
-      type: Object
-    }
-  },
-
-  data() {
-    return {
-      transfer: false,
-      share: false,
-      transferRecipient: "",
-      isFlipped: false,
-      transfered: false,
-      transferPending: false
-    };
-  },
-
-  methods: {
-    flip: function(event) {
-      this.isFlipped = !this.isFlipped;
-    }
-  }
-};
+  };
 </script>
 
 <style lang="scss" scoped>
@@ -111,192 +129,147 @@ export default {
   //bootstrap overides
   $enable-rounded: false;
 
-// Card
-.card {
-  $p_v: 1rem;
-  $p_h: 1.5rem;
+  // Card
+  .card {
+    $p_v: 1rem;
+    $p_h: 1.5rem;
 
-  position: relative;
-  display: flex;
-  flex-shrink: 0;
-  flex-grow: 1;
-  width: 18rem;
-  max-width: 18rem;
-  min-height: 22rem;
-  margin-right: 1rem;
-  padding: $p_v $p_h;
-
-  box-shadow: 0 0.25rem 1rem rgba($black, 0.1);
-  background: $white;
-  border-radius: 0;
-  border: 0;
-  border-bottom-color: transparent;
-  cursor: pointer;
-
-  transition: all 0.2s ease-in-out;
-
-  &:hover {
-    box-shadow: 0 0.25rem 1.5rem rgba($black, 0.2);
-    border-bottom: none;
-  }
-  &:not(.card--flippable):hover {
-    transform: translateY(-2px);
-  }
-
-  &--flippable {
-    cursor: e-resize;
-    cursor: alias;
-    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-style: preserve-3d;
-
-    // Flip effect
-    &.card--flipped {
-      transform: rotateY(-180deg);
-      transform-style: preserve-3d;
-    }
-  }
-
-  &__front,
-  &__back {
-    transform-style: preserve-3d;
-    backface-visibility: hidden;
-  }
-
-  figure {
-    display: block;
-    width: 100%;
-  }
-
-  &__image {
-    flex: 1;
-    margin: -#{$p_v} -#{$p_h} $p_v;
-
-    img {
-      display: block;
-      width: 100%;
-      max-width: 100%;
-      height: 100%;
-      min-height: 12rem;
-      object-fit: cover;
-      object-position: center;
-    }
-    .img--placeholder {
-      opacity: 0.1;
-      display: flex;
-      justify-content: center;
-      text-align: center;
-    }
-  }
-
-  figcaption {
+    position: relative;
     display: flex;
-  }
+    flex-shrink: 0;
+    flex-grow: 1;
+    width: 18rem;
+    max-width: 18rem;
+    min-height: 20rem;
+    margin-right: 1rem;
+    padding: $p_v $p_h;
 
-  &__meta {
-    flex: 1;
-  }
+    box-shadow: 0 0.25rem 1rem rgba($black, 0.1);
+    background: $white;
+    border-radius: 0;
+    border: 0;
+    border-bottom-color: transparent;
+    cursor: pointer;
 
-  &__value {
-    flex: 0;
-  }
-
-  // Content
-  .title {
-    font-size: 1.2rem;
-  }
-  .creator {
-    font-size: 0.9rem;
-  }
-  .descr {
-    margin-top: 0.5rem;
-    font-size: 0.875rem;
-    color: $gray;
-  }
-
-  // .badge {
-  //   display: flex;
-  //   align-items: center;
-  //   margin-right: -$p_h;
-  //   padding: 0.5rem;
-  //   background: $black;
-  //   color: $white;
-  //   white-space: nowrap;
-  //   font-weight: bold;
-
-  //   img {
-  //     width: 0.875rem;
-  //     margin-right: 0.25rem;
-  //   }
-  // }
-
-  .help {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    display: flex;
-    flex: 0;
-    align-items: center;
-    margin: 0 -#{$p_h/2} -#{$p_v/2} 0;
-
-    font-size: 0.75rem;
-    opacity: 0.2;
+    transition: all 0.2s ease-in-out;
 
     &:hover {
-      opacity: 0.4;
+      box-shadow: 0 0.25rem 1.5rem rgba($black, 0.2);
+      border-bottom: none;
     }
 
-    img {
-      width: 0.875rem;
-      margin-right: 0.25rem;
+    &:not(.card--flippable):hover {
+      transform: translateY(-2px);
+    }
+
+    &--flippable {
+      cursor: e-resize;
+      cursor: alias;
+      transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+
+      // Flip effect
+      &.card--flipped {
+        transform: rotateY(-180deg);
+        transform-style: preserve-3d;
+      }
+    }
+
+    &__front,
+    &__back {
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+    }
+
+    figure {
+      display: block;
+      width: 100%;
+    }
+
+    &__image {
+      flex: 1;
+      margin: -#{$p_v} -#{$p_h} $p_v;
+
+      img {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        height: 100%;
+        min-height: 12rem;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .img--placeholder {
+        opacity: 0.1;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+      }
+    }
+
+    figcaption {
+      display: flex;
+    }
+
+    &__meta {
+      flex: 1;
+    }
+
+    &__value {
+      flex: 0;
+    }
+
+    // Content
+    .title {
+      font-size: 1.2rem;
+      margin-top: 1rem;
+    }
+
+    .creator {
+      font-size: 0.9rem;
+    }
+
+    .descr {
+      margin-top: 2rem;
+      font-size: 0.875rem;
+      color: $gray;
+    }
+
+    .help {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      display: flex;
+      flex: 0;
+      align-items: center;
+      margin: 0 -#{$p_h/2} -#{$p_v/2} 0;
+
+      font-size: 0.75rem;
+      opacity: 0.2;
+
+      &:hover {
+        opacity: 0.4;
+      }
+
+      img {
+        width: 0.875rem;
+        margin-right: 0.25rem;
+      }
+    }
+
+    // Card back side
+    &__back {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: $p_v $p_h;
+      background: $secondary;
+      transform: rotateY(180deg);
+
+      cursor: w-resize;
     }
   }
-
-  // Card back side
-  &__back {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    padding: $p_v $p_h;
-    background: $secondary;
-    transform: rotateY(180deg);
-
-    cursor: w-resize;
-  }
-
-  // Card transfer side
-  &__transfer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    padding: $p_v $p_h;
-    background: #f5f5f5;
-
-    cursor: default;
-  }
-
-  .transferButton {
-    background: #000000;
-    font-family: Helvetica;
-    line-height: normal;
-    text-align: center;
-    color: #ffffff;
-    font-size: 16px;
-    padding: 15px;
-    border: 1px solid black;
-  }
-
-  .cancelButton {
-    background: white;
-    color: black;
-    font-family: Helvetica;
-    line-height: normal;
-    font-size: 16px;
-    padding: 15px;
-    border: 1px solid black;
-  }
-}
 </style>
