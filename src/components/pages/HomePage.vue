@@ -27,7 +27,7 @@
         <div v-if="searchResult">
           <card :cdata="searchResult" class="m-2"></card>
         </div>
-        <div v-else class="mb-5" v-for="card in filteredKaiju()" :key="card.tokenId">
+        <div v-else class="mb-5" v-for="card in filteredKaiju()" :key="card.nfcId">
           <card :cdata="card" class="m-2"></card>
         </div>
       </div>
@@ -73,7 +73,7 @@
           });
         }
 
-        return this.kaijus;
+        return _.filter(this.kaijus, (k) => k);
       }
     },
   };

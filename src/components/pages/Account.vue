@@ -16,7 +16,7 @@
 
     <div class="row text-center mt-5" v-else>
       <div class="card-deck">
-        <div class="mb-5" v-for="card in accountKaijus" :key="card.tokenId">
+        <div class="mb-5" v-for="card in accountKaijus" :key="card.nfcId">
           <card :cdata="card" class="m-2"></card>
         </div>
       </div>
