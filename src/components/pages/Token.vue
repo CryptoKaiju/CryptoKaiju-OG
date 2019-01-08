@@ -34,7 +34,7 @@
       filteredKaiju: function (id) {
         if (!this.kaijus) return;
 
-        return _.filter(this.kaijus, (k) => k && k.tokenId.toString(10).includes(id));
+        return _.filter(this.kaijus, (k) => k && k.tokenId.toString(10) === id);
       }
     },
   };
