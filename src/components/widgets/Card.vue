@@ -244,7 +244,7 @@
       margin: 0 -#{$p_h/2} -#{$p_v/2} 0;
 
       font-size: 0.75rem;
-      opacity: 0.2;
+      opacity: 0.5;
 
       &:hover {
         opacity: 0.4;

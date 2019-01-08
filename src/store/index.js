@@ -123,7 +123,7 @@ const store = new Vuex.Store({
       };
 
       // Every second check if the main account has changed
-      // setInterval(refreshHandler, 5000);
+      // setInterval(refreshHandler, 5000); -- this was causing issues
 
       if (account) {
         commit(mutations.SET_ACCOUNT, account);
