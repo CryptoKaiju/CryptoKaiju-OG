@@ -9,7 +9,6 @@
       </div>
 
       <div class="col-sm-7 mt-5">
-        <b-form novalidate class="">
           <div class="form-group">
             <input type="text"
                    class="form-control form-control-lg w-75"
@@ -17,10 +16,9 @@
                    v-model="searchData.kId"
                    placeholder="Name, Token ID or NFC ID"/>
           </div>
-          <b-button type="submit" variant="primary" class="btn-lg">
+          <b-button type="button" variant="primary" class="btn-lg">
             Search
           </b-button>
-        </b-form>
       </div>
     </div>
 
@@ -29,7 +27,7 @@
         <div v-if="searchResult">
           <card :cdata="searchResult" class="m-2"></card>
         </div>
-        <div v-else class="mb-5" v-for="card in filteredKaiju()" :key="kaijus.tokenId">
+        <div v-else class="mb-5" v-for="card in filteredKaiju()" :key="card.tokenId">
           <card :cdata="card" class="m-2"></card>
         </div>
       </div>
