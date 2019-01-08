@@ -15,7 +15,7 @@
                    class="form-control form-control-lg w-75"
                    id="kId"
                    v-model="searchData.kId"
-                   placeholder="Token ID or NFC ID"/>
+                   placeholder="Name, Token ID or NFC ID"/>
           </div>
           <b-button type="submit" variant="primary" class="btn-lg">
             Search
