@@ -8,6 +8,10 @@ import logging from './logging'
 import BootstrapVue from 'bootstrap-vue'
 import VueMoment from 'vue-moment/vue-moment'
 import Web3 from 'web3'
+import VueChartkick from 'vue-chartkick'
+import Chart from 'chart.js'
+
+Vue.use(VueChartkick, {adapter: Chart});
 
 Vue.config.productionTip = false;
 
