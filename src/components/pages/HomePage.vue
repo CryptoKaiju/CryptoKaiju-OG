@@ -55,8 +55,7 @@
       };
     },
     computed: {
-      ...mapState(['notFound', 'totalSupply', 'searchResult', 'transfers', 'kaijus']),
-      ...mapGetters(['findTx'])
+      ...mapState(['notFound', 'totalSupply', 'searchResult', 'transfers', 'kaijus'])
     },
     methods: {
       filteredKaiju: function () {

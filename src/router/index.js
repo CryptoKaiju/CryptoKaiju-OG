@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import HomePage from '@/components/pages/HomePage'
 import KaijusCreator from '@/components/pages/KaijusCreator'
 import Account from '@/components/pages/Account'
+import Token from '@/components/pages/Token'
 
 Vue.use(Router);
 
@@ -24,6 +25,12 @@ export default new Router({
       path: '/account',
       name: 'account',
       component: Account
+    },
+    {
+      path: '/token/:tokenId',
+      name: 'token',
+      component: Token,
+      props: true
     }
   ]
 })

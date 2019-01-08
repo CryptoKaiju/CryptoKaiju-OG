@@ -37,6 +37,9 @@
           <div class="col">
             <span class="small">Birth date</span><br/><code>{{new Date(cdata.dob * 1000).toDateString()}}</code>
           </div>
+          <div class="col">
+            <span class="small">Owner</span><br/><code><clickable-address :eth-address="cdata.owner"></clickable-address></code>
+          </div>
         </div>
         <div class="row mb-2">
           <div class="col">
@@ -75,10 +78,13 @@
   import { mapGetters, mapState } from 'vuex';
   import router from '../../router';
   import * as actions from '../../store/actions';
+  import ClickableAddress from './ClickableAddress';
 
   export default {
     name: 'card',
+    components: {ClickableAddress},
     computed: {
+      ...mapGetters(['findTx']),
       isFlippable: function () {
         return true;
       }
@@ -88,7 +94,6 @@
         type: Object
       }
     },
-
     data () {
       return {
         transfer: false,
@@ -99,7 +104,6 @@
         transferPending: false
       };
     },
-
     methods: {
       flip: function (event) {
         this.isFlipped = !this.isFlipped;

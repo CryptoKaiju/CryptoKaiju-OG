@@ -129,7 +129,7 @@ const store = new Vuex.Store({
         commit(mutations.SET_ACCOUNT, account);
       }
 
-      dispatch(actions.WATCH_TRANSFERS);
+      // dispatch(actions.WATCH_TRANSFERS);
       dispatch(actions.LOAD_ALL_KAIJUS);
 
       await refreshHandler();
@@ -197,8 +197,8 @@ const store = new Vuex.Store({
 
       let accountKaijus = _.map(tokenIds, async (tokenId) => {
         let results = await contract.tokenDetails(tokenId);
-        console.log(`my kaiju`, results);
-        return await mapTokenDetails(results);
+        let owner = await contract.ownerOf(tokenId);
+        return await mapTokenDetails(results, owner);
       });
       commit(mutations.SET_ACCOUNT_KAIJUS, await Promise.all(accountKaijus));
     },
@@ -211,7 +211,8 @@ const store = new Vuex.Store({
         // let data = await mapTokenDetails(results);
         try {
           let results = await contract.tokenDetails(tokenId);
-          return await mapTokenDetails(results);
+          let owner = await contract.ownerOf(tokenId);
+          return await mapTokenDetails(results, owner);
         } catch (e) {
           return undefined;
         }
@@ -224,7 +225,7 @@ const store = new Vuex.Store({
       const contract = await state.contract.deployed();
 
       let transferEvent = contract.Transfer({}, {
-        fromBlock: 0,
+        fromBlock: 6802211,
         toBlock: 'latest' // wait until event comes through
       });
 
@@ -241,12 +242,13 @@ const store = new Vuex.Store({
   }
 });
 
-async function mapTokenDetails (results) {
+async function mapTokenDetails (results, owner) {
   let data = {
     tokenId: results[0],
     nfcId: Web3.utils.toAscii(results[1]).replace(/\0/g, ''),
     tokenUri: results[2],
     dob: results[3],
+    owner: owner
   };
 
   data.ipfsData = (await axios.get(data.tokenUri)).data;

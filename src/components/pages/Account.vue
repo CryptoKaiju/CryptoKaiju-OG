@@ -37,8 +37,7 @@
     name: 'account',
     components: {Card, ClickableTransaction, ClickableAddress},
     computed: {
-      ...mapState(['account', 'accountKaijus', 'transfers']),
-      ...mapGetters(['findTx'])
+      ...mapState(['account', 'accountKaijus', 'transfers'])
     },
     created () {
       const loadData = function () {
@@ -58,12 +57,5 @@
 </script>
 
 <style lang="scss" scoped>
-  .card-body {
-    padding-top: 0 !important;
-  }
 
-  .card-img-top {
-    width: 170px;
-    height: 250px;
-  }
 </style>
