@@ -12,6 +12,16 @@
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item nav-link">
+            <router-link :to="{ name: 'home' }" class="nav-link d-none d-md-block">
+              Home
+            </router-link>
+          </li>
+          <li class="nav-item nav-link">
+            <router-link :to="{ name: 'traits' }" class="nav-link d-none d-md-block">
+              Traits
+            </router-link>
+          </li>
+          <li class="nav-item nav-link">
             <router-link :to="{ name: 'account' }" class="nav-link">
               My Kaiju
               <span class="ml-2 badge badge-primary">{{accountKaijus.length}}</span>
