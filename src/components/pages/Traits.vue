@@ -9,7 +9,7 @@
       </div>
       <div class="col">
         <h3>Gender</h3>
-        <pie-chart :donut="true" :data="genderStats" :colors="['lightblue', 'pink', 'purple']"></pie-chart>
+        <pie-chart :donut="true" :data="genderStats" :colors="['lightblue', '#fff0f2', 'purple']"></pie-chart>
       </div>
     </div>
 
