@@ -10,6 +10,7 @@ import VueMoment from 'vue-moment/vue-moment'
 import Web3 from 'web3'
 import VueChartkick from 'vue-chartkick'
 import Chart from 'chart.js'
+import SocialSharing from 'vue-social-sharing'
 
 Vue.use(VueChartkick, {adapter: Chart});
 
@@ -17,6 +18,7 @@ Vue.config.productionTip = false;
 
 Vue.use(BootstrapVue);
 Vue.use(VueMoment);
+Vue.use(SocialSharing);
 
 Vue.filter('toEth', function (value) {
   if (!value) return '';

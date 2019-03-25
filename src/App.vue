@@ -241,5 +241,7 @@
       color: $white;
     }
   }
-
+  .hand-pointer {
+    cursor: pointer !important;
+  }
 </style>

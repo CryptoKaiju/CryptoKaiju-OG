@@ -14,6 +14,41 @@
       </div>
     </div>
 
+    <!--{{kaijus}}-->
+
+    <div class="row text-center pt-3" v-if="kaijus">
+      <div class="card-deck mx-auto">
+        <social-sharing :url="'https://cryptokaiju.io/token/' + kaijus.tokenId"
+                        title="CryptoKaiju - Ethereum Powered Vinyl Kaiju Toys | Non Fungible Sofubi"
+                        :description="kaijus.ipfsData.name + ' - ' + kaijus.ipfsData.description"
+                        quote="CryptoKaiju are Adding Even More Fun to Non Fungible Tokens With our Range of Highly Collectible Soft Vinyl Kaiju Toys. Each is Individual & Backed by an ERC-721 Token. Find out More & Shop Online Today"
+                        hashtags="cryptokaiju,bitcoin,ethereum,erc721,sofubi,vinyltoys"
+                        twitter-user="cryptokaijuio"
+                        v-cloak inline-template>
+          <div>
+            <network network="facebook">
+              <i class="fa fa-fw fa-facebook hand-pointer"></i>
+            </network>
+            <network network="linkedin">
+              <i class="fa fa-fw fa-linkedin hand-pointer"></i>
+            </network>
+            <network network="pinterest">
+              <i class="fa fa-fw fa-pinterest hand-pointer"></i>
+            </network>
+            <network network="reddit">
+              <i class="fa fa-fw fa-reddit hand-pointer"></i>
+            </network>
+            <network network="twitter">
+              <i class="fa fa-fw fa-twitter hand-pointer"></i>
+            </network>
+            <network network="weibo">
+              <i class="fa fa-weibo hand-pointer"></i>
+            </network>
+          </div>
+        </social-sharing>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -44,7 +79,6 @@
     }
   };
 </script>
-
 <style lang="scss" scoped>
 
 </style>
