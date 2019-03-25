@@ -182,7 +182,7 @@
 
 <script>
 
-  import { mapGetters, mapState } from 'vuex';
+  import {mapGetters, mapState} from 'vuex';
   import * as _ from 'lodash';
   import * as moment from 'moment';
   import IPFS from 'ipfs-api';
@@ -195,7 +195,7 @@
   export default {
     name: 'creator',
     components: {ClickableTransaction},
-    data () {
+    data() {
       return {
         formLookupData: {
           gender: [
@@ -205,14 +205,24 @@
           ],
           colour: [
             {
-              name: 'Purple',
+              name: 'Genesis Purple',
               hash: 'QmYSFTEeFFQ37qShWdW7S9odUmh3DaEF2SczuzG2uoGBAU',
               uri: 'https://ipfs.infura.io/ipfs/QmYSFTEeFFQ37qShWdW7S9odUmh3DaEF2SczuzG2uoGBAU'
             },
             {
-              name: 'Green',
+              name: 'Genesis Green',
               hash: 'QmatreSMcd9GLLEX2xDpnjHDzY1EaxpSptZi2gbZzEN54a',
               uri: 'https://ipfs.infura.io/ipfs/QmatreSMcd9GLLEX2xDpnjHDzY1EaxpSptZi2gbZzEN54a'
+            },
+            {
+              name: 'Jaiantokoin ETH',
+              hash: 'QmWnzX8B4GJ8rpCQqTxjREYmNr41Azza3bTf9J3cxEUqBp',
+              uri: 'https://ipfs.infura.io/ipfs/QmWnzX8B4GJ8rpCQqTxjREYmNr41Azza3bTf9J3cxEUqBp'
+            },
+            {
+              name: 'Jaiantokoin BTC',
+              hash: 'QmNR3as3E6L9fjpiHCqRy8dBM6oxiVK6oPR6XzULKuXfXF',
+              uri: 'https://ipfs.infura.io/ipfs/QmNR3as3E6L9fjpiHCqRy8dBM6oxiVK6oPR6XzULKuXfXF'
             },
           ],
           kclass: [
@@ -228,7 +238,7 @@
             'Sneaky',
             'Firey',
             'Warrior',
-            'Adventurer ',
+            'Adventurer',
             'Gross',
             'Hero',
             'Joker',
@@ -237,7 +247,10 @@
             'Mythical',
             'Wizard',
             'Genius',
-            'Doctor'
+            'Doctor',
+            'Witch',
+            'Sophisticated',
+            'Omnipotent'
           ],
           skills: [
             'Influential',
@@ -274,9 +287,20 @@
             'Gentleman',
             'Hodler',
             'Actress',
-            'Psychic'
+            'Psychic',
+            'Collector',
+            'Inquisitive',
+            'Ambitious',
+            'Brave',
+            'Frugal',
+            'Charming',
+            'Frank',
+            'Gregarious',
+            'Philosophical',
+            'Sailor',
+            'Rascal'
           ],
-          batch: ['Genesis']
+          batch: ['Jaiantokoin', 'Genesis']
         },
         formData: {
           errors: [],
@@ -290,7 +314,7 @@
     computed: {
       ...mapState(['account', 'uploadedKaijusHashs'])
     },
-    mounted () {
+    mounted() {
       this.$nextTick(function () {
         this.formData.recipient = this.account;
       });
