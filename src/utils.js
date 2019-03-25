@@ -3,18 +3,16 @@ const getNetIdString = () => {
     .then((id) => {
       switch (id) {
         case 1:
-          return 'Main Ethereum Network';
+          return {id: 1, name: 'Main Ethereum Network'};
         case 3:
-          return 'Ropsten Ethereum Test Network';
+          return {id: 3, name: 'Ropsten Ethereum Test Network'};
         case 4:
-          return 'Rinkeby Ethereum Test Network';
-        case 42:
-          return 'Kovan Ethereum Test Network';
+          return {id: 4, name: 'Rinkeby Ethereum Test Network'};
         case 'loading':
           return 'loading..';
         // Will be some random number when connected locally
         default:
-          return 'Local Test Network';
+          return {id: 5777, name: 'Local Test Network'};
       }
     });
 };

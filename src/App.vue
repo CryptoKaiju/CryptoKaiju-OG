@@ -47,7 +47,13 @@
       <div class="row">
         <div class="col text-left d-none d-md-inline-block">
           <small>
-            Powered by <a href="https://knownorigin.io/" target="_blank"><img src="../static/KO_icon_Round.1.svg" style="max-height: 25px" title="Powered by KnownOrigin.io" class="ml-2"/></a>
+            Built by
+            <a href="http://blockrocket.tech" target="_blank">
+              <img src="../static/BR_stack_black-01.png" style="max-height: 25px" title="Built by BlockRocket.tech" class="ml-2"/>
+            </a>
+            <a href="https://knownorigin.io/" target="_blank">
+              <img src="../static/KO_icon_Round.1.svg" style="max-height: 25px" title="Powered by KnownOrigin.io" class="ml-2"/>
+            </a>
           </small>
         </div>
         <div class="col text-center small">
@@ -117,10 +123,13 @@
         this.web3Detected = false;
       }
 
-      window.web3 = bootStrappedWeb3;
-
-      // Bootstrap the full app
-      this.$store.dispatch(actions.INIT_APP, bootStrappedWeb3);
+      if (bootStrappedWeb3) {
+        window.web3 = bootStrappedWeb3;
+        // Bootstrap the full app
+        this.$store.dispatch(actions.INIT_APP, bootStrappedWeb3);
+      } else {
+        this.$store.dispatch(actions.LOAD_ALL_KAIJUS);
+      }
     },
     created () {
       const loadData = function () {
