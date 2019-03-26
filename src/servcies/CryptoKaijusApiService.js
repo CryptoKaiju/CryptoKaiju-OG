@@ -16,6 +16,11 @@ class CryptoKaijusApiService {
       .then((payload) => payload.data);
   }
 
+  async getOpenSeaDetials(network = 1, tokenId) {
+    return axios.get(`${API_URL}/network/${network}/os/id/${tokenId}`, AXIOS_CONFIG)
+      .then((payload) => payload.data);
+  }
+
   async getNfcDetails(network = 1, nfcId) {
     return axios.get(`${API_URL}/network/${network}/token/nfc/${nfcId}`, AXIOS_CONFIG)
       .then((payload) => payload.data);

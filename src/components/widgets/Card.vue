@@ -51,7 +51,7 @@
             <span class="small">Gender</span><br/><code>{{cdata.ipfsData.attributes.gender|capitalize}}</code>
           </div>
           <div class="col">
-            <span class="small">Colour</span><br/><code>{{cdata.ipfsData.attributes.colour|capitalize}}</code>
+            <span class="small">Colour/Style</span><br/><code>{{cdata.ipfsData.attributes.colour|capitalize}}</code>
           </div>
         </div>
         <div class="row mb-2">

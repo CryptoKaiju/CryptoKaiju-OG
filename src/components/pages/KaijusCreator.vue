@@ -205,22 +205,22 @@
           ],
           colour: [
             {
-              name: 'Genesis Purple',
+              name: 'Purple',
               hash: 'QmYSFTEeFFQ37qShWdW7S9odUmh3DaEF2SczuzG2uoGBAU',
               uri: 'https://ipfs.infura.io/ipfs/QmYSFTEeFFQ37qShWdW7S9odUmh3DaEF2SczuzG2uoGBAU'
             },
             {
-              name: 'Genesis Green',
+              name: 'Green',
               hash: 'QmatreSMcd9GLLEX2xDpnjHDzY1EaxpSptZi2gbZzEN54a',
               uri: 'https://ipfs.infura.io/ipfs/QmatreSMcd9GLLEX2xDpnjHDzY1EaxpSptZi2gbZzEN54a'
             },
             {
-              name: 'Jaiantokoin ETH',
+              name: 'Gray ETH',
               hash: 'QmWnzX8B4GJ8rpCQqTxjREYmNr41Azza3bTf9J3cxEUqBp',
               uri: 'https://ipfs.infura.io/ipfs/QmWnzX8B4GJ8rpCQqTxjREYmNr41Azza3bTf9J3cxEUqBp'
             },
             {
-              name: 'Jaiantokoin BTC',
+              name: 'Orange BTC',
               hash: 'QmNR3as3E6L9fjpiHCqRy8dBM6oxiVK6oPR6XzULKuXfXF',
               uri: 'https://ipfs.infura.io/ipfs/QmNR3as3E6L9fjpiHCqRy8dBM6oxiVK6oPR6XzULKuXfXF'
             },

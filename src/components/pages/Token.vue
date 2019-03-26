@@ -8,44 +8,76 @@
       </div>
     </div>
 
-    <div class="row text-center">
-      <div class="card-deck mx-auto">
-        <card :cdata="kaijus" class="m-2"></card>
+    <!--<div class="row text-center">-->
+    <!--<div class="card-deck mx-auto">-->
+    <!--<card :cdata="kaijus" class="m-2"></card>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <h3 v-if="opensea">Details</h3>
+
+    <div class="row" v-if="opensea">
+
+
+      <div class="col text-center">
+        <img :src="opensea.image_url" class="img-fluid" style="max-height: 300px"></img>
       </div>
+
+      <div class="col">
+        <h4>{{opensea.name}}</h4>
+        <h6>{{opensea.description}}</h6>
+        <p>
+          <img :src="opensea.owner.profile_img_url" class="rounded-circle" style="max-height: 25px"></img>
+          <strong>{{opensea.owner.user}}</strong>
+          {{opensea.owner.address}}
+        </p>
+        <p>
+          Open on <a :href="opensea.permalink" target="_blank">OpenSea</a>
+        </p>
+        <p>
+          <social-sharing :url="'https://cryptokaiju.io/token/' + opensea.token_id"
+                          title="CryptoKaiju - Ethereum Powered Vinyl Kaiju Toys | Non Fungible Sofubi"
+                          :description="opensea.name + ' - ' + opensea.description"
+                          quote="CryptoKaiju are Adding Even More Fun to Non Fungible Tokens With our Range of Highly Collectible Soft Vinyl Kaiju Toys. Each is Individual & Backed by an ERC-721 Token. Find out More & Shop Online Today"
+                          hashtags="cryptokaiju,bitcoin,ethereum,erc721,sofubi,vinyltoys"
+                          twitter-user="cryptokaijuio"
+                          v-cloak inline-template>
+            <div>
+              <network network="facebook">
+                <i class="fa fa-fw fa-facebook hand-pointer"></i>
+              </network>
+              <network network="linkedin">
+                <i class="fa fa-fw fa-linkedin hand-pointer"></i>
+              </network>
+              <network network="pinterest">
+                <i class="fa fa-fw fa-pinterest hand-pointer"></i>
+              </network>
+              <network network="reddit">
+                <i class="fa fa-fw fa-reddit hand-pointer"></i>
+              </network>
+              <network network="twitter">
+                <i class="fa fa-fw fa-twitter hand-pointer"></i>
+              </network>
+              <network network="weibo">
+                <i class="fa fa-weibo hand-pointer"></i>
+              </network>
+            </div>
+          </social-sharing>
+
+        </p>
+      </div>
+
     </div>
 
-    <!--{{kaijus}}-->
+    <h3 v-if="opensea">Traits</h3>
 
-    <div class="row text-center pt-3" v-if="kaijus">
-      <div class="card-deck mx-auto">
-        <social-sharing :url="'https://cryptokaiju.io/token/' + kaijus.tokenId"
-                        title="CryptoKaiju - Ethereum Powered Vinyl Kaiju Toys | Non Fungible Sofubi"
-                        :description="kaijus.ipfsData.name + ' - ' + kaijus.ipfsData.description"
-                        quote="CryptoKaiju are Adding Even More Fun to Non Fungible Tokens With our Range of Highly Collectible Soft Vinyl Kaiju Toys. Each is Individual & Backed by an ERC-721 Token. Find out More & Shop Online Today"
-                        hashtags="cryptokaiju,bitcoin,ethereum,erc721,sofubi,vinyltoys"
-                        twitter-user="cryptokaijuio"
-                        v-cloak inline-template>
-          <div>
-            <network network="facebook">
-              <i class="fa fa-fw fa-facebook hand-pointer"></i>
-            </network>
-            <network network="linkedin">
-              <i class="fa fa-fw fa-linkedin hand-pointer"></i>
-            </network>
-            <network network="pinterest">
-              <i class="fa fa-fw fa-pinterest hand-pointer"></i>
-            </network>
-            <network network="reddit">
-              <i class="fa fa-fw fa-reddit hand-pointer"></i>
-            </network>
-            <network network="twitter">
-              <i class="fa fa-fw fa-twitter hand-pointer"></i>
-            </network>
-            <network network="weibo">
-              <i class="fa fa-weibo hand-pointer"></i>
-            </network>
-          </div>
-        </social-sharing>
+    <div class="row" v-if="opensea">
+      <div class="col-3" v-for="trait in opensea.traits">
+        <div class="alert alert-info text-center border-dark" role="alert">
+          <div class="text-muted">{{trait.trait_type | uppercase}}</div>
+          <div class="font-weight-bold">{{trait.value}}</div>
+          <!--<div>{{trait.trait_count}}</div>-->
+        </div>
       </div>
     </div>
 
@@ -65,8 +97,10 @@
       return {
         loading: false,
         kaijus: null,
+        opensea: null,
       };
     },
+    methods: {},
     created() {
       this.loading = true;
       cryptoKaijusApiService.getTokenDetails(this.$store.state.currentNetworkId, this.$route.params.tokenId)
@@ -75,6 +109,11 @@
         })
         .finally(() => {
           this.loading = false;
+        });
+
+      cryptoKaijusApiService.getOpenSeaDetials(this.$store.state.currentNetworkId, this.$route.params.tokenId)
+        .then((result) => {
+          this.opensea = result;
         });
     }
   };
