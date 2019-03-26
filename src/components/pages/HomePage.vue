@@ -16,7 +16,7 @@
                    v-model="searchData.kId"
                    placeholder="Name, Token ID or NFC ID"/>
           </div>
-          <b-button type="button" variant="primary" class="btn-lg">
+          <b-button type="button" variant="primary" class="btn-lg" :disabled="kaijus.length < 1">
             Search
           </b-button>
       </div>

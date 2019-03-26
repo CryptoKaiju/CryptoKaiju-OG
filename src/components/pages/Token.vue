@@ -28,8 +28,8 @@
         <h6>{{opensea.description}}</h6>
         <p>
           <img :src="opensea.owner.profile_img_url" class="rounded-circle" style="max-height: 25px"></img>
-          <strong>{{opensea.owner.user}}</strong>
-          {{opensea.owner.address}}
+          <strong v-if="opensea.owner.user.username">{{opensea.owner.user.username}}</strong>
+          <span class="text-muted">{{opensea.owner.address}}</span>
         </p>
         <p>
           Open on <a :href="opensea.permalink" target="_blank">OpenSea</a>

@@ -67,6 +67,13 @@
             <span class="small">Batch</span><br/><code>{{cdata.ipfsData.attributes.batch|capitalize}}</code>
           </div>
         </div>
+        <div class="row mb-2">
+          <div class="col text-center">
+            <router-link :to="{ name: 'token', params: { tokenId: cdata.tokenId }}" class="btn-link text-info">
+              More details
+            </router-link>
+          </div>
+        </div>
       </div>
     </figure>
   </div>

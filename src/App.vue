@@ -31,7 +31,7 @@
       </nav>
     </header>
 
-    <div class="container-fluid mt-5" v-if="!web3Detected">
+    <div class="container-fluid mt-5" v-if="!web3Detected && $route.name === 'account'">
       <div class="row no-metamask text-center">
         <div class="col mt-2 mb-2">
           <img src="../static/metamask.png" style="max-height: 35px" class="mr-3"/> Please install the <code><a href="https://metamask.io/" target="_blank">METAMASK</a></code> extension to interact with the Ethereum blockchain
