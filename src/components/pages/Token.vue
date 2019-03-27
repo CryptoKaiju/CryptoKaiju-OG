@@ -29,10 +29,10 @@
         <p>
           <img :src="opensea.owner.profile_img_url" class="rounded-circle" style="max-height: 25px"></img>
           <strong v-if="opensea.owner.user.username">{{opensea.owner.user.username}}</strong>
-          <span class="text-muted">{{opensea.owner.address}}</span>
+          <clickable-address class="text-muted" :eth-address="opensea.owner.address"></clickable-address>
         </p>
         <p>
-          Open on <a :href="opensea.permalink" target="_blank">OpenSea</a>
+          View on <a :href="opensea.permalink" target="_blank">OpenSea</a>
         </p>
         <p>
           <social-sharing :url="'https://cryptokaiju.io/token/' + opensea.token_id"
@@ -72,7 +72,7 @@
     <h3 v-if="opensea">Traits</h3>
 
     <div class="row" v-if="opensea">
-      <div class="col-3" v-for="trait in opensea.traits">
+      <div class="col-md-3 col-sm-3" v-for="trait in opensea.traits">
         <div class="alert alert-info text-center border-dark" role="alert">
           <div class="text-muted">{{trait.trait_type | uppercase}}</div>
           <div class="font-weight-bold">{{trait.value}}</div>
@@ -89,10 +89,11 @@
   import {mapGetters, mapState} from 'vuex';
   import Card from '../widgets/Card';
   import cryptoKaijusApiService from '../../servcies/CryptoKaijusApiService';
+  import ClickableAddress from "../widgets/ClickableAddress";
 
   export default {
     name: 'token',
-    components: {Card},
+    components: {ClickableAddress, Card},
     data() {
       return {
         loading: false,
