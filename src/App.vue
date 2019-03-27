@@ -31,7 +31,7 @@
       </nav>
     </header>
 
-    <div class="container-fluid mt-5" v-if="!web3Detected">
+    <div class="container-fluid mt-5" v-if="!web3Detected && $route.name === 'account'">
       <div class="row no-metamask text-center">
         <div class="col mt-2 mb-2">
           <img src="../static/metamask.png" style="max-height: 35px" class="mr-3"/> Please install the <code><a href="https://metamask.io/" target="_blank">METAMASK</a></code> extension to interact with the Ethereum blockchain
@@ -47,13 +47,19 @@
       <div class="row">
         <div class="col text-left d-none d-md-inline-block">
           <small>
-            Powered by <a href="https://knownorigin.io/" target="_blank"><img src="../static/KO_icon_Round.1.svg" style="max-height: 25px" title="Powered by KnownOrigin.io" class="ml-2"/></a>
+            Built by
+            <a href="http://blockrocket.tech" target="_blank">
+              <img src="../static/BR_stack_black-01.png" style="max-height: 25px" title="Built by BlockRocket.tech" class="ml-2"/>
+            </a>
+            <a href="https://knownorigin.io/" target="_blank">
+              <img src="../static/KO_icon_Round.1.svg" style="max-height: 25px" title="Powered by KnownOrigin.io" class="ml-2"/>
+            </a>
           </small>
         </div>
         <div class="col text-center small">
           <router-link :to="{ name: 'home' }">Home</router-link>
           &bull;
-          <router-link :to="{ name: 'account' }">My Kajui</router-link>
+          <router-link :to="{ name: 'account' }">My Kaiju</router-link>
         </div>
         <div class="col text-right small">
           <current-network></current-network>
@@ -117,10 +123,13 @@
         this.web3Detected = false;
       }
 
-      window.web3 = bootStrappedWeb3;
-
-      // Bootstrap the full app
-      this.$store.dispatch(actions.INIT_APP, bootStrappedWeb3);
+      if (bootStrappedWeb3) {
+        window.web3 = bootStrappedWeb3;
+        // Bootstrap the full app
+        this.$store.dispatch(actions.INIT_APP, bootStrappedWeb3);
+      } else {
+        this.$store.dispatch(actions.LOAD_ALL_KAIJUS);
+      }
     },
     created () {
       const loadData = function () {
@@ -232,5 +241,7 @@
       color: $white;
     }
   }
-
+  .hand-pointer {
+    cursor: pointer !important;
+  }
 </style>

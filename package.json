@@ -35,6 +35,7 @@
     "vue-chartkick": "^0.5.0",
     "vue-moment": "^4.0.0",
     "vue-router": "^3.0.1",
+    "vue-social-sharing": "^2.4.2",
     "vuejs-logger": "1.5.3",
     "vuex": "^3.0.1",
     "web3": "^1.0.0-beta.36"

@@ -51,7 +51,7 @@
             <span class="small">Gender</span><br/><code>{{cdata.ipfsData.attributes.gender|capitalize}}</code>
           </div>
           <div class="col">
-            <span class="small">Colour</span><br/><code>{{cdata.ipfsData.attributes.colour|capitalize}}</code>
+            <span class="small">Colour/Style</span><br/><code>{{cdata.ipfsData.attributes.colour|capitalize}}</code>
           </div>
         </div>
         <div class="row mb-2">
@@ -65,6 +65,13 @@
         <div class="row mb-2">
           <div class="col">
             <span class="small">Batch</span><br/><code>{{cdata.ipfsData.attributes.batch|capitalize}}</code>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col text-center">
+            <router-link :to="{ name: 'token', params: { tokenId: cdata.tokenId }}" class="btn-link text-info">
+              More details
+            </router-link>
           </div>
         </div>
       </div>

@@ -1,16 +1,15 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import axios from 'axios';
-import Web3 from 'web3';
 import * as actions from './actions';
 import * as mutations from './mutation-types';
 import createLogger from 'vuex/dist/logger';
 import moment from 'moment';
-import { getEtherscanAddress, getNetIdString } from '../utils';
+import {getEtherscanAddress, getNetIdString} from '../utils';
 import _ from 'lodash';
 
 import truffleContract from 'truffle-contract';
 import CryptoKaijuABI from '../../build/contracts/CryptoKaiju.json';
+import cryptoKaijusApiService from '../servcies/CryptoKaijusApiService';
 
 const CryptoKaiju = truffleContract(CryptoKaijuABI);
 
@@ -26,6 +25,7 @@ const store = new Vuex.Store({
     accountKaijus: [],
     kaijus: [],
     currentNetwork: null,
+    currentNetworkId: 1,
     etherscanBase: null,
     totalSupply: null,
     uploadedKaijusHashs: null,
@@ -39,13 +39,14 @@ const store = new Vuex.Store({
     },
   },
   mutations: {
-    [mutations.SET_ACCOUNT] (state, account) {
+    [mutations.SET_ACCOUNT](state, account) {
       state.account = account;
     },
-    [mutations.SET_CURRENT_NETWORK] (state, currentNetwork) {
-      state.currentNetwork = currentNetwork;
+    [mutations.SET_CURRENT_NETWORK](state, {id, name}) {
+      state.currentNetworkId = id;
+      state.currentNetwork = name;
     },
-    [mutations.SET_ETHERSCAN_NETWORK] (state, etherscanBase) {
+    [mutations.SET_ETHERSCAN_NETWORK](state, etherscanBase) {
       state.etherscanBase = etherscanBase;
     },
     [mutations.SET_WEB3]: async function (state, {web3, contract}) {
@@ -53,33 +54,33 @@ const store = new Vuex.Store({
       state.contract = contract;
       state.contractAddress = (await CryptoKaiju.deployed()).address;
     },
-    [mutations.SET_KAIJUS_UPLOAD_HASH] (state, hash) {
+    [mutations.SET_KAIJUS_UPLOAD_HASH](state, hash) {
       state.uploadedKaijusHashs = hash;
     },
-    [mutations.SET_KAIJUS_TOTAL_SUPPLY] (state, totalSupply) {
+    [mutations.SET_KAIJUS_TOTAL_SUPPLY](state, totalSupply) {
       state.totalSupply = totalSupply;
     },
-    [mutations.SET_KAIJUS_SEARCH] (state, searchResult) {
+    [mutations.SET_KAIJUS_SEARCH](state, searchResult) {
       state.searchResult = searchResult;
     },
-    [mutations.SET_KAIJUS_SEARCH_NOT_FOUND] (state, notFound) {
+    [mutations.SET_KAIJUS_SEARCH_NOT_FOUND](state, notFound) {
       state.notFound = notFound;
     },
-    [mutations.SET_ACCOUNT_KAIJUS] (state, accountKaijus) {
+    [mutations.SET_ACCOUNT_KAIJUS](state, accountKaijus) {
       state.accountKaijus = accountKaijus;
     },
-    [mutations.SET_ALL_KAIJUS] (state, kaijus) {
+    [mutations.SET_ALL_KAIJUS](state, kaijus) {
       state.kaijus = kaijus;
     },
-    [mutations.SET_TRANSFER] (state, transfer) {
+    [mutations.SET_TRANSFER](state, transfer) {
       Vue.set(state, 'transfers', state.transfers.concat(transfer));
     },
   },
   actions: {
     [actions.GET_CURRENT_NETWORK]: function ({commit, dispatch, state}) {
       getNetIdString()
-        .then((currentNetwork) => {
-          commit(mutations.SET_CURRENT_NETWORK, currentNetwork);
+        .then(({id, name}) => {
+          commit(mutations.SET_CURRENT_NETWORK, {id, name});
         });
 
       getEtherscanAddress()
@@ -152,107 +153,29 @@ const store = new Vuex.Store({
       commit(mutations.SET_KAIJUS_SEARCH, null);
       commit(mutations.SET_KAIJUS_SEARCH_NOT_FOUND, null);
 
-      const contract = await state.contract.deployed();
-
-      let results = null;
-      try {
-        results = await contract.nfcDetails(nfcId);
-
-        let tokenDetails = await mapTokenDetails(results);
-
-        console.log(`By NFC ID ${nfcId}`, tokenDetails);
-        commit(mutations.SET_KAIJUS_SEARCH, tokenDetails);
-      } catch (e) {
-        console.log(`By NFC ID ${nfcId}: not found`);
-
-        commit(mutations.SET_KAIJUS_SEARCH, null);
-        commit(mutations.SET_KAIJUS_SEARCH_NOT_FOUND, true);
-      }
+      const tokenDetails = await cryptoKaijusApiService.getNfcDetails(state.currentNetworkId, nfcId);
+      console.log(`By NFC ID ${nfcId}`, tokenDetails);
+      commit(mutations.SET_KAIJUS_SEARCH, tokenDetails);
     },
     [actions.FIND_KAIJUS_BY_TOKEN_ID]: async function ({commit, dispatch, state}, tokenId) {
       commit(mutations.SET_KAIJUS_SEARCH, null);
       commit(mutations.SET_KAIJUS_SEARCH_NOT_FOUND, null);
 
-      const contract = await state.contract.deployed();
-
-      let results = null;
-      try {
-        results = await contract.tokenDetails(tokenId);
-
-        let tokenDetails = await mapTokenDetails(results);
-
-        console.log(`By Token ID ${tokenId}`, tokenDetails);
-        commit(mutations.SET_KAIJUS_SEARCH, tokenDetails);
-      } catch (e) {
-        console.log(`By Token ID ${tokenId}: not found`);
-
-        commit(mutations.SET_KAIJUS_SEARCH, null);
-        commit(mutations.SET_KAIJUS_SEARCH_NOT_FOUND, true);
-      }
+      const tokenDetails = await cryptoKaijusApiService.getTokenDetails(state.currentNetworkId, tokenId);
+      console.log(`By TOKEN ID ${tokenId}`, tokenDetails);
+      commit(mutations.SET_KAIJUS_SEARCH, tokenDetails);
     },
     [actions.LOAD_ACCOUNT_KAIJUS]: async function ({commit, dispatch, state}, {account}) {
-
-      const contract = await state.contract.deployed();
-      let tokenIds = await contract.tokensOf(account);
-
-      let accountKaijus = _.map(tokenIds, async (tokenId) => {
-        let results = await contract.tokenDetails(tokenId);
-        let owner = await contract.ownerOf(tokenId);
-        return await mapTokenDetails(results, owner);
-      });
-      commit(mutations.SET_ACCOUNT_KAIJUS, await Promise.all(accountKaijus));
+      const accountKaijus = await cryptoKaijusApiService.getTokensForAddress(state.currentNetworkId, account);
+      console.log(`Account Kajius ${account}`, accountKaijus);
+      commit(mutations.SET_ACCOUNT_KAIJUS, accountKaijus);
     },
     [actions.LOAD_ALL_KAIJUS]: async function ({commit, dispatch, state}) {
-
-      const contract = await state.contract.deployed();
-      let tokenPointer = await contract.tokenIdPointer();
-
-      let allKaijus = _.map(_.range(tokenPointer), async (tokenId) => {
-        // let data = await mapTokenDetails(results);
-        try {
-          let results = await contract.tokenDetails(tokenId);
-          let owner = await contract.ownerOf(tokenId);
-          return await mapTokenDetails(results, owner);
-        } catch (e) {
-          return undefined;
-        }
-      });
-
-      commit(mutations.SET_ALL_KAIJUS, await Promise.all(allKaijus));
+      const allKaijus = await cryptoKaijusApiService.getAllTokens(state.currentNetworkId);
+      console.log(`All Kajius`, allKaijus);
+      commit(mutations.SET_ALL_KAIJUS, allKaijus);
     },
-    [actions.WATCH_TRANSFERS]: async function ({commit, dispatch, state}) {
-
-      const contract = await state.contract.deployed();
-
-      let transferEvent = contract.Transfer({}, {
-        fromBlock: 6802211,
-        toBlock: 'latest' // wait until event comes through
-      });
-
-      transferEvent.watch(function (error, anEvent) {
-        if (!error) {
-          console.log(`Transfer event`, anEvent);
-          commit(mutations.SET_TRANSFER, anEvent);
-        } else {
-          console.log('Failure', error);
-          transferEvent.stopWatching();
-        }
-      });
-    }
   }
 });
-
-async function mapTokenDetails (results, owner) {
-  let data = {
-    tokenId: results[0],
-    nfcId: Web3.utils.toAscii(results[1]).replace(/\0/g, ''),
-    tokenUri: results[2],
-    dob: results[3],
-    owner: owner
-  };
-
-  data.ipfsData = (await axios.get(data.tokenUri)).data;
-  return data;
-}
 
 export default store;
