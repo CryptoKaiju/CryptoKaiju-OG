@@ -28,7 +28,7 @@
         <h6>{{opensea.description}}</h6>
         <p>
           <img :src="opensea.owner.profile_img_url" class="rounded-circle" style="max-height: 25px"></img>
-          <strong v-if="opensea.owner.user.username">{{opensea.owner.user.username}}</strong>
+          <strong v-if="opensea.owner.user && opensea.owner.user.username">{{opensea.owner.user.username}}</strong>
           <clickable-address class="text-muted" :eth-address="opensea.owner.address"></clickable-address>
         </p>
         <p>
