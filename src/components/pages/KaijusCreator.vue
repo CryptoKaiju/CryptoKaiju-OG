@@ -216,13 +216,13 @@
             },
             {
               name: 'Gray ETH',
-              hash: 'QmWnzX8B4GJ8rpCQqTxjREYmNr41Azza3bTf9J3cxEUqBp',
-              uri: 'https://ipfs.infura.io/ipfs/QmWnzX8B4GJ8rpCQqTxjREYmNr41Azza3bTf9J3cxEUqBp'
+              hash: 'QmNtsy1B2LqW6H2RBeYPAFZhiFCGg327QZLaFmx1KdzFvy',
+              uri: 'https://ipfs.infura.io/ipfs/QmNtsy1B2LqW6H2RBeYPAFZhiFCGg327QZLaFmx1KdzFvy'
             },
             {
               name: 'Orange BTC',
-              hash: 'QmNR3as3E6L9fjpiHCqRy8dBM6oxiVK6oPR6XzULKuXfXF',
-              uri: 'https://ipfs.infura.io/ipfs/QmNR3as3E6L9fjpiHCqRy8dBM6oxiVK6oPR6XzULKuXfXF'
+              hash: 'QmNgaX5Djp48JXdSj6yWz6WmAmGqnBDMoqHpDR4UA4NHVv',
+              uri: 'https://ipfs.infura.io/ipfs/QmNgaX5Djp48JXdSj6yWz6WmAmGqnBDMoqHpDR4UA4NHVv'
             },
           ],
           kclass: [
