@@ -1,7 +1,8 @@
 const axios = require('axios');
 
 // const API_URL = `http://localhost:5000/cryptokaiju-39233/us-central1/api`;
-const API_URL = `https://us-central1-cryptokaiju-39233.cloudfunctions.net/api`;
+// const API_URL = `https://us-central1-cryptokaiju-39233.cloudfunctions.net/api`;
+const API_URL = `https://dapp.cryptokaiju.io/api`;
 
 const AXIOS_CONFIG = {
   headers: {
