@@ -271,6 +271,8 @@
             'Fashionable',
             'Chubby',
             'Thief',
+	    'Kawaii',
+	    'Delicious',
             'Magic',
             'Engineer',
             'Scavenger',
@@ -301,7 +303,7 @@
             'Sailor',
             'Rascal',
           ],
-          batch: ['Jaiantokoin', 'Genesis']
+          batch: ['Jaiantokoin', 'Genesis', 'Sushi',]
         },
         formData: {
           errors: [],
