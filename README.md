@@ -31,4 +31,6 @@ Dreamt up by [coinjournal](https://coinjournal.net) in partnership with [KnownOr
 
 # License
 
+Smart contracts are licenced under:
+
 [MIT](https://opensource.org/licenses/MIT)
