@@ -4,7 +4,7 @@
 
 <h1 align="center">CryptoKaiju</h1>
 <div align="center">
-  Collectable Vinyl Toys Powered By The Ethereum Blockchain.
+  Founded in 2018, CryptoKaiju is the first project to link physical collectibles to NFTs on Ethereum ! 
 </div>
 
 <br />
@@ -20,7 +20,7 @@
 
 # Authors
 
-Dreamt up by [coinjournal](https://coinjournal.net) in partnership with [KnownOrigin](https://twitter.com/knownorigin_io) and [BlockRocket](http://blockrocket.tech)
+Dreamt up by Oliver Carding with contributions from [BlockRocket](http://blockrocket.tech)
 
 # Features
 
