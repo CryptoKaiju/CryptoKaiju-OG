@@ -14,8 +14,6 @@
   <a href="http://erc721.org/" target="_blank"><img src="https://img.shields.io/badge/token-ERC721-ff69b4.svg?style=flat-square" alt="Token ERC721" /> </a>
   <img src="https://img.shields.io/badge/contributions-welcome-orange.svg?style=flat-square" alt="Contributions Welcome" />
   <img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="MIT License" />
-  
-  <a href="https://t.me/knownorigin" target="_blank"><img src="https://img.shields.io/badge/Join%20Us%20On-Telegram-2599D2.svg?style=flat-square" alt="Join Us On Telegram" /></a>
 </div>
 
 # Authors
@@ -30,5 +28,3 @@ Dreamt up by Oliver Carding with contributions from [BlockRocket](http://blockro
 * **IPFS Support** - Internally IPFS is used for storing asset files and metadata
 
 # License
-
-[MIT](https://opensource.org/licenses/MIT)
