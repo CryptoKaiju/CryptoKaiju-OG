@@ -96,6 +96,13 @@ var webpackConfig = merge(baseWebpackConfig, {
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
       }
+    ]),
+    // copy sitemap
+    new CopyWebpackPlugin([
+      {
+        from: './extra/KaijuDappsitemap.xml',
+        to: config.build.assetsRoot,
+      }
     ])
   ]
 })
