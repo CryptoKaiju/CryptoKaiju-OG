@@ -18,7 +18,7 @@
 
 # Authors
 
-Dreamt up by Oliver Carding with contributions from [BlockRocket](http://blockrocket.tech)
+Oliver Carding
 
 # Features
 
